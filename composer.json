@@ -1,0 +1,59 @@
+{
+    "name": "digipolis/toerismevlaanderen-lodging",
+    "description": "PHP package to access the Toerismevlaanderen Lodging linked open data.",
+    "homepage": "https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging",
+    "keywords": [
+        "digipolis",
+        "services",
+        "toerismevlaanderen",
+        "lodging",
+        "linked open data"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Peter Decuyper",
+            "email": "peter.decuyper@digipolis.gent"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "digipolisgent/api-client": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6",
+        "squizlabs/php_codesniffer": "^2.3",
+        "brainmaestro/composer-git-hooks": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Digipolis\\Toerismevlaanderen\\Lodging\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Digipolis\\Tests\\Toerismevlaanderen\\Lodging\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": "vendor/bin/cghooks add --no-lock",
+        "post-update-cmd": "vendor/bin/cghooks update",
+        "phpcs": "vendor/bin/phpcs",
+        "test": "vendor/bin/phpunit",
+        "coverage": "vendor/bin/phpunit --coverage-html ./build/coverage"
+    },
+    "extra": {
+        "hooks": {
+            "pre-commit": [
+                "echo committing as $(git config user.name)",
+                "vendor/bin/phpcs"
+            ],
+            "pre-push": [
+                "vendor/bin/phpunit"
+            ]
+        }
+    }
+}
