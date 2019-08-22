@@ -21,4 +21,16 @@ class MissingResponseDataTest extends TestCase
         $this->assertEquals('Response data does not contain count value.', $exception->getMessage());
         $this->assertSame(500, $exception->getCode());
     }
+
+    /**
+     * From list contains the proper message.
+     *
+     * @test
+     */
+    public function exceptionForListContainsProperMessage(): void
+    {
+        $exception = MissingResponseData::list();
+        $this->assertEquals('Response data does not contain list record value.', $exception->getMessage());
+        $this->assertSame(500, $exception->getCode());
+    }
 }

@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Handler;
 
-use DigipolisGent\API\Client\Exception\InvalidResponse;
 use DigipolisGent\API\Client\Handler\HandlerInterface;
 use DigipolisGent\API\Client\Response\ResponseInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData;
-use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
-use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
+use DigipolisGent\Toerismevlaanderen\Lodging\Request\ListRequest;
+use DigipolisGent\Toerismevlaanderen\Lodging\Response\ListResponse;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
 use Psr\Http\Message as Psr;
-use RuntimeException;
 
 /**
- * Handles the count request.
+ * Handles the list request.
  */
-final class CountHandler implements HandlerInterface
+final class ListHandler implements HandlerInterface
 {
     /**
      * @inheritDoc
      */
     public function handles(): array
     {
-        return [CountRequest::class];
+        return [ListRequest::class];
     }
 
     /**
@@ -36,7 +35,15 @@ final class CountHandler implements HandlerInterface
         $data = json_decode($response->getBody()->getContents());
         $this->assertDataIsComplete($data);
 
-        return new CountResponse((int) $data->results->bindings[0]->count->value);
+        $listItems = [];
+        foreach ($data->results->bindings as $itemData) {
+            $listItems[] = ListItem::fromUriAndName(
+                $itemData->_lodging->value,
+                $itemData->naam->value
+            );
+        }
+
+        return new ListResponse($listItems);
     }
 
     /**
@@ -45,12 +52,12 @@ final class CountHandler implements HandlerInterface
      * @param object
      *
      * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData
-     *   When the response does not contain a count value.
+     *   When the response does not contain the list values.
      */
     private function assertDataIsComplete($data): void
     {
-        if (!isset($data->results->bindings[0]->count->value)) {
-            throw MissingResponseData::count();
+        if (!isset($data->results->bindings)) {
+            throw MissingResponseData::list();
         }
     }
 }

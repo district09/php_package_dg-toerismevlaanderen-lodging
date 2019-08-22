@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Request\AbstractRequest
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Request\AbstractFilteredRequest
  * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest
  */
 class CountRequestTest extends TestCase

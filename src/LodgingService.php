@@ -5,11 +5,12 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging;
 use DigipolisGent\API\Client\ClientInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
+use DigipolisGent\Toerismevlaanderen\Lodging\Request\ListRequest;
 
 /**
  * Service to access the Toerismevlaanderen Lodging linked open data.
  */
-class LodgingService
+class LodgingService implements LodgingServiceInterface
 {
 
     /**
@@ -18,7 +19,7 @@ class LodgingService
     protected $client;
 
     /**
-     * Create a new lodging service by injecting the Sparql client.
+     * Create a new lodging service by injecting the client.
      *
      * @param \DigipolisGent\API\Client\ClientInterface $client
      */
@@ -28,17 +29,20 @@ class LodgingService
     }
 
     /**
-     * Count the number of lodges by the given filter.
-     *
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface ...$filters
-     *   Filters to count the lodges by.
-     *
-     * @return int
-     *   The number of lodges that apply to the given filter.
+     * @inheritDoc
      */
     public function count(FilterInterface ...$filters): int
     {
         $request = new CountRequest(...$filters);
         return $this->client->send($request)->count();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function list(FilterInterface ...$filters): array
+    {
+        $request = new ListRequest(...$filters);
+        return $this->client->send($request)->items();
     }
 }
