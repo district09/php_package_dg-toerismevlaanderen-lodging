@@ -1,4 +1,4 @@
-# Digipolis - Toerismevlaanderen Lodging
+# DigipolisGent - Toerismevlaanderen Lodging
 
 This package integrates with the [Toerismevlaanderen Lodging][tv.lodging] linked
 open data [SPARQL endpoint][tv.lodging.sparql].
@@ -34,7 +34,7 @@ Add the package repository to composer.json:
 Install the package:
 
 ```bash
-composer require digipolis/toerismevlaanderen-lodging
+composer require digipolisgent/toerismevlaanderen-lodging
 ```
 
 ## Change log
@@ -62,7 +62,7 @@ information.
 [tv.lodging]: https://data.toerismevlaanderen.be/linked-data-gebruik
 [tv.lodging.sparql]: https://linked.toerismevlaanderen.be/sparql
 
-[github-badge]: https://img.shields.io/badge/github-digipolis_toerismevlaanderen_lodging-blue.svg?logo=github
+[github-badge]: https://img.shields.io/badge/github-DigipolisGent_Toerismevlaanderen_Lodging-blue.svg?logo=github
 [github-link]: https://github.com/digipolisgent/drupal8_site_kuanza
 
 [travis-master-badge]: https://travis-ci.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging.svg?token=anXPs46DEwgxP8RmJPAJ&branch=master "Travis build master"
