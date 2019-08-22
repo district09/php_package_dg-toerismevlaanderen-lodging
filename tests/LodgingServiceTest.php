@@ -3,6 +3,8 @@
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging;
 
 use DigipolisGent\API\Client\ClientInterface;
+use DigipolisGent\Toerismevlaanderen\Lodging\Filter\LocalityFilter;
+use DigipolisGent\Toerismevlaanderen\Lodging\Filter\RegistrationStatusFilter;
 use DigipolisGent\Toerismevlaanderen\Lodging\LodgingService;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
@@ -21,7 +23,10 @@ class LodgingServiceTest extends TestCase
      */
     public function countMethodSendsCountRequestAndReturnsNumberOfLodges(): void
     {
-        $request = new CountRequest('Gent', ['FooBar']);
+        $localityFilter = new LocalityFilter('Foo');
+        $registrationStatusFilter = new RegistrationStatusFilter('Biz', 'Baz');
+
+        $request = new CountRequest($localityFilter, $registrationStatusFilter);
         $response = new CountResponse(123);
 
         $clientMock = $this->prophesize(ClientInterface::class);
@@ -30,7 +35,7 @@ class LodgingServiceTest extends TestCase
         $service = new LodgingService($clientMock->reveal());
         $this->assertEquals(
             123,
-            $service->count('Gent', ['FooBar'])
+            $service->count($localityFilter, $registrationStatusFilter)
         );
     }
 }

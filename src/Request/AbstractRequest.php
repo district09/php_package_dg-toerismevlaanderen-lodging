@@ -6,6 +6,9 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Request;
 
 use GuzzleHttp\Psr7\Request;
 
+/**
+ * Abstract (SPARQL) request implementation.
+ */
 abstract class AbstractRequest extends Request
 {
     /**

@@ -6,6 +6,8 @@
 
 use DigipolisGent\API\Client\Configuration\Configuration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Client\Client;
+use DigipolisGent\Toerismevlaanderen\Lodging\Filter\LocalityFilter;
+use DigipolisGent\Toerismevlaanderen\Lodging\Filter\RegistrationStatusFilter;
 use DigipolisGent\Toerismevlaanderen\Lodging\LodgingServiceFactory;
 
 require_once __DIR__ . '/bootstrap.php';
@@ -29,8 +31,11 @@ $client = new Client($guzzleClient, $configuration);
 echo ' → Create the Site Service wrapper.' . PHP_EOL;
 $service = LodgingServiceFactory::create($client);
 
-echo ' → Count the number of lodges.' . PHP_EOL;
-$count = $service->count('Gent', ['Erkend', 'Vergund']);
+echo ' → Count the number of lodges in Gent that are "Erkend" or "Vergund".' . PHP_EOL;
+$count = $service->count(
+    new LocalityFilter('Gent'),
+    new RegistrationStatusFilter('Erkend', 'Vergund')
+);
 
 echo PHP_EOL;
 echo sprintf(' COUNT : %s', $count) . PHP_EOL;

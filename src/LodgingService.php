@@ -3,6 +3,7 @@
 namespace DigipolisGent\Toerismevlaanderen\Lodging;
 
 use DigipolisGent\API\Client\ClientInterface;
+use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
 
 /**
@@ -29,17 +30,15 @@ class LodgingService
     /**
      * Count the number of lodges by the given filter.
      *
-     * @param string $locality
-     *   The locality name.
-     * @param string[] $registrationStatus
-     *   Array of registration statuses.
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface ...$filters
+     *   Filters to count the lodges by.
      *
      * @return int
      *   The number of lodges that apply to the given filter.
      */
-    public function count(string $locality, $registrationStatus): int
+    public function count(FilterInterface ...$filters): int
     {
-        $request = new CountRequest($locality, $registrationStatus);
+        $request = new CountRequest(...$filters);
         return $this->client->send($request)->count();
     }
 }

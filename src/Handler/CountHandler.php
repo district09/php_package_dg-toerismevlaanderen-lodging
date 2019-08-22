@@ -13,7 +13,7 @@ use Psr\Http\Message as Psr;
 /**
  * Handles the count request.
  */
-class CountHandler implements HandlerInterface
+final class CountHandler implements HandlerInterface
 {
     /**
      * @inheritDoc

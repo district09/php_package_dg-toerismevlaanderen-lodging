@@ -4,37 +4,20 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Request;
 
+use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
+
 /**
  * Request to get the number of lodges filtered by their locality and statuses.
  */
-class CountRequest extends AbstractRequest
+final class CountRequest extends AbstractRequest
 {
-    /**
-     * Construct a new request.
-     *
-     * @param string $locality
-     *   The locality to get the lodges for.
-     * @param string[] $statuses
-     *   Array of statuses to filter the lodges by (OR).
-     */
-    public function __construct(string $locality, array $statuses)
-    {
-        parent::__construct($this->createQuery($locality, $statuses));
-    }
 
     /**
-     * Create the query string.
+     * The query string.
      *
-     * @param string $locality
-     *   The locality to get the lodges for.
-     * @param string[] $statuses
-     *   Array of statuses to filter the lodges by (OR).
-     *
-     * @return string
+     * @var string
      */
-    private function createQuery(string $locality, array $statuses): string
-    {
-        $query = <<<EOT
+    private $query = <<<EOT
 PREFIX tvl: <https://data.vlaanderen.be/ns/logies#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX tva: <https://data.vlaanderen.be/ns/adres#>
@@ -42,39 +25,33 @@ PREFIX schema: <http://schema.org/>
 SELECT (COUNT(?_lodging) AS ?count)
 WHERE {
     ?_lodging a tvl:Logies;
-    tvl:onthaalAdres/tva:gemeentenaam "%s"@nl;
-    tvl:heeftRegistratie/tvl:registratieStatus/skos:prefLabel ?regstatus;
+    %s
     schema:name ?naam.
     %s
 }
 EOT;
 
-        return sprintf(
-            $query,
-            $locality,
-            $this->createStatusesFilter($statuses)
-        );
-    }
-
     /**
-     * Create the status filters.
+     * Construct a new request.
      *
-     * @param string[] $statuses
-     *   Array of statuses to filter the lodges by (OR).
-     *
-     * @return string
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface ...$filters
+     *   The filters to get the lodges by.
      */
-    private function createStatusesFilter(array $statuses): string
+    public function __construct(FilterInterface ...$filters)
     {
-        if (!$statuses) {
-            return '';
+        $whereParts = [];
+        $filterParts = [];
+        foreach ($filters as $filter) {
+            $whereParts[] = $filter->where();
+            $filterParts[] = $filter->filter();
         }
 
-        $items = [];
-        foreach ($statuses as $status) {
-            $items[] = sprintf('?regstatus = "%s"@nl', $status);
-        }
+        $query = sprintf(
+            $this->query,
+            implode(PHP_EOL, $whereParts),
+            implode(PHP_EOL, $filterParts)
+        );
 
-        return sprintf('FILTER (%s) .', implode(' || ', $items));
+        parent::__construct($query);
     }
 }

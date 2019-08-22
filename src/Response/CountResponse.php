@@ -6,14 +6,17 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Response;
 
 use DigipolisGent\API\Client\Response\ResponseInterface;
 
-class CountResponse implements ResponseInterface
+/**
+ * Response containing the number of found lodges.
+ */
+final class CountResponse implements ResponseInterface
 {
     /**
      * The number of found lodges.
      *
      * @var int
      */
-    protected $count;
+    private $count;
 
     /**
      * Constructor.
