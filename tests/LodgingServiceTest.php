@@ -9,6 +9,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\LodgingService;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 
 /**
  * @covers \DigipolisGent\Toerismevlaanderen\Lodging\LodgingService
@@ -26,11 +27,12 @@ class LodgingServiceTest extends TestCase
         $localityFilter = new LocalityFilter('Foo');
         $registrationStatusFilter = new RegistrationStatusFilter('Biz', 'Baz');
 
-        $request = new CountRequest($localityFilter, $registrationStatusFilter);
         $response = new CountResponse(123);
 
         $clientMock = $this->prophesize(ClientInterface::class);
-        $clientMock->send($request)->willReturn($response);
+        $clientMock
+            ->send(Argument::type(CountRequest::class))
+            ->willReturn($response);
 
         $service = new LodgingService($clientMock->reveal());
         $this->assertEquals(

@@ -19,37 +19,22 @@ abstract class AbstractRequest extends Request
      */
     public function __construct(string $query)
     {
-        $method = 'GET';
-        $uri = $this->uriFromQuery($query);
-        $headers = ['Accept' => 'application/sparql-results+json'];
-        $body = null;
+        $headers = [
+            'Accept' => 'application/sparql-results+json',
+            'Content-Type' => 'application/x-www-form-urlencoded',
+        ];
 
-        // Use POST if the query is bigger than 2kB.
-        // 2046 = 2kB
-        //        minus 1 for '?'.
-        //        minus 1 for NULL-terminated string on server.
-        if (strlen($uri) > 2046) {
-            $method = 'POST';
-            $body = $uri;
-            $uri = '';
-            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        }
-
-        if ($uri) {
-            $uri = '?' . $uri;
-        }
-
-        parent::__construct($method, $uri, $headers, $body);
+        parent::__construct('POST', '', $headers, $this->bodyFromQuery($query));
     }
 
     /**
-     * Create the uri string from the query string.
+     * Create the body string from the query string.
      *
      * @param string $query
      *
      * @return string
      */
-    private function uriFromQuery(string $query): string
+    private function bodyFromQuery(string $query): string
     {
         $clean = preg_replace('/\s+/', ' ', $query);
         return sprintf(
