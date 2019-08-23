@@ -14,7 +14,7 @@ final class ListResponse implements ResponseInterface
     /**
      * List items
      *
-     * @var
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem[]
      */
     private $items;
 

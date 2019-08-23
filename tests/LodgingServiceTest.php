@@ -7,8 +7,10 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Filter\LocalityFilter;
 use DigipolisGent\Toerismevlaanderen\Lodging\Filter\RegistrationStatusFilter;
 use DigipolisGent\Toerismevlaanderen\Lodging\LodgingService;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
+use DigipolisGent\Toerismevlaanderen\Lodging\Request\LodgingRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\ListRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
+use DigipolisGent\Toerismevlaanderen\Lodging\Response\LodgingResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\ListResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
 use PHPUnit\Framework\TestCase;
@@ -55,8 +57,8 @@ class LodgingServiceTest extends TestCase
         $registrationStatusFilter = new RegistrationStatusFilter('Biz', 'Baz');
 
         $listItems = [
-            ListItem::fromUriAndName('http://test.me/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-888888', 'FooBar'),
-            ListItem::fromUriAndName('http://test.me/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999', 'BizBaz'),
+            ListItem::fromUriAndName('http://test.me/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-888888', 'FooBar'),
+            ListItem::fromUriAndName('http://test.me/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999', 'BizBaz'),
         ];
         $response = new ListResponse($listItems);
 
@@ -69,6 +71,28 @@ class LodgingServiceTest extends TestCase
         $this->assertEquals(
             $listItems,
             $service->list($localityFilter, $registrationStatusFilter)
+        );
+    }
+
+    /**
+     * Lodging method sends out the DetailRequest and returns lodging details.
+     *
+     * @test
+     */
+    public function lodgingMethodSendsDetailRequestAndReturnsLodgingDetail(): void
+    {
+        $detail = [];
+        $response = new LodgingResponse($detail);
+
+        $clientMock = $this->prophesize(ClientInterface::class);
+        $clientMock
+            ->send(Argument::type(LodgingRequest::class))
+            ->willReturn($response);
+
+        $service = new LodgingService($clientMock->reveal());
+        $this->assertEquals(
+            $detail,
+            $service->lodging('http://domain.be/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999')
         );
     }
 }

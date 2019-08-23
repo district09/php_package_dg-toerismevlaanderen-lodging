@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Example how to get a single job.
+ * Example how to count (filtered) the number of lodgings.
  */
 
 use DigipolisGent\API\Client\Configuration\Configuration;

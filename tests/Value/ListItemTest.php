@@ -3,7 +3,7 @@
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
-use DigipolisGent\Value\ValueInterface;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,39 +16,23 @@ class ListItemTest extends TestCase
      *
      * @test
      */
-    public function valueCanBeCreatedFromUriAndName(): void
+    public function valueCanBeCreatedFromIdAndName(): void
     {
         $uri = 'http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999';
         $name = 'FooBar';
+        $expectedLodgingId = LodgingId::fromUri($uri);
 
         $listItem = ListItem::fromUriAndName($uri, $name);
-        $this->assertEquals('7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999', $listItem->getId());
-        $this->assertEquals($uri, $listItem->getUri());
+        $this->assertEquals($expectedLodgingId, $listItem->lodgingId());
         $this->assertEquals($name, $listItem->getName());
     }
 
     /**
-     * Not the same value when different value object types.
+     * Not the same value when different lodging id.
      *
      * @test
      */
-    public function notSameValueIfDifferentTypes(): void
-    {
-        $notListItem = $this->prophesize(ValueInterface::class)->reveal();
-        $listItem = ListItem::fromUriAndName(
-            'http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
-            'FooBar'
-        );
-
-        $this->assertFalse($listItem->sameValueAs($notListItem));
-    }
-
-    /**
-     * Not the same value when different URI.
-     *
-     * @test
-     */
-    public function notSameValueWhenDifferentUri(): void
+    public function notSameValueWhenDifferentId(): void
     {
         $listItem = ListItem::fromUriAndName(
             'http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
@@ -82,30 +66,11 @@ class ListItemTest extends TestCase
     }
 
     /**
-     * Same value if URI & Name are the same.
-     *
-     * @test
-     */
-    public function sameValueWhenSameUriAndName(): void
-    {
-        $listItem = ListItem::fromUriAndName(
-            'http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
-            'FooBar'
-        );
-        $otherListItem = ListItem::fromUriAndName(
-            'http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
-            'FooBar'
-        );
-
-        $this->assertTrue($listItem->sameValueAs($otherListItem));
-    }
-
-    /**
      * String version of the object is the list item name.
      *
      * @test
      */
-    public function toStringIsName(): void
+    public function castToStringReturnsName(): void
     {
         $listItem = ListItem::fromUriAndName(
             'http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
