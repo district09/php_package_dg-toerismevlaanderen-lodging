@@ -4,7 +4,7 @@
          verbose="true">
 
   <testsuites>
-    <testsuite name="Digipolis\Toerismevlaanderen\Lodging">
+    <testsuite name="DigipolisGent\Toerismevlaanderen\Lodging">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
