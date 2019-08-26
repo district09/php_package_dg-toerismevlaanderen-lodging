@@ -11,7 +11,7 @@ use DigipolisGent\Value\ValueInterface;
 /**
  * A rating in number of stars.
  */
-class StarRating extends ValueAbstract
+final class StarRating extends ValueAbstract
 {
     /**
      * The star rating pattern.
@@ -55,6 +55,9 @@ class StarRating extends ValueAbstract
      * @param string $uri
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
+     *
+     * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidStarRating
+     *   When value is not in the correct format.
      */
     public static function fromEuropeanFormat(string $rating): StarRating
     {

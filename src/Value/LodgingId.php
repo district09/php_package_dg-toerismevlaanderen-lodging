@@ -11,7 +11,7 @@ use DigipolisGent\Value\ValueInterface;
 /**
  * A lodging id.
  */
-class LodgingId extends ValueAbstract
+final class LodgingId extends ValueAbstract
 {
     /**
      * The list item URI.
