@@ -1,6 +1,6 @@
 <?php
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Filter;
+namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Exception;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidLodgingUri;
 use PHPUnit\Framework\TestCase;
