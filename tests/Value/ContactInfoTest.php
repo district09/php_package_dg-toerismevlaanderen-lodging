@@ -3,16 +3,16 @@
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Contact;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Value\Contact
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
  */
-class ContactTest extends TestCase
+class ContactInfoTest extends TestCase
 {
     /**
      * Contact is created from its details.
@@ -26,11 +26,11 @@ class ContactTest extends TestCase
         $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
         $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
 
-        $contact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
-        $this->assertEquals($address, $contact->getAddress());
-        $this->assertEquals($phoneNumber, $contact->getPhoneNumber());
-        $this->assertEquals($emailAddress, $contact->getEmailAddress());
-        $this->assertEquals($websiteAddress, $contact->getWebsiteAddress());
+        $contactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $this->assertEquals($address, $contactInfo->getAddress());
+        $this->assertEquals($phoneNumber, $contactInfo->getPhoneNumber());
+        $this->assertEquals($emailAddress, $contactInfo->getEmailAddress());
+        $this->assertEquals($websiteAddress, $contactInfo->getWebsiteAddress());
     }
 
     /**
@@ -44,12 +44,12 @@ class ContactTest extends TestCase
         $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
         $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
         $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $contactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
 
         $otherAddress = Address::fromDetails('Foo', 2, 'a', '9000', 'Bar');
-        $otherContact = Contact::fromDetails($otherAddress, $phoneNumber, $emailAddress, $websiteAddress);
+        $otherContactInfo = ContactInfo::fromDetails($otherAddress, $phoneNumber, $emailAddress, $websiteAddress);
 
-        $this->assertFalse($contact->sameValueAs($otherContact));
+        $this->assertFalse($contactInfo->sameValueAs($otherContactInfo));
     }
 
     /**
@@ -63,12 +63,12 @@ class ContactTest extends TestCase
         $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
         $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
         $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $contactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
 
         $otherPhoneNumber = PhoneNumber::withoutNumber();
-        $otherContact = Contact::fromDetails($address, $otherPhoneNumber, $emailAddress, $websiteAddress);
+        $otherContactInfo = ContactInfo::fromDetails($address, $otherPhoneNumber, $emailAddress, $websiteAddress);
 
-        $this->assertFalse($contact->sameValueAs($otherContact));
+        $this->assertFalse($contactInfo->sameValueAs($otherContactInfo));
     }
 
     /**
@@ -82,12 +82,12 @@ class ContactTest extends TestCase
         $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
         $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
         $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $contactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
 
         $otherEmailAddress = EmailAddress::withoutAddress();
-        $otherContact = Contact::fromDetails($address, $phoneNumber, $otherEmailAddress, $websiteAddress);
+        $otherContactInfo = ContactInfo::fromDetails($address, $phoneNumber, $otherEmailAddress, $websiteAddress);
 
-        $this->assertFalse($contact->sameValueAs($otherContact));
+        $this->assertFalse($contactInfo->sameValueAs($otherContactInfo));
     }
 
     /**
@@ -101,12 +101,12 @@ class ContactTest extends TestCase
         $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
         $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
         $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $contactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
 
         $otherWebsiteAddress = WebsiteAddress::withoutUrl();
-        $otherContact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $otherWebsiteAddress);
+        $otherContactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $otherWebsiteAddress);
 
-        $this->assertFalse($contact->sameValueAs($otherContact));
+        $this->assertFalse($contactInfo->sameValueAs($otherContactInfo));
     }
 
     /**
@@ -120,11 +120,11 @@ class ContactTest extends TestCase
         $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
         $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
         $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $contactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
 
-        $sameContact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $sameContactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
 
-        $this->assertTrue($contact->sameValueAs($sameContact));
+        $this->assertTrue($contactInfo->sameValueAs($sameContactInfo));
     }
 
     /**
@@ -138,7 +138,7 @@ class ContactTest extends TestCase
         $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
         $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
         $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contact = Contact::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        $contactInfo = ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
 
         $expected = <<<EOT
 Foo 1 a, 9000 Bar
@@ -147,6 +147,6 @@ m: foo@biz.baz
 w: http://foo.bar
 EOT;
 
-        $this->assertSame($expected, (string) $contact);
+        $this->assertSame($expected, (string) $contactInfo);
     }
 }

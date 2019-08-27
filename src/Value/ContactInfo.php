@@ -8,9 +8,9 @@ use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
 
 /**
- * Lodging contact details.
+ * Lodging contact point details.
  */
-final class Contact extends ValueAbstract
+final class ContactInfo extends ValueAbstract
 {
     /**
      * Address.
@@ -55,14 +55,14 @@ final class Contact extends ValueAbstract
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress $emailAddress
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress $websiteAddress
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Contact
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
      */
     public static function fromDetails(
         Address $address,
         PhoneNumber $phoneNumber,
         EmailAddress $emailAddress,
         WebsiteAddress $websiteAddress
-    ): Contact {
+    ): ContactInfo {
         $contact = new static();
         $contact->address = $address;
         $contact->phoneNumber = $phoneNumber;
