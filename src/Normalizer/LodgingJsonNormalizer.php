@@ -37,6 +37,7 @@ final class LodgingJsonNormalizer
             $lodgingData->description->value ?? '',
             (int) $lodgingData->numberOfSleepingPlaces->value,
             $this->normalizeRegistration($lodgingData),
+            $this->normalizeReceptionAddress($lodgingData),
             $this->normalizeContactPoint($lodgingData),
             StarRating::fromEuropeanFormat($lodgingData->starRating->value)
         );
@@ -58,6 +59,24 @@ final class LodgingJsonNormalizer
     }
 
     /**
+     * Extract the recpetion address from the json data.
+     *
+     * @param object $lodgingData
+     *
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
+     */
+    private function normalizeReceptionAddress(object $lodgingData): Address
+    {
+        return Address::fromDetails(
+            $lodgingData->street->value ?? '',
+            $lodgingData->houseNumber->value ?? '',
+            $lodgingData->busNumber->value ?? '',
+            $lodgingData->postalCode->value ?? '',
+            $lodgingData->locality->value ?? ''
+        );
+    }
+
+    /**
      * Extract the contact point value from the json data.
      *
      * @param object $lodgingData
@@ -66,14 +85,6 @@ final class LodgingJsonNormalizer
      */
     private function normalizeContactPoint(object $lodgingData): ContactInfo
     {
-        $address = Address::fromDetails(
-            $lodgingData->street->value ?? '',
-            $lodgingData->houseNumber->value ?? '',
-            $lodgingData->busNumber->value ?? '',
-            $lodgingData->postalCode->value ?? '',
-            $lodgingData->locality->value ?? ''
-        );
-
         $phoneNumber = !empty($lodgingData->phoneNumber->value)
             ? PhoneNumber::fromNumber($lodgingData->phoneNumber->value)
             : PhoneNumber::withoutNumber();
@@ -85,7 +96,6 @@ final class LodgingJsonNormalizer
             : WebsiteAddress::withoutUrl();
 
         return ContactInfo::fromDetails(
-            $address,
             $phoneNumber,
             $emailAddress,
             $websiteAddress

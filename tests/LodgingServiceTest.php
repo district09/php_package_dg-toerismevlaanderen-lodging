@@ -96,8 +96,8 @@ class LodgingServiceTest extends TestCase
             '',
             55,
             Registration::fromTypeAndStatus('B&B', 'Erkend'),
+            Address::fromDetails('', '', '', '', ''),
             ContactInfo::fromDetails(
-                Address::fromDetails('', '', '', '', ''),
                 PhoneNumber::withoutNumber(),
                 EmailAddress::withoutAddress(),
                 WebsiteAddress::withoutUrl()

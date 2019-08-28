@@ -20,10 +20,7 @@ final class ContactInfoArraySerializer
      */
     public function serialize(ContactInfo $contactInfo): array
     {
-        $addressSerializer = new AddressArraySerializer();
-
         return [
-            'address' => $addressSerializer->serialize($contactInfo->getAddress()),
             'phoneNumber' => (string) $contactInfo->getPhoneNumber(),
             'emailAddress' => (string) $contactInfo->getEmailAddress(),
             'websiteAddress' => (string) $contactInfo->getWebsiteAddress(),

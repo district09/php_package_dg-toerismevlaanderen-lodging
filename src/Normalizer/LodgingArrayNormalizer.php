@@ -28,6 +28,7 @@ final class LodgingArrayNormalizer
             $data['registration']['status']
         );
 
+        $addressArrayNormalizer = new AddressArrayNormalizer();
         $contactInfoNormalizer = new ContactInfoArrayNormalizer();
 
         return Lodging::fromDetails(
@@ -36,6 +37,7 @@ final class LodgingArrayNormalizer
             $data['description'] ?? '',
             (int) $data['numberOfSleepingPlaces'],
             $registration,
+            $addressArrayNormalizer->normalize($data['receptionAddress'] ?? []),
             $contactInfoNormalizer->normalize($data['contactPoint'] ?? []),
             StarRating::fromEuropeanFormat($data['starRating'])
         );

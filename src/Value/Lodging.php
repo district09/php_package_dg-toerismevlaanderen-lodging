@@ -48,6 +48,13 @@ final class Lodging extends ValueAbstract
     private $registration;
 
     /**
+     * The reception address.
+     *
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
+     */
+    private $receptionAddress;
+
+    /**
      * The contact point.
      *
      * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
@@ -76,6 +83,7 @@ final class Lodging extends ValueAbstract
      * @param string $description
      * @param int $numberOfSleepingPlaces
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration $registration
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address $receptionAddress
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo $contactPoint
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating $starRating
      *
@@ -87,6 +95,7 @@ final class Lodging extends ValueAbstract
         string $description,
         int $numberOfSleepingPlaces,
         Registration $registration,
+        Address $receptionAddress,
         ContactInfo $contactPoint,
         StarRating $starRating
     ): Lodging {
@@ -96,6 +105,7 @@ final class Lodging extends ValueAbstract
         $lodging->description = $description;
         $lodging->numberOfSleepingPlaces = $numberOfSleepingPlaces;
         $lodging->registration = $registration;
+        $lodging->receptionAddress = $receptionAddress;
         $lodging->contactPoint = $contactPoint;
         $lodging->starRating = $starRating;
 
@@ -143,6 +153,14 @@ final class Lodging extends ValueAbstract
     }
 
     /**
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
+     */
+    public function getReceptionAddress(): Address
+    {
+        return $this->receptionAddress;
+    }
+
+    /**
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
      */
     public function getContactPoint(): ContactInfo
@@ -169,6 +187,7 @@ final class Lodging extends ValueAbstract
             && $this->getDescription() === $object->getDescription()
             && $this->getNumberOfSleepingPlaces() === $object->getNumberOfSleepingPlaces()
             && $this->getRegistration()->sameValueAs($object->getRegistration())
+            && $this->getReceptionAddress()->sameValueAs($object->getReceptionAddress())
             && $this->getContactPoint()->sameValueAs($object->getContactPoint())
             && $this->getStarRating()->sameValueAs($object->getStarRating())
         ;

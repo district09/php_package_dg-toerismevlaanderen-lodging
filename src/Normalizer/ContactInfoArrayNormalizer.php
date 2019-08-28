@@ -23,9 +23,6 @@ final class ContactInfoArrayNormalizer
      */
     public function normalize(array $data): ContactInfo
     {
-        $addressNormalizer = new AddressArrayNormalizer();
-        $address = $addressNormalizer->normalize($data['address'] ?? []);
-
         $phoneNumber = !empty($data['phoneNumber'])
             ? PhoneNumber::fromNumber($data['phoneNumber'])
             : PhoneNumber::withoutNumber();
@@ -36,6 +33,6 @@ final class ContactInfoArrayNormalizer
             ? WebsiteAddress::fromUrl($data['websiteAddress'])
             : WebsiteAddress::withoutUrl();
 
-        return ContactInfo::fromDetails($address, $phoneNumber, $emailAddress, $websiteAddress);
+        return ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
     }
 }

@@ -30,19 +30,29 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
 
-        $lodging = Lodging::fromDetails($listId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $listId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
         $this->assertSame($listId, $lodging->getLodgingId());
         $this->assertSame($name, $lodging->getName());
         $this->assertSame($description, $lodging->getDescription());
         $this->assertSame($registration, $lodging->getRegistration());
+        $this->assertSame($receptionAddress, $lodging->getReceptionAddress());
         $this->assertSame($contactPoint, $lodging->getContactPoint());
         $this->assertSame($starRating, $lodging->getStarRating());
     }
@@ -59,17 +69,35 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $otherLodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-888888');
-        $otherLodging = Lodging::fromDetails($otherLodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $otherLodging = Lodging::fromDetails(
+            $otherLodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
     }
@@ -86,17 +114,35 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $otherName = 'Fiz';
-        $otherLodging = Lodging::fromDetails($lodgingId, $otherName, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $otherLodging = Lodging::fromDetails(
+            $lodgingId,
+            $otherName,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
     }
@@ -113,17 +159,35 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $otherDescription = 'Fiz';
-        $otherLodging = Lodging::fromDetails($lodgingId, $name, $otherDescription, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $otherLodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $otherDescription,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
     }
@@ -140,17 +204,35 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $otherNumberOfSleepingPlaces = 16;
-        $otherLodging = Lodging::fromDetails($lodgingId, $name, $description, $otherNumberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $otherLodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $otherNumberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
     }
@@ -167,17 +249,80 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $otherRegistration = Registration::fromTypeAndStatus('Fiz', 'Baz');
-        $otherLodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $otherRegistration, $contactPoint, $starRating);
+        $otherLodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $otherRegistration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
+
+        $this->assertFalse($lodging->sameValueAs($otherLodging));
+    }
+
+    /**
+     * Not the same value when different registration.
+     *
+     * @test
+     */
+    public function notSameValueWhenDifferentReceptionAddress(): void
+    {
+        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
+        $name = 'Foo';
+        $description = 'Bar';
+        $numberOfSleepingPlaces = 15;
+        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $contactPoint = ContactInfo::fromDetails(
+            PhoneNumber::withoutNumber(),
+            EmailAddress::withoutAddress(),
+            WebsiteAddress::withoutUrl()
+        );
+        $starRating = StarRating::fromEuropeanFormat('4 *');
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
+
+        $otherReceptionAddress = Address::fromDetails('Other address', '5', 'b', '9000', 'Baz');
+        $otherLodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $otherReceptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
     }
@@ -194,22 +339,39 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
-            PhoneNumber::withoutNumber(),
+            PhoneNumber::fromNumber('+32 9 123 12 12'),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $otherContactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Fiz', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
-        $otherLodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $otherContactPoint, $starRating);
+        $otherLodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $otherContactPoint,
+            $starRating
+        );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
     }
@@ -226,17 +388,35 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $otherStarRating = StarRating::fromEuropeanFormat('1 *');
-        $otherLodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $otherStarRating);
+        $otherLodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $otherStarRating
+        );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
     }
@@ -253,16 +433,34 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
-        $sameLodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $sameLodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $this->assertTrue($lodging->sameValueAs($sameLodging));
     }
@@ -279,15 +477,24 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
         $contactPoint = ContactInfo::fromDetails(
-            Address::fromDetails('Foo', '5', 'b', '9000', 'Baz'),
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
 
-        $lodging = Lodging::fromDetails($lodgingId, $name, $description, $numberOfSleepingPlaces, $registration, $contactPoint, $starRating);
+        $lodging = Lodging::fromDetails(
+            $lodgingId,
+            $name,
+            $description,
+            $numberOfSleepingPlaces,
+            $registration,
+            $receptionAddress,
+            $contactPoint,
+            $starRating
+        );
 
         $this->assertEquals('Foo', (string) $lodging);
     }

@@ -32,8 +32,8 @@ class LodgingResponseTest extends TestCase
             'Foo description',
             55,
             Registration::fromTypeAndStatus('B&B', 'Erkend'),
+            Address::fromDetails('Foo street', '138', 'b', '9000', 'Foo locality'),
             ContactInfo::fromDetails(
-                Address::fromDetails('Foo street', '138', 'b', '9000', 'Foo locality'),
                 PhoneNumber::fromNumber('+32 9 123 12 12'),
                 EmailAddress::fromAddress('foo@biz.baz'),
                 WebsiteAddress::fromUrl('http://foo.bar')

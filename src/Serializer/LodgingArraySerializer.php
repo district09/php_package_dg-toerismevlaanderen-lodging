@@ -20,6 +20,7 @@ final class LodgingArraySerializer
      */
     public function serialize(Lodging $lodging): array
     {
+        $addressSerializer = new AddressArraySerializer();
         $contactInfoSerializer = new ContactInfoArraySerializer();
 
         return [
@@ -31,6 +32,7 @@ final class LodgingArraySerializer
                 'type' => $lodging->getRegistration()->getType(),
                 'status' => $lodging->getRegistration()->getStatus(),
             ],
+            'receptionAddress' => $addressSerializer->serialize($lodging->getReceptionAddress()),
             'contactPoint' => $contactInfoSerializer->serialize($lodging->getContactPoint()),
             'starRating' => (string) $lodging->getStarRating(),
         ];

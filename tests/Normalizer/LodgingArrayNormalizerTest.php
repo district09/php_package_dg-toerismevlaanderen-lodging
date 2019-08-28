@@ -43,8 +43,8 @@ class LodgingArrayNormalizerTest extends TestCase
             '',
             55,
             Registration::fromTypeAndStatus('B&B', 'Erkend'),
+            Address::fromDetails('', '', '', '', ''),
             ContactInfo::fromDetails(
-                Address::fromDetails('', '', '', '', ''),
                 PhoneNumber::withoutNumber(),
                 EmailAddress::withoutAddress(),
                 WebsiteAddress::withoutUrl()
@@ -73,14 +73,14 @@ class LodgingArrayNormalizerTest extends TestCase
                 'type' => 'B&B',
                 'status' => 'Erkend',
             ],
+            'receptionAddress' => [
+                'street' => 'Foo street',
+                'houseNumber' => '8',
+                'busNumber' => 'b',
+                'postalCode' => '9000',
+                'locality' => 'Foo locality',
+            ],
             'contactPoint' => [
-                'address' => [
-                    'street' => 'Foo street',
-                    'houseNumber' => '8',
-                    'busNumber' => 'b',
-                    'postalCode' => '9000',
-                    'locality' => 'Foo locality',
-                ],
                 'phoneNumber' => '+32 9 123 12 12',
                 'emailAddress' => 'foo@biz.baz',
                 'websiteAddress' => 'https://foo.baz',
@@ -94,8 +94,8 @@ class LodgingArrayNormalizerTest extends TestCase
             'Foo description',
             55,
             Registration::fromTypeAndStatus('B&B', 'Erkend'),
+            Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality'),
             ContactInfo::fromDetails(
-                Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality'),
                 PhoneNumber::fromNumber('+32 9 123 12 12'),
                 EmailAddress::fromAddress('foo@biz.baz'),
                 WebsiteAddress::fromUrl('https://foo.baz')

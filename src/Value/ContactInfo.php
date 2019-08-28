@@ -13,13 +13,6 @@ use DigipolisGent\Value\ValueInterface;
 final class ContactInfo extends ValueAbstract
 {
     /**
-     * Address.
-     *
-     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
-     */
-    private $address;
-
-    /**
      * Phone number.
      *
      * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber
@@ -50,7 +43,6 @@ final class ContactInfo extends ValueAbstract
     /**
      * Create the contact from its details.
      *
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address $address
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber $phoneNumber
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress $emailAddress
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress $websiteAddress
@@ -58,26 +50,16 @@ final class ContactInfo extends ValueAbstract
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
      */
     public static function fromDetails(
-        Address $address,
         PhoneNumber $phoneNumber,
         EmailAddress $emailAddress,
         WebsiteAddress $websiteAddress
     ): ContactInfo {
         $contact = new static();
-        $contact->address = $address;
         $contact->phoneNumber = $phoneNumber;
         $contact->emailAddress = $emailAddress;
         $contact->websiteAddress = $websiteAddress;
 
         return $contact;
-    }
-
-    /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
-     */
-    public function getAddress(): Address
-    {
-        return $this->address;
     }
 
     /**
@@ -110,7 +92,6 @@ final class ContactInfo extends ValueAbstract
     public function sameValueAs(ValueInterface $object)
     {
         return $this->sameValueTypeAs($object)
-            && $this->getAddress()->sameValueAs($object->getAddress())
             && $this->getPhoneNumber()->sameValueAs($object->getPhoneNumber())
             && $this->getEmailAddress()->sameValueAs($object->getEmailAddress())
             && $this->getWebsiteAddress()->sameValueAs($object->getWebsiteAddress());
@@ -122,7 +103,6 @@ final class ContactInfo extends ValueAbstract
     public function __toString()
     {
         $template = <<<EOT
-%s
 t: %s
 m: %s
 w: %s
@@ -130,7 +110,6 @@ EOT;
 
         return sprintf(
             $template,
-            $this->getAddress(),
             $this->getPhoneNumber(),
             $this->getEmailAddress(),
             $this->getWebsiteAddress()
