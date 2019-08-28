@@ -33,4 +33,16 @@ class MissingResponseDataTest extends TestCase
         $this->assertEquals('Response data does not contain list record value.', $exception->getMessage());
         $this->assertSame(500, $exception->getCode());
     }
+
+    /**
+     * From detail contains the proper message.
+     *
+     * @test
+     */
+    public function exceptionForlodgingContainsProperMessage(): void
+    {
+        $exception = MissingResponseData::lodging();
+        $this->assertEquals('Response data does not contain lodging details.', $exception->getMessage());
+        $this->assertSame(500, $exception->getCode());
+    }
 }
