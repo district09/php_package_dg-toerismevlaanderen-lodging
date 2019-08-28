@@ -37,7 +37,9 @@ $listItems = $service->list(
     new RegistrationStatusFilter('Erkend', 'Vergund')
 );
 foreach ($listItems as $listItem) {
-    echo sprintf('   • %s : %s', $listItem->lodgingId(), $listItem->getName()),  PHP_EOL;
+    /* @var $listItem \DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem */
+    echo sprintf('   • %s', $listItem->lodgingId()->getUri()), PHP_EOL;
+    echo sprintf('     %s : %s', $listItem->lodgingId(), $listItem->getName()),  PHP_EOL;
 }
 
 echo PHP_EOL;

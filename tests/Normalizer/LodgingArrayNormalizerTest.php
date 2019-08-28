@@ -29,7 +29,7 @@ class LodgingArrayNormalizerTest extends TestCase
         $data = [
             '_lodging' => 'http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
             'name' => 'Foo name',
-            'numberOfBeds' => '55',
+            'numberOfSleepingPlaces' => '55',
             'type' => 'B&B',
             'registrationStatus' => 'Erkend',
             'starRating' => '2 *',
@@ -65,7 +65,7 @@ class LodgingArrayNormalizerTest extends TestCase
             '_lodging' => 'http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
             'name' => 'Foo name',
             'description' => 'Foo description',
-            'numberOfBeds' => '55',
+            'numberOfSleepingPlaces' => '55',
             'type' => 'B&B',
             'registrationStatus' => 'Erkend',
             'starRating' => '2 *',

@@ -29,7 +29,7 @@ final class LodgingArrayNormalizer
 
         $name = $data['name'];
         $description = $data['description'] ?? '';
-        $numberOfSleepingPlaces = (int) $data['numberOfBeds'];
+        $numberOfSleepingPlaces = (int) $data['numberOfSleepingPlaces'];
 
         $registration = Registration::fromTypeAndStatus(
             $data['type'],

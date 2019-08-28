@@ -33,7 +33,7 @@ SELECT
   ?idIssuer
   ?name
   ?description
-  ?numberOfBeds
+  ?numberOfSleepingPlaces
   ?label
   ?street
   ?houseNumber
@@ -42,7 +42,8 @@ SELECT
   ?locality
   ?email
   ?phoneNumber
-  ?website
+  ?contactType
+  ?websiteAddress
   ?registrationStatus
   ?starRating
   ?type
@@ -50,7 +51,7 @@ WHERE {
   BIND(<%s> AS ?_lodging).
   ?_lodging a tvl:Logies.
   ?_lodging schema:name ?name.
-  ?_lodging tvl:aantalSlaapplaatsen ?numberOfBeds.
+  ?_lodging tvl:aantalSlaapplaatsen ?numberOfSleepingPlaces.
   
   OPTIONAL { ?_lodging tvl:heeftBeschrijving ?_description. }
   ?_description schema:value ?description.
@@ -68,7 +69,8 @@ WHERE {
    
   OPTIONAL { ?_lodging schema:contactPoint/schema:email ?email. }
   OPTIONAL { ?_lodging schema:contactPoint/schema:telephone ?phoneNumber. }
-  OPTIONAL { ?_lodging schema:contactPoint/foaf:page ?website. }
+  OPTIONAL { ?_lodging schema:contactPoint/foaf:page ?websiteAddress. }
+  OPTIONAL { ?_lodging schema:contactPoint/schema:contactType ?contactType. }
   
   OPTIONAL { ?_lodging tvl:heeftRegistratie ?_registration. }
   ?_registration dcterms:type ?_type.
@@ -83,6 +85,7 @@ WHERE {
   
   FILTER (LANG(?registrationStatus) = "nl")
   FILTER (LANG(?type) = "nl")
+  FILTER (LANG(?description) = "nl")
 }
 EOT;
 
