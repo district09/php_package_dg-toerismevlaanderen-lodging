@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 
+/**
+ * Normalizes an array of lodging data to a Lodging value.
+ */
 final class LodgingArrayNormalizer
 {
     /**
@@ -25,29 +23,21 @@ final class LodgingArrayNormalizer
      */
     public function normalize(array $data): Lodging
     {
-        $lodgingId = LodgingId::fromUri($data['_lodging']);
-
-        $name = $data['name'];
-        $description = $data['description'] ?? '';
-        $numberOfSleepingPlaces = (int) $data['numberOfSleepingPlaces'];
-
         $registration = Registration::fromTypeAndStatus(
-            $data['type'],
-            $data['registrationStatus']
+            $data['registration']['type'],
+            $data['registration']['status']
         );
-        $starRating = StarRating::fromEuropeanFormat($data['starRating']);
 
-        $contactPointNormalizer = new ContactPointArrayNormalizer();
-        $contactPoint = $contactPointNormalizer->normalize($data);
+        $contactInfoNormalizer = new ContactInfoArrayNormalizer();
 
         return Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
+            LodgingId::fromUri($data['lodgingId']),
+            $data['name'],
+            $data['description'] ?? '',
+            (int) $data['numberOfSleepingPlaces'],
             $registration,
-            $contactPoint,
-            $starRating
+            $contactInfoNormalizer->normalize($data['contactPoint'] ?? []),
+            StarRating::fromEuropeanFormat($data['starRating'])
         );
     }
 }

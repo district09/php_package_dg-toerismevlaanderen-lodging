@@ -2,7 +2,7 @@
 
 namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ContactPointArrayNormalizer;
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ContactInfoArrayNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
@@ -11,9 +11,9 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ContactPointArrayNormalizer
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ContactInfoArrayNormalizer
  */
-class ContactPointArrayNormalizerTest extends TestCase
+class ContactInfoArrayNormalizerTest extends TestCase
 {
     /**
      * Contactpoint can be created from array not containing any data.
@@ -29,7 +29,7 @@ class ContactPointArrayNormalizerTest extends TestCase
             WebsiteAddress::withoutUrl()
         );
 
-        $normalizer = new ContactPointArrayNormalizer();
+        $normalizer = new ContactInfoArrayNormalizer();
         $this->assertEquals(
             $expectedContactPoint,
             $normalizer->normalize([])
@@ -44,11 +44,13 @@ class ContactPointArrayNormalizerTest extends TestCase
     public function allContactPointDataIsNormalized(): void
     {
         $data = [
-            'street' => 'Foo street',
-            'houseNumber' => '8',
-            'busNumber' => 'b',
-            'postalCode' => '9000',
-            'locality' => 'Foo locality',
+            'address' => [
+                'street' => 'Foo street',
+                'houseNumber' => '8',
+                'busNumber' => 'b',
+                'postalCode' => '9000',
+                'locality' => 'Foo locality',
+            ],
             'phoneNumber' => '+32 9 123 12 12',
             'emailAddress' => 'foo@biz.baz',
             'websiteAddress' => 'https://foo.baz',
@@ -61,7 +63,7 @@ class ContactPointArrayNormalizerTest extends TestCase
             WebsiteAddress::fromUrl('https://foo.baz')
         );
 
-        $normalizer = new ContactPointArrayNormalizer();
+        $normalizer = new ContactInfoArrayNormalizer();
         $this->assertEquals($expectedContactPoint, $normalizer->normalize($data));
     }
 }

@@ -27,11 +27,13 @@ class LodgingArrayNormalizerTest extends TestCase
     public function lodgingCanBeNormalizedFromMinimalDataSet(): void
     {
         $data = [
-            '_lodging' => 'http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
+            'lodgingId' => 'http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
             'name' => 'Foo name',
-            'numberOfSleepingPlaces' => '55',
-            'type' => 'B&B',
-            'registrationStatus' => 'Erkend',
+            'numberOfSleepingPlaces' => 55,
+            'registration' => [
+                'type' => 'B&B',
+                'status' => 'Erkend',
+            ],
             'starRating' => '2 *',
         ];
 
@@ -62,21 +64,28 @@ class LodgingArrayNormalizerTest extends TestCase
     public function allLodgingDataIsNormalized(): void
     {
         $data = [
-            '_lodging' => 'http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
+            'lodgingId' => 'http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999',
             'name' => 'Foo name',
             'description' => 'Foo description',
-            'numberOfSleepingPlaces' => '55',
+            'numberOfSleepingPlaces' => 55,
             'type' => 'B&B',
-            'registrationStatus' => 'Erkend',
+            'registration' => [
+                'type' => 'B&B',
+                'status' => 'Erkend',
+            ],
+            'contactPoint' => [
+                'address' => [
+                    'street' => 'Foo street',
+                    'houseNumber' => '8',
+                    'busNumber' => 'b',
+                    'postalCode' => '9000',
+                    'locality' => 'Foo locality',
+                ],
+                'phoneNumber' => '+32 9 123 12 12',
+                'emailAddress' => 'foo@biz.baz',
+                'websiteAddress' => 'https://foo.baz',
+            ],
             'starRating' => '2 *',
-            'street' => 'Foo street',
-            'houseNumber' => '8',
-            'busNumber' => 'b',
-            'postalCode' => '9000',
-            'locality' => 'Foo locality',
-            'phoneNumber' => '+32 9 123 12 12',
-            'emailAddress' => 'foo@biz.baz',
-            'websiteAddress' => 'https://foo.baz',
         ];
 
         $expectedLodging = Lodging::fromDetails(

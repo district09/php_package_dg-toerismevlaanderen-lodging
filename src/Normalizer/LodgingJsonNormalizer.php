@@ -14,6 +14,9 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 
+/**
+ * Normalizes a json string into a Lodging value.
+ */
 final class LodgingJsonNormalizer
 {
     /**
