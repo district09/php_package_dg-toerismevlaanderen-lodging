@@ -5,6 +5,7 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Serializer\LodgingArraySerializer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
@@ -32,7 +33,7 @@ class LodgingArraySerializerTest extends TestCase
             'Foo description',
             55,
             Registration::fromTypeAndStatus('B&B', 'Erkend'),
-            Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality'),
+            Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality', Coordinates::fromLongitudeLatitude(1.234, 56.789)),
             ContactInfo::fromDetails(
                 PhoneNumber::fromNumber('+32 9 123 12 12'),
                 EmailAddress::fromAddress('info@biz.baz'),
@@ -56,6 +57,10 @@ class LodgingArraySerializerTest extends TestCase
                 'busNumber' => 'b',
                 'postalCode' => '9000',
                 'locality' => 'Foo locality',
+                'coordinates' => [
+                    'longitude' => 1.234,
+                    'latitude' => 56.789,
+                ]
             ],
             'contactPoint' => [
                 'phoneNumber' => '+32 9 123 12 12',

@@ -5,6 +5,7 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\LodgingResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
@@ -32,7 +33,7 @@ class LodgingResponseTest extends TestCase
             'Foo description',
             55,
             Registration::fromTypeAndStatus('B&B', 'Erkend'),
-            Address::fromDetails('Foo street', '138', 'b', '9000', 'Foo locality'),
+            Address::fromDetails('Foo street', '138', 'b', '9000', 'Foo locality', Coordinates::fromLongitudeLatitude(0, 0)),
             ContactInfo::fromDetails(
                 PhoneNumber::fromNumber('+32 9 123 12 12'),
                 EmailAddress::fromAddress('foo@biz.baz'),

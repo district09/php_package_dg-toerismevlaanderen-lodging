@@ -5,6 +5,7 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\LodgingJsonNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
@@ -124,12 +125,12 @@ EOT;
           "type": "literal"
         },
         "receptionAddress_longitude": {
-          "value": "3.72543",
+          "value": "1.234",
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#float"
         },
         "receptionAddress_latitude": {
-          "value": "51.0547",
+          "value": "56.789",
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#float"
         },
@@ -176,7 +177,7 @@ EOT;
             '',
             55,
             Registration::fromTypeAndStatus('B&B', 'Foo status'),
-            Address::fromDetails('', '', '', '', ''),
+            Address::fromDetails('', '', '', '', '', Coordinates::fromLongitudeLatitude(0, 0)),
             ContactInfo::fromDetails(
                 PhoneNumber::withoutNumber(),
                 EmailAddress::withoutAddress(),
@@ -202,7 +203,7 @@ EOT;
             'Foo description',
             55,
             Registration::fromTypeAndStatus('B&B', 'Foo status'),
-            Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality'),
+            Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality', Coordinates::fromLongitudeLatitude(1.234, 56.789)),
             ContactInfo::fromDetails(
                 PhoneNumber::fromNumber('+32 9 123 12 12'),
                 EmailAddress::fromAddress('info@foo.baz'),

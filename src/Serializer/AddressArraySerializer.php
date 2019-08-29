@@ -26,6 +26,10 @@ final class AddressArraySerializer
             'busNumber' => $address->getBusNumber(),
             'postalCode' => $address->getPostalCode(),
             'locality' => $address->getLocality(),
+            'coordinates' => [
+                'longitude' => $address->getCoordinates()->getLongitude(),
+                'latitude' => $address->getCoordinates()->getLatitude(),
+            ]
         ];
     }
 }

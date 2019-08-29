@@ -3,6 +3,7 @@
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,12 +18,16 @@ class AddressTest extends TestCase
      */
     public function createFromPartsContainsAllData(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+
         $this->assertEquals('Biz', $address->getStreet());
         $this->assertEquals('1', $address->getHouseNumber());
         $this->assertEquals('b', $address->getBusNumber());
         $this->assertEquals('9000', $address->getPostalCode());
         $this->assertEquals('Baz', $address->getLocality());
+        $this->assertSame($coordinates, $address->getCoordinates());
     }
 
     /**
@@ -32,8 +37,10 @@ class AddressTest extends TestCase
      */
     public function notSameValueIfStreetIsDifferent(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
-        $otherAddress = Address::fromDetails('Foo', '1', 'b', '9000', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+        $otherAddress = Address::fromDetails('Foo', '1', 'b', '9000', 'Baz', $coordinates);
 
         $this->assertFalse($address->sameValueAs($otherAddress));
     }
@@ -45,8 +52,10 @@ class AddressTest extends TestCase
      */
     public function notSameValueIfHouseNumberIsDifferent(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
-        $otherAddress = Address::fromDetails('Biz', '2', 'b', '9000', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+        $otherAddress = Address::fromDetails('Biz', '2', 'b', '9000', 'Baz', $coordinates);
 
         $this->assertFalse($address->sameValueAs($otherAddress));
     }
@@ -58,8 +67,10 @@ class AddressTest extends TestCase
      */
     public function notSameValueIfBusNumberIsDifferent(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
-        $otherAddress = Address::fromDetails('Biz', '1', '', '9000', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+        $otherAddress = Address::fromDetails('Biz', '1', '', '9000', 'Baz', $coordinates);
 
         $this->assertFalse($address->sameValueAs($otherAddress));
     }
@@ -71,8 +82,10 @@ class AddressTest extends TestCase
      */
     public function notSameValueIfPostalCodeIsDifferent(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
-        $otherAddress = Address::fromDetails('Biz', '1', 'b', '9001', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+        $otherAddress = Address::fromDetails('Biz', '1', 'b', '9001', 'Baz', $coordinates);
 
         $this->assertFalse($address->sameValueAs($otherAddress));
     }
@@ -84,8 +97,26 @@ class AddressTest extends TestCase
      */
     public function notSameValueIfLocalityIsDifferent(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
-        $otherAddress = Address::fromDetails('Biz', '1', 'b', '9000', 'Foo');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+        $otherAddress = Address::fromDetails('Biz', '1', 'b', '9000', 'Foo', $coordinates);
+
+        $this->assertFalse($address->sameValueAs($otherAddress));
+    }
+
+    /**
+     * Not the same value if coordinates are not the same.
+     *
+     * @test
+     */
+    public function notSameValueIfCoordinatesAreDifferent(): void
+    {
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+        $otherCoordinates = Coordinates::fromLongitudeLatitude(50, 60);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+        $otherAddress = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $otherCoordinates);
 
         $this->assertFalse($address->sameValueAs($otherAddress));
     }
@@ -97,8 +128,10 @@ class AddressTest extends TestCase
      */
     public function sameValueIfAllPropertiesHaveSameValue(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
-        $otherAddress = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
+        $otherAddress = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
 
         $this->assertTrue($address->sameValueAs($otherAddress));
     }
@@ -110,7 +143,9 @@ class AddressTest extends TestCase
      */
     public function toStringContainsAllParts(): void
     {
-        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', 'b', '9000', 'Baz', $coordinates);
         $this->assertEquals(
             'Biz 1 b, 9000 Baz',
             (string) $address
@@ -124,7 +159,9 @@ class AddressTest extends TestCase
      */
     public function toStringContainsNoBusNumberIfValueIsEmpty(): void
     {
-        $address = Address::fromDetails('Biz', '1', '', '9000', 'Baz');
+        $coordinates = Coordinates::fromLongitudeLatitude(0, 0);
+
+        $address = Address::fromDetails('Biz', '1', '', '9000', 'Baz', $coordinates);
         $this->assertEquals(
             'Biz 1, 9000 Baz',
             (string) $address

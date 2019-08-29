@@ -14,6 +14,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Response\LodgingResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\ListResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
@@ -96,7 +97,7 @@ class LodgingServiceTest extends TestCase
             '',
             55,
             Registration::fromTypeAndStatus('B&B', 'Erkend'),
-            Address::fromDetails('', '', '', '', ''),
+            Address::fromDetails('', '', '', '', '', Coordinates::fromLongitudeLatitude(0, 0)),
             ContactInfo::fromDetails(
                 PhoneNumber::withoutNumber(),
                 EmailAddress::withoutAddress(),

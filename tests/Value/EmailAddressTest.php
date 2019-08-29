@@ -38,14 +38,14 @@ class EmailAddressTest extends TestCase
      *
      * @test
      */
-    public function phoneNumberCanBeCreatedWithoutNumber(): void
+    public function emailAddressCanBeCreatedWithoutAddress(): void
     {
         $emailAddress = EmailAddress::withoutAddress();
         $this->assertEquals('', $emailAddress->getAddress());
     }
 
     /**
-     * Not the same value if addresses are different.
+     * Not the same value if addresses is different.
      *
      * @test
      */

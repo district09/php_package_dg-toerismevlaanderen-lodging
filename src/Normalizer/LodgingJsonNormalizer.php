@@ -6,6 +6,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
@@ -59,7 +60,7 @@ final class LodgingJsonNormalizer
     }
 
     /**
-     * Extract the recpetion address from the json data.
+     * Extract the reception address from the json data.
      *
      * @param object $lodgingData
      *
@@ -72,7 +73,11 @@ final class LodgingJsonNormalizer
             $lodgingData->receptionAddress_houseNumber->value ?? '',
             $lodgingData->receptionAddress_busNumber->value ?? '',
             $lodgingData->receptionAddress_postalCode->value ?? '',
-            $lodgingData->receptionAddress_locality->value ?? ''
+            $lodgingData->receptionAddress_locality->value ?? '',
+            Coordinates::fromLongitudeLatitude(
+                (float) ($lodgingData->receptionAddress_longitude->value ?? 0),
+                (float) ($lodgingData->receptionAddress_latitude->value ?? 0)
+            )
         );
     }
 

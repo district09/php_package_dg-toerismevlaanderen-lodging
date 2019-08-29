@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 
 /**
  * Normalizes an array of data into an Address value.
@@ -25,7 +26,11 @@ final class AddressArrayNormalizer
             $data['houseNumber'] ?? '',
             $data['busNumber'] ?? '',
             $data['postalCode'] ?? '',
-            $data['locality'] ?? ''
+            $data['locality'] ?? '',
+            Coordinates::fromLongitudeLatitude(
+                (float) ($data['coordinates']['longitude'] ?? 0),
+                (float) ($data['coordinates']['latitude'] ?? 0)
+            )
         );
     }
 }

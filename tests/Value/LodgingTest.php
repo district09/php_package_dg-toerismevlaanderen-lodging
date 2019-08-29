@@ -4,6 +4,7 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
@@ -30,7 +31,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -69,7 +70,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -114,7 +115,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -159,7 +160,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -204,7 +205,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -249,7 +250,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -294,7 +295,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -312,7 +313,7 @@ class LodgingTest extends TestCase
             $starRating
         );
 
-        $otherReceptionAddress = Address::fromDetails('Other address', '5', 'b', '9000', 'Baz');
+        $otherReceptionAddress = Address::fromDetails('Other address', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $otherLodging = Lodging::fromDetails(
             $lodgingId,
             $name,
@@ -339,7 +340,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::fromNumber('+32 9 123 12 12'),
             EmailAddress::withoutAddress(),
@@ -388,7 +389,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -433,7 +434,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),
@@ -477,7 +478,7 @@ class LodgingTest extends TestCase
         $description = 'Bar';
         $numberOfSleepingPlaces = 15;
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz');
+        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
             PhoneNumber::withoutNumber(),
             EmailAddress::withoutAddress(),

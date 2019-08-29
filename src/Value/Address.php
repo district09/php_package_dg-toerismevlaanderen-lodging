@@ -48,6 +48,13 @@ final class Address extends ValueAbstract
     private $locality;
 
     /**
+     * The coordinates.
+     *
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates
+     */
+    private $coordinates;
+
+    /**
      * Disable constructor.
      */
     protected function __construct()
@@ -62,17 +69,25 @@ final class Address extends ValueAbstract
      * @param string $busNumber
      * @param string $postalCode
      * @param string $locality
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates $coordinates
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
      */
-    public static function fromDetails(string $street, string $houseNumber, string $busNumber, string $postalCode, string $locality): Address
-    {
+    public static function fromDetails(
+        string $street,
+        string $houseNumber,
+        string $busNumber,
+        string $postalCode,
+        string $locality,
+        Coordinates $coordinates
+    ): Address {
         $address = new static();
         $address->street = $street;
         $address->houseNumber = $houseNumber;
         $address->busNumber = $busNumber;
         $address->postalCode = $postalCode;
         $address->locality = $locality;
+        $address->coordinates = $coordinates;
 
         return $address;
     }
@@ -128,6 +143,16 @@ final class Address extends ValueAbstract
     }
 
     /**
+     * Get tha coordinates of the address.
+     *
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates
+     */
+    public function getCoordinates(): Coordinates
+    {
+        return $this->coordinates;
+    }
+
+    /**
      * @inheritDoc
      */
     public function sameValueAs(ValueInterface $object)
@@ -137,7 +162,9 @@ final class Address extends ValueAbstract
             && $this->getHouseNumber() === $object->getHouseNumber()
             && $this->getBusNumber() === $object->getBusNumber()
             && $this->getPostalCode() === $object->getPostalCode()
-            && $this->getLocality() === $object->getLocality();
+            && $this->getLocality() === $object->getLocality()
+            && $this->getCoordinates()->sameValueAs($object->getCoordinates())
+        ;
     }
 
     /**
