@@ -53,8 +53,8 @@ final class LodgingJsonNormalizer
     private function normalizeRegistration(object $lodgingData): Registration
     {
         return $registration = Registration::fromTypeAndStatus(
-            $lodgingData->type->value,
-            $lodgingData->registrationStatus->value
+            $lodgingData->registration_type->value,
+            $lodgingData->registration_status->value
         );
     }
 
@@ -68,11 +68,11 @@ final class LodgingJsonNormalizer
     private function normalizeReceptionAddress(object $lodgingData): Address
     {
         return Address::fromDetails(
-            $lodgingData->street->value ?? '',
-            $lodgingData->houseNumber->value ?? '',
-            $lodgingData->busNumber->value ?? '',
-            $lodgingData->postalCode->value ?? '',
-            $lodgingData->locality->value ?? ''
+            $lodgingData->receptionAddress_street->value ?? '',
+            $lodgingData->receptionAddress_houseNumber->value ?? '',
+            $lodgingData->receptionAddress_busNumber->value ?? '',
+            $lodgingData->receptionAddress_postalCode->value ?? '',
+            $lodgingData->receptionAddress_locality->value ?? ''
         );
     }
 
@@ -85,14 +85,14 @@ final class LodgingJsonNormalizer
      */
     private function normalizeContactPoint(object $lodgingData): ContactInfo
     {
-        $phoneNumber = !empty($lodgingData->phoneNumber->value)
-            ? PhoneNumber::fromNumber($lodgingData->phoneNumber->value)
+        $phoneNumber = !empty($lodgingData->contactPoint_phoneNumber->value)
+            ? PhoneNumber::fromNumber($lodgingData->contactPoint_phoneNumber->value)
             : PhoneNumber::withoutNumber();
-        $emailAddress = !empty($lodgingData->emailAddress->value)
-            ? EmailAddress::fromAddress($lodgingData->emailAddress->value)
+        $emailAddress = !empty($lodgingData->contactPoint_emailAddress->value)
+            ? EmailAddress::fromAddress($lodgingData->contactPoint_emailAddress->value)
             : EmailAddress::withoutAddress();
-        $websiteAddress = !empty($lodgingData->websiteAddress->value)
-            ? WebsiteAddress::fromUrl($lodgingData->websiteAddress->value)
+        $websiteAddress = !empty($lodgingData->contactPoint_websiteAddress->value)
+            ? WebsiteAddress::fromUrl($lodgingData->contactPoint_websiteAddress->value)
             : WebsiteAddress::withoutUrl();
 
         return ContactInfo::fromDetails(

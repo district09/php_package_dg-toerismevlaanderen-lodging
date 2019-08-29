@@ -33,12 +33,10 @@ class LodgingHandlerTest extends TestCase
     private $detailResponseContent = <<<EOT
 {
   "results": {
-    "ordered": true,
-    "distinct": false,
     "bindings": [
       {
         "_lodging": {
-          "value": "http://foo.bar/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999",
+          "value": "http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999",
           "type": "uri"
         },
         "name": {
@@ -51,56 +49,74 @@ class LodgingHandlerTest extends TestCase
           "value": "Foo description",
           "type": "literal"
         },
-        "type": {
-          "xml:lang": "nl",
-          "value": "B&B",
-          "type": "literal"
-        },
-        "registrationStatus": {
-          "xml:lang": "nl",
-          "value": "Erkend",
-          "type": "literal"
-        },
         "numberOfSleepingPlaces": {
           "value": "55",
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer"
         },
-        "street": {
+        "registration_type": {
+          "xml:lang": "nl",
+          "value": "B&B",
+          "type": "literal"
+        },
+        "registration_status": {
+          "xml:lang": "nl",
+          "value": "Foo status",
+          "type": "literal"
+        },
+        "receptionAddress_street": {
           "value": "Foo street",
           "type": "literal"
         },
-        "houseNumber": {
-          "value": "138",
+        "receptionAddress_houseNumber": {
+          "value": "8",
           "type": "literal"
         },
-        "busNumber": {
+        "receptionAddress_busNumber": {
           "value": "b",
           "type": "literal"
         },
-        "postalCode": {
+        "receptionAddress_postalCode": {
           "value": "9000",
           "type": "literal"
         },
-        "locality": {
+        "receptionAddress_locality": {
           "xml:lang": "nl",
           "value": "Foo locality",
           "type": "literal"
         },
-        "phoneNumber": {
+        "receptionAddress_longitude": {
+          "value": "3.72543",
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#float"
+        },
+        "receptionAddress_latitude": {
+          "value": "51.0547",
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#float"
+        },
+        "contactPoint_phoneNumber": {
           "value": "+32 9 123 12 12",
           "type": "literal"
         },
-        "emailAddress": {
-          "value": "foo@biz.baz",
+        "contactPoint_emailAddress": {
+          "value": "info@foo.baz",
           "type": "literal"
         },
-        "websiteAddress": {
-          "value": "http://foo.bar",
+        "contactPoint_websiteAddress": {
+          "value": "https://foo.baz",
           "type": "uri"
         },
         "starRating": {
-          "value": "3 *",
+          "value": "4 *",
+          "type": "literal"
+        },
+        "qualityLabels": {
+          "value": "Label 1,Label 2",
+          "type": "literal"
+        },
+        "images": {
+          "value": "http://foo.bar/img/1.jpg,http://foo.bar/img/2.jpg",
           "type": "literal"
         }
       }
@@ -154,18 +170,18 @@ EOT;
 
         $expectedResponse = new LodgingResponse(
             Lodging::fromDetails(
-                LodgingId::fromUri('http://foo.bar/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999'),
+                LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999'),
                 'Foo name',
                 'Foo description',
                 55,
-                Registration::fromTypeAndStatus('B&B', 'Erkend'),
-                Address::fromDetails('Foo street', '138', 'b', '9000', 'Foo locality'),
+                Registration::fromTypeAndStatus('B&B', 'Foo status'),
+                Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality'),
                 ContactInfo::fromDetails(
                     PhoneNumber::fromNumber('+32 9 123 12 12'),
-                    EmailAddress::fromAddress('foo@biz.baz'),
-                    WebsiteAddress::fromUrl('http://foo.bar')
+                    EmailAddress::fromAddress('info@foo.baz'),
+                    WebsiteAddress::fromUrl('https://foo.baz')
                 ),
-                StarRating::fromEuropeanFormat('3 *')
+                StarRating::fromEuropeanFormat('4 *')
             )
         );
 

@@ -16,6 +16,8 @@ final class LodgingRequest extends AbstractRequest
      * @var string
      */
     private $query = <<<EOT
+PREFIX geoc: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX sc: <http://purl.org/science/owl/sciencecommons/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -27,26 +29,28 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
+
 SELECT
   ?_lodging
-  ?id
-  ?idIssuer
   ?name
   ?description
   ?numberOfSleepingPlaces
-  ?label
-  ?street
-  ?houseNumber
-  ?busNumber
-  ?postalCode
-  ?locality
-  ?email
-  ?phoneNumber
-  ?contactType
-  ?websiteAddress
-  ?registrationStatus
+  ?registration_type
+  ?registration_status
+  ?receptionAddress_street
+  ?receptionAddress_houseNumber
+  ?receptionAddress_busNumber
+  ?receptionAddress_postalCode
+  ?receptionAddress_locality
+  ?receptionAddress_longitude
+  ?receptionAddress_latitude
+  ?contactPoint_phoneNumber
+  ?contactPoint_emailAddress
+  ?contactPoint_websiteAddress
   ?starRating
-  ?type
+  (GROUP_CONCAT(DISTINCT ?qualityLabel; SEPARATOR=",") AS ?qualityLabels)
+  (GROUP_CONCAT(DISTINCT ?media; SEPARATOR=",") AS ?images)
+
 WHERE {
   BIND(<%s> AS ?_lodging).
   ?_lodging a tvl:Logies.
@@ -56,36 +60,38 @@ WHERE {
   OPTIONAL { ?_lodging tvl:heeftBeschrijving ?_description. }
   ?_description schema:value ?description.
   
-  ?_lodging adms:identifier ?_identifier.
-  ?_identifier skos:notation ?id.
-  ?_identifier adms:schemaAgency ?idIssuer.
+  ?_lodging tvl:onthaalAdres ?_receptionAddress.
+  ?_receptionAddress locn:thoroughfare ?receptionAddress_street.
+  ?_receptionAddress tva:Adresvoorstelling.huisnummer ?receptionAddress_houseNumber.
+  OPTIONAL { ?_receptionAddress tva:Adresvoorstelling.busnummer ?receptionAddress_busNumber. }
+  ?_receptionAddress locn:postCode ?receptionAddress_postalCode.
+  ?_receptionAddress tva:gemeentenaam ?receptionAddress_locality.
   
-  ?_lodging tvl:onthaalAdres ?_address.
-  ?_address locn:thoroughfare ?street.
-  ?_address tva:Adresvoorstelling.huisnummer ?houseNumber.
-  OPTIONAL { ?_address tva:Adresvoorstelling.busnummer ?busNumber. }
-  ?_address locn:postCode ?postalCode.
-  ?_address tva:gemeentenaam ?locality.
+  ?_lodging tvl:onthaalLocatie ?_receptionAddress_location.
+  ?_receptionAddress_location geoc:long ?receptionAddress_longitude.
+  ?_receptionAddress_location geoc:lat ?receptionAddress_latitude.
    
-  OPTIONAL { ?_lodging schema:contactPoint/schema:email ?email. }
-  OPTIONAL { ?_lodging schema:contactPoint/schema:telephone ?phoneNumber. }
-  OPTIONAL { ?_lodging schema:contactPoint/foaf:page ?websiteAddress. }
-  OPTIONAL { ?_lodging schema:contactPoint/schema:contactType ?contactType. }
+  OPTIONAL { ?_lodging schema:contactPoint/schema:telephone ?contactPoint_phoneNumber. }
+  OPTIONAL { ?_lodging schema:contactPoint/schema:email ?contactPoint_emailAddress. }
+  OPTIONAL { ?_lodging schema:contactPoint/foaf:page ?contactPoint_websiteAddress. }
   
   OPTIONAL { ?_lodging tvl:heeftRegistratie ?_registration. }
-  ?_registration dcterms:type ?_type.
-  ?_type skos:prefLabel ?type.
+  ?_registration dcterms:type ?_registration_type.
+  ?_registration_type skos:prefLabel ?registration_type.
+  ?_registration tvl:registratieStatus ?_registration_status.
+  ?_registration_status skos:prefLabel ?registration_status.
   
-  ?_registration tvl:registratieStatus ?_concept.
-  ?_concept skos:prefLabel ?registrationStatus.
-  
-  OPTIONAL { ?_lodging tvl:heeftKwaliteitsLabel ?_label. }
   OPTIONAL { ?_lodging schema:starRating ?_starRating. }
   OPTIONAL { ?_starRating schema:ratingValue ?starRating. }
+  OPTIONAL { ?_lodging tvl:heeftKwaliteitslabel/skos:prefLabel ?qualityLabel. }
   
-  FILTER (LANG(?registrationStatus) = "nl")
-  FILTER (LANG(?type) = "nl")
+  OPTIONAL { ?_lodging tvl:heeftMedia ?_media. }
+  OPTIONAL { ?_media schema:contentUrl ?media. }
+  
+  FILTER (LANG(?registration_status) = "nl")
+  FILTER (LANG(?registration_type) = "nl")
   FILTER (LANG(?description) = "nl")
+  FILTER (LANG(?qualityLabel) = "nl")
 }
 EOT;
 

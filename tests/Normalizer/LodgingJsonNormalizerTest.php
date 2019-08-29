@@ -27,8 +27,6 @@ class LodgingJsonNormalizerTest extends TestCase
     private $partialJson = <<<EOT
 {
   "results": {
-    "ordered": true,
-    "distinct": false,
     "bindings": [
       {
         "_lodging": {
@@ -40,14 +38,14 @@ class LodgingJsonNormalizerTest extends TestCase
           "value": "Foo name",
           "type": "literal"
         },
-        "type": {
+        "registration_type": {
           "xml:lang": "nl",
           "value": "B&B",
           "type": "literal"
         },
-        "registrationStatus": {
+        "registration_status": {
           "xml:lang": "nl",
-          "value": "Erkend",
+          "value": "Foo status",
           "type": "literal"
         },
         "numberOfSleepingPlaces": {
@@ -73,8 +71,6 @@ EOT;
     private $completeJson = <<<EOT
 {
   "results": {
-    "ordered": true,
-    "distinct": false,
     "bindings": [
       {
         "_lodging": {
@@ -91,56 +87,74 @@ EOT;
           "value": "Foo description",
           "type": "literal"
         },
-        "type": {
-          "xml:lang": "nl",
-          "value": "B&B",
-          "type": "literal"
-        },
-        "registrationStatus": {
-          "xml:lang": "nl",
-          "value": "Erkend",
-          "type": "literal"
-        },
         "numberOfSleepingPlaces": {
           "value": "55",
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer"
         },
-        "street": {
+        "registration_type": {
+          "xml:lang": "nl",
+          "value": "B&B",
+          "type": "literal"
+        },
+        "registration_status": {
+          "xml:lang": "nl",
+          "value": "Foo status",
+          "type": "literal"
+        },
+        "receptionAddress_street": {
           "value": "Foo street",
           "type": "literal"
         },
-        "houseNumber": {
-          "value": "138",
+        "receptionAddress_houseNumber": {
+          "value": "8",
           "type": "literal"
         },
-        "busNumber": {
+        "receptionAddress_busNumber": {
           "value": "b",
           "type": "literal"
         },
-        "postalCode": {
+        "receptionAddress_postalCode": {
           "value": "9000",
           "type": "literal"
         },
-        "locality": {
+        "receptionAddress_locality": {
           "xml:lang": "nl",
           "value": "Foo locality",
           "type": "literal"
         },
-        "phoneNumber": {
+        "receptionAddress_longitude": {
+          "value": "3.72543",
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#float"
+        },
+        "receptionAddress_latitude": {
+          "value": "51.0547",
+          "type": "typed-literal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#float"
+        },
+        "contactPoint_phoneNumber": {
           "value": "+32 9 123 12 12",
           "type": "literal"
         },
-        "emailAddress": {
-          "value": "foo@biz.baz",
+        "contactPoint_emailAddress": {
+          "value": "info@foo.baz",
           "type": "literal"
         },
-        "websiteAddress": {
-          "value": "https://foo.bar",
+        "contactPoint_websiteAddress": {
+          "value": "https://foo.baz",
           "type": "uri"
         },
         "starRating": {
-          "value": "3 *",
+          "value": "4 *",
+          "type": "literal"
+        },
+        "qualityLabels": {
+          "value": "Label 1,Label 2",
+          "type": "literal"
+        },
+        "images": {
+          "value": "http://foo.bar/img/1.jpg,http://foo.bar/img/2.jpg",
           "type": "literal"
         }
       }
@@ -161,7 +175,7 @@ EOT;
             'Foo name',
             '',
             55,
-            Registration::fromTypeAndStatus('B&B', 'Erkend'),
+            Registration::fromTypeAndStatus('B&B', 'Foo status'),
             Address::fromDetails('', '', '', '', ''),
             ContactInfo::fromDetails(
                 PhoneNumber::withoutNumber(),
@@ -187,14 +201,14 @@ EOT;
             'Foo name',
             'Foo description',
             55,
-            Registration::fromTypeAndStatus('B&B', 'Erkend'),
-            Address::fromDetails('Foo street', '138', 'b', '9000', 'Foo locality'),
+            Registration::fromTypeAndStatus('B&B', 'Foo status'),
+            Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality'),
             ContactInfo::fromDetails(
                 PhoneNumber::fromNumber('+32 9 123 12 12'),
-                EmailAddress::fromAddress('foo@biz.baz'),
-                WebsiteAddress::fromUrl('https://foo.bar')
+                EmailAddress::fromAddress('info@foo.baz'),
+                WebsiteAddress::fromUrl('https://foo.baz')
             ),
-            StarRating::fromEuropeanFormat('3 *')
+            StarRating::fromEuropeanFormat('4 *')
         );
 
         $normalizer = new LodgingJsonNormalizer();
