@@ -182,7 +182,8 @@ EOT;
                     EmailAddress::fromAddress('info@foo.baz'),
                     WebsiteAddress::fromUrl('https://foo.baz')
                 ),
-                StarRating::fromEuropeanFormat('4 *')
+                StarRating::fromEuropeanFormat('4 *'),
+                ['Label 1', 'Label 2']
             )
         );
 

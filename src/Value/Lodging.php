@@ -69,6 +69,13 @@ final class Lodging extends ValueAbstract
     private $starRating;
 
     /**
+     * The quality labels assigned to the lodging.
+     *
+     * @var string[]
+     */
+    private $qualityLabels;
+
+    /**
      * Disable constructor.
      */
     protected function __construct()
@@ -79,13 +86,23 @@ final class Lodging extends ValueAbstract
      * Create a new lodging from its details.
      *
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId $lodgingId
+     *   The lodging ID (based on the lodging URI).
      * @param string $name
+     *   The lodging name.
      * @param string $description
+     *   The lodging description.
      * @param int $numberOfSleepingPlaces
+     *   The number of sleeping laces at the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration $registration
+     *   The registration details.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address $receptionAddress
+     *   The address of the lodging reception.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo $contactPoint
+     *   The contact details of the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating $starRating
+     *   The rating in number of stars of the lodging.
+     * @param string[] $qualityLabels
+     *   The quality labels of the lodging.
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
      */
@@ -97,7 +114,8 @@ final class Lodging extends ValueAbstract
         Registration $registration,
         Address $receptionAddress,
         ContactInfo $contactPoint,
-        StarRating $starRating
+        StarRating $starRating,
+        array $qualityLabels
     ): Lodging {
         $lodging = new static();
         $lodging->lodgingId = $lodgingId;
@@ -108,6 +126,7 @@ final class Lodging extends ValueAbstract
         $lodging->receptionAddress = $receptionAddress;
         $lodging->contactPoint = $contactPoint;
         $lodging->starRating = $starRating;
+        $lodging->qualityLabels = $qualityLabels;
 
         return $lodging;
     }
@@ -177,6 +196,14 @@ final class Lodging extends ValueAbstract
     }
 
     /**
+     * @return string[]
+     */
+    public function getQualityLabels(): array
+    {
+        return $this->qualityLabels;
+    }
+
+    /**
      * @inheritDoc
      */
     public function sameValueAs(ValueInterface $object)
@@ -190,6 +217,7 @@ final class Lodging extends ValueAbstract
             && $this->getReceptionAddress()->sameValueAs($object->getReceptionAddress())
             && $this->getContactPoint()->sameValueAs($object->getContactPoint())
             && $this->getStarRating()->sameValueAs($object->getStarRating())
+            && $this->getQualityLabels() === $object->getQualityLabels()
         ;
     }
 

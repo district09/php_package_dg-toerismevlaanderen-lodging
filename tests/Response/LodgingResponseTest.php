@@ -39,7 +39,8 @@ class LodgingResponseTest extends TestCase
                 EmailAddress::fromAddress('foo@biz.baz'),
                 WebsiteAddress::fromUrl('http://foo.bar')
             ),
-            StarRating::fromEuropeanFormat('3 *')
+            StarRating::fromEuropeanFormat('3 *'),
+            []
         );
 
         $response = new LodgingResponse($lodging);

@@ -35,6 +35,7 @@ final class LodgingArraySerializer
             'receptionAddress' => $addressSerializer->serialize($lodging->getReceptionAddress()),
             'contactPoint' => $contactInfoSerializer->serialize($lodging->getContactPoint()),
             'starRating' => (string) $lodging->getStarRating(),
+            'qualityLabels' => $lodging->getQualityLabels(),
         ];
     }
 }

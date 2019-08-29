@@ -39,7 +39,8 @@ final class LodgingArrayNormalizer
             $registration,
             $addressArrayNormalizer->normalize($data['receptionAddress'] ?? []),
             $contactInfoNormalizer->normalize($data['contactPoint'] ?? []),
-            StarRating::fromEuropeanFormat($data['starRating'])
+            StarRating::fromEuropeanFormat($data['starRating']),
+            $data['qualityLabels'] ?? []
         );
     }
 }

@@ -103,7 +103,8 @@ class LodgingServiceTest extends TestCase
                 EmailAddress::withoutAddress(),
                 WebsiteAddress::withoutUrl()
             ),
-            StarRating::fromEuropeanFormat('3 *')
+            StarRating::fromEuropeanFormat('3 *'),
+            []
         );
         $response = new LodgingResponse($lodging);
 

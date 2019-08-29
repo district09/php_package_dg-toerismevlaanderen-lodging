@@ -50,7 +50,8 @@ class LodgingArrayNormalizerTest extends TestCase
                 EmailAddress::withoutAddress(),
                 WebsiteAddress::withoutUrl()
             ),
-            StarRating::fromEuropeanFormat('2 *')
+            StarRating::fromEuropeanFormat('2 *'),
+            []
         );
 
         $normalizer = new LodgingArrayNormalizer();
@@ -91,6 +92,7 @@ class LodgingArrayNormalizerTest extends TestCase
                 'websiteAddress' => 'https://foo.baz',
             ],
             'starRating' => '2 *',
+            'qualityLabels' => ['Label 1', 'Label 2'],
         ];
 
         $expectedLodging = Lodging::fromDetails(
@@ -105,7 +107,8 @@ class LodgingArrayNormalizerTest extends TestCase
                 EmailAddress::fromAddress('foo@biz.baz'),
                 WebsiteAddress::fromUrl('https://foo.baz')
             ),
-            StarRating::fromEuropeanFormat('2 *')
+            StarRating::fromEuropeanFormat('2 *'),
+            ['Label 1', 'Label 2']
         );
 
         $normalizer = new LodgingArrayNormalizer();

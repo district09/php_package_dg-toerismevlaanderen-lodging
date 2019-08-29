@@ -39,7 +39,8 @@ class LodgingArraySerializerTest extends TestCase
                 EmailAddress::fromAddress('info@biz.baz'),
                 WebsiteAddress::fromUrl('https://foo.baz')
             ),
-            StarRating::fromEuropeanFormat('4 *')
+            StarRating::fromEuropeanFormat('4 *'),
+            ['label 1', 'Label 2']
         );
 
         $expectedArray = [
@@ -68,6 +69,7 @@ class LodgingArraySerializerTest extends TestCase
                 'websiteAddress' => 'https://foo.baz',
             ],
             'starRating' => '4 *',
+            'qualityLabels' => ['label 1', 'Label 2'],
         ];
 
         $serializer = new LodgingArraySerializer();

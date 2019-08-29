@@ -40,7 +40,8 @@ final class LodgingJsonNormalizer
             $this->normalizeRegistration($lodgingData),
             $this->normalizeReceptionAddress($lodgingData),
             $this->normalizeContactPoint($lodgingData),
-            StarRating::fromEuropeanFormat($lodgingData->starRating->value)
+            StarRating::fromEuropeanFormat($lodgingData->starRating->value),
+            $this->normalizeQualityLabels($lodgingData)
         );
     }
 
@@ -105,5 +106,21 @@ final class LodgingJsonNormalizer
             $emailAddress,
             $websiteAddress
         );
+    }
+
+    /**
+     * Extract the quality labels from the json data.
+     *
+     * @param object $lodgingData
+     *
+     * @return string[]
+     */
+    private function normalizeQualityLabels(object $lodgingData): array
+    {
+        if (empty($lodgingData->qualityLabels->value)) {
+            return [];
+        }
+
+        return explode(',', $lodgingData->qualityLabels->value);
     }
 }

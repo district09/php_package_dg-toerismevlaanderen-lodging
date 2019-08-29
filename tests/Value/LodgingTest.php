@@ -38,6 +38,7 @@ class LodgingTest extends TestCase
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
+        $qualityLabels = ['Label 1', 'Label 2'];
 
         $lodging = Lodging::fromDetails(
             $listId,
@@ -47,7 +48,8 @@ class LodgingTest extends TestCase
             $registration,
             $receptionAddress,
             $contactPoint,
-            $starRating
+            $starRating,
+            $qualityLabels
         );
         $this->assertSame($listId, $lodging->getLodgingId());
         $this->assertSame($name, $lodging->getName());
@@ -56,6 +58,7 @@ class LodgingTest extends TestCase
         $this->assertSame($receptionAddress, $lodging->getReceptionAddress());
         $this->assertSame($contactPoint, $lodging->getContactPoint());
         $this->assertSame($starRating, $lodging->getStarRating());
+        $this->assertSame($qualityLabels, $lodging->getQualityLabels());
     }
 
     /**
@@ -65,39 +68,17 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentId(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherLodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-888888');
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $otherLodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
+            LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-888888'),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -110,39 +91,17 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentName(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherName = 'Fiz';
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $lodgingId,
-            $otherName,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
+            $lodging->getLodgingId(),
+            'Fiz name',
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -155,39 +114,17 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentDescription(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherDescription = 'Fiz';
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $otherDescription,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            'Fiz description',
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -200,39 +137,17 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentNumberOfSleepingPlaces(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherNumberOfSleepingPlaces = 16;
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $otherNumberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            16,
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -245,39 +160,17 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentRegistration(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherRegistration = Registration::fromTypeAndStatus('Fiz', 'Baz');
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $otherRegistration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            Registration::fromTypeAndStatus('Fiz', 'Baz'),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -290,39 +183,17 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentReceptionAddress(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherReceptionAddress = Address::fromDetails('Other address', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $otherReceptionAddress,
-            $contactPoint,
-            $starRating
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            Address::fromDetails('Other address', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0)),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -335,43 +206,21 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentContactPoint(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::fromNumber('+32 9 123 12 12'),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherContactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $otherContactPoint,
-            $starRating
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            ContactInfo::fromDetails(
+                PhoneNumber::withoutNumber(),
+                EmailAddress::withoutAddress(),
+                WebsiteAddress::withoutUrl()
+            ),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -384,39 +233,17 @@ class LodgingTest extends TestCase
      */
     public function notSameValueWhenDifferentStarRating(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $otherStarRating = StarRating::fromEuropeanFormat('1 *');
+        $lodging = $this->createLodging();
         $otherLodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $otherStarRating
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            StarRating::fromEuropeanFormat('1 *'),
+            $lodging->getQualityLabels()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -429,39 +256,8 @@ class LodgingTest extends TestCase
      */
     public function sameValueIfDetailsAreTheSame(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
-
-        $sameLodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
-        );
+        $lodging = $this->createLodging();
+        $sameLodging = $this->createLodging();
 
         $this->assertTrue($lodging->sameValueAs($sameLodging));
     }
@@ -473,30 +269,38 @@ class LodgingTest extends TestCase
      */
     public function castToStringReturnsName(): void
     {
-        $lodgingId = LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999');
-        $name = 'Foo';
-        $description = 'Bar';
-        $numberOfSleepingPlaces = 15;
-        $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
-        $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
-        $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-        $starRating = StarRating::fromEuropeanFormat('4 *');
+        $lodging = $this->createLodging();
+        $this->assertEquals('Foo name', (string) $lodging);
+    }
 
-        $lodging = Lodging::fromDetails(
-            $lodgingId,
-            $name,
-            $description,
-            $numberOfSleepingPlaces,
-            $registration,
-            $receptionAddress,
-            $contactPoint,
-            $starRating
+    /**
+     * Create a lodging record to test with.
+     *
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     */
+    private function createLodging(): Lodging
+    {
+        return Lodging::fromDetails(
+            LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999'),
+            'Foo name',
+            'Foo description',
+            15,
+            Registration::fromTypeAndStatus('Biz', 'Baz'),
+            Address::fromDetails(
+                'Foo',
+                '5',
+                'b',
+                '9000',
+                'Baz',
+                Coordinates::fromLongitudeLatitude(0, 0)
+            ),
+            ContactInfo::fromDetails(
+                PhoneNumber::fromNumber('+32 9 123 12 12'),
+                EmailAddress::fromAddress('info@foo.baz'),
+                WebsiteAddress::fromUrl('https://foo.baz')
+            ),
+            StarRating::fromEuropeanFormat('4 *'),
+            ['Label 1', 'Label 2']
         );
-
-        $this->assertEquals('Foo', (string) $lodging);
     }
 }
