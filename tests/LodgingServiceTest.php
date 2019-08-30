@@ -16,6 +16,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
@@ -104,7 +105,8 @@ class LodgingServiceTest extends TestCase
                 WebsiteAddress::withoutUrl()
             ),
             StarRating::fromEuropeanFormat('3 *'),
-            []
+            [],
+            Images::fromImages()
         );
         $response = new LodgingResponse($lodging);
 

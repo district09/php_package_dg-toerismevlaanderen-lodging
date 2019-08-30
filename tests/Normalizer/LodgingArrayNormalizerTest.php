@@ -7,6 +7,8 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
@@ -51,7 +53,8 @@ class LodgingArrayNormalizerTest extends TestCase
                 WebsiteAddress::withoutUrl()
             ),
             StarRating::fromEuropeanFormat('2 *'),
-            []
+            [],
+            Images::fromImages()
         );
 
         $normalizer = new LodgingArrayNormalizer();
@@ -93,6 +96,10 @@ class LodgingArrayNormalizerTest extends TestCase
             ],
             'starRating' => '2 *',
             'qualityLabels' => ['Label 1', 'Label 2'],
+            'images' => [
+                'http://foo.bar/image/1.jpg',
+                'http://foo.bar/image/2.jpg',
+            ],
         ];
 
         $expectedLodging = Lodging::fromDetails(
@@ -108,7 +115,11 @@ class LodgingArrayNormalizerTest extends TestCase
                 WebsiteAddress::fromUrl('https://foo.baz')
             ),
             StarRating::fromEuropeanFormat('2 *'),
-            ['Label 1', 'Label 2']
+            ['Label 1', 'Label 2'],
+            Images::fromImages(
+                Image::fromUrl('http://foo.bar/image/1.jpg'),
+                Image::fromUrl('http://foo.bar/image/2.jpg')
+            )
         );
 
         $normalizer = new LodgingArrayNormalizer();

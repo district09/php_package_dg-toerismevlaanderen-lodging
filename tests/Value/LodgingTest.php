@@ -6,6 +6,8 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
@@ -39,6 +41,7 @@ class LodgingTest extends TestCase
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
         $qualityLabels = ['Label 1', 'Label 2'];
+        $images = Images::fromImages();
 
         $lodging = Lodging::fromDetails(
             $listId,
@@ -49,7 +52,8 @@ class LodgingTest extends TestCase
             $receptionAddress,
             $contactPoint,
             $starRating,
-            $qualityLabels
+            $qualityLabels,
+            $images
         );
         $this->assertSame($listId, $lodging->getLodgingId());
         $this->assertSame($name, $lodging->getName());
@@ -59,6 +63,7 @@ class LodgingTest extends TestCase
         $this->assertSame($contactPoint, $lodging->getContactPoint());
         $this->assertSame($starRating, $lodging->getStarRating());
         $this->assertSame($qualityLabels, $lodging->getQualityLabels());
+        $this->assertSame($images, $lodging->getImages());
     }
 
     /**
@@ -78,7 +83,8 @@ class LodgingTest extends TestCase
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
             $lodging->getStarRating(),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -101,7 +107,8 @@ class LodgingTest extends TestCase
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
             $lodging->getStarRating(),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -124,7 +131,8 @@ class LodgingTest extends TestCase
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
             $lodging->getStarRating(),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -147,7 +155,8 @@ class LodgingTest extends TestCase
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
             $lodging->getStarRating(),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -170,7 +179,8 @@ class LodgingTest extends TestCase
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
             $lodging->getStarRating(),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -193,7 +203,8 @@ class LodgingTest extends TestCase
             Address::fromDetails('Other address', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0)),
             $lodging->getContactPoint(),
             $lodging->getStarRating(),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -220,7 +231,8 @@ class LodgingTest extends TestCase
                 WebsiteAddress::withoutUrl()
             ),
             $lodging->getStarRating(),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -243,7 +255,56 @@ class LodgingTest extends TestCase
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
             StarRating::fromEuropeanFormat('1 *'),
-            $lodging->getQualityLabels()
+            $lodging->getQualityLabels(),
+            $lodging->getImages()
+        );
+
+        $this->assertFalse($lodging->sameValueAs($otherLodging));
+    }
+
+    /**
+     * Not the same value when different quality labels.
+     *
+     * @test
+     */
+    public function notSameValueWhenDifferentQualityLabels(): void
+    {
+        $lodging = $this->createLodging();
+        $otherLodging = Lodging::fromDetails(
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            ['Other label'],
+            $lodging->getImages()
+        );
+
+        $this->assertFalse($lodging->sameValueAs($otherLodging));
+    }
+
+    /**
+     * Not the same value when different images.
+     *
+     * @test
+     */
+    public function notSameValueWhenDifferentImages(): void
+    {
+        $lodging = $this->createLodging();
+        $otherLodging = Lodging::fromDetails(
+            $lodging->getLodgingId(),
+            $lodging->getName(),
+            $lodging->getDescription(),
+            $lodging->getNumberOfSleepingPlaces(),
+            $lodging->getRegistration(),
+            $lodging->getReceptionAddress(),
+            $lodging->getContactPoint(),
+            $lodging->getStarRating(),
+            $lodging->getQualityLabels(),
+            Images::fromImages()
         );
 
         $this->assertFalse($lodging->sameValueAs($otherLodging));
@@ -300,7 +361,8 @@ class LodgingTest extends TestCase
                 WebsiteAddress::fromUrl('https://foo.baz')
             ),
             StarRating::fromEuropeanFormat('4 *'),
-            ['Label 1', 'Label 2']
+            ['Label 1', 'Label 2'],
+            Images::fromImages(Image::fromUrl('http://foo.bar/image.jpg'))
         );
     }
 }

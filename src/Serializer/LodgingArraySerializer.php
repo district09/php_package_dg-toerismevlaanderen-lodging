@@ -22,6 +22,7 @@ final class LodgingArraySerializer
     {
         $addressSerializer = new AddressArraySerializer();
         $contactInfoSerializer = new ContactInfoArraySerializer();
+        $imagesSerializer = new ImagesArraySerializer();
 
         return [
             'lodgingId' => $lodging->getLodgingId()->getUri(),
@@ -36,6 +37,7 @@ final class LodgingArraySerializer
             'contactPoint' => $contactInfoSerializer->serialize($lodging->getContactPoint()),
             'starRating' => (string) $lodging->getStarRating(),
             'qualityLabels' => $lodging->getQualityLabels(),
+            'images' => $imagesSerializer->serialize($lodging->getImages()),
         ];
     }
 }

@@ -8,6 +8,8 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
@@ -41,7 +43,8 @@ final class LodgingJsonNormalizer
             $this->normalizeReceptionAddress($lodgingData),
             $this->normalizeContactPoint($lodgingData),
             StarRating::fromEuropeanFormat($lodgingData->starRating->value),
-            $this->normalizeQualityLabels($lodgingData)
+            $this->normalizeQualityLabels($lodgingData),
+            $this->normalizeImages($lodgingData)
         );
     }
 
@@ -122,5 +125,27 @@ final class LodgingJsonNormalizer
         }
 
         return explode(',', $lodgingData->qualityLabels->value);
+    }
+
+    /**
+     * Extract the images from the json data.
+     *
+     * @param object $lodgingData
+     *
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images
+     */
+    private function normalizeImages(object $lodgingData): Images
+    {
+        if (empty($lodgingData->images->value)) {
+            return Images::fromImages();
+        }
+
+        $images = [];
+        $imageUrls = explode(',', $lodgingData->images->value);
+        foreach ($imageUrls as $imageUrl) {
+            $images[] = Image::fromUrl($imageUrl);
+        }
+
+        return Images::fromImages(...$images);
     }
 }

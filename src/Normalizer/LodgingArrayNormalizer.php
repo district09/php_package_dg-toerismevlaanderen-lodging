@@ -30,6 +30,7 @@ final class LodgingArrayNormalizer
 
         $addressArrayNormalizer = new AddressArrayNormalizer();
         $contactInfoNormalizer = new ContactInfoArrayNormalizer();
+        $imagesArrayNormalizer = new ImagesArrayNormalizer();
 
         return Lodging::fromDetails(
             LodgingId::fromUri($data['lodgingId']),
@@ -40,7 +41,8 @@ final class LodgingArrayNormalizer
             $addressArrayNormalizer->normalize($data['receptionAddress'] ?? []),
             $contactInfoNormalizer->normalize($data['contactPoint'] ?? []),
             StarRating::fromEuropeanFormat($data['starRating']),
-            $data['qualityLabels'] ?? []
+            $data['qualityLabels'] ?? [],
+            $imagesArrayNormalizer->normalize($data['images'] ?? [])
         );
     }
 }

@@ -76,6 +76,13 @@ final class Lodging extends ValueAbstract
     private $qualityLabels;
 
     /**
+     * The lodging images.
+     *
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images
+     */
+    private $images;
+
+    /**
      * Disable constructor.
      */
     protected function __construct()
@@ -103,6 +110,8 @@ final class Lodging extends ValueAbstract
      *   The rating in number of stars of the lodging.
      * @param string[] $qualityLabels
      *   The quality labels of the lodging.
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images $images
+     *   The images collection.
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
      */
@@ -115,7 +124,8 @@ final class Lodging extends ValueAbstract
         Address $receptionAddress,
         ContactInfo $contactPoint,
         StarRating $starRating,
-        array $qualityLabels
+        array $qualityLabels,
+        Images $images
     ): Lodging {
         $lodging = new static();
         $lodging->lodgingId = $lodgingId;
@@ -127,6 +137,7 @@ final class Lodging extends ValueAbstract
         $lodging->contactPoint = $contactPoint;
         $lodging->starRating = $starRating;
         $lodging->qualityLabels = $qualityLabels;
+        $lodging->images = $images;
 
         return $lodging;
     }
@@ -204,6 +215,14 @@ final class Lodging extends ValueAbstract
     }
 
     /**
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images
+     */
+    public function getImages(): Images
+    {
+        return $this->images;
+    }
+
+    /**
      * @inheritDoc
      */
     public function sameValueAs(ValueInterface $object)
@@ -218,6 +237,7 @@ final class Lodging extends ValueAbstract
             && $this->getContactPoint()->sameValueAs($object->getContactPoint())
             && $this->getStarRating()->sameValueAs($object->getStarRating())
             && $this->getQualityLabels() === $object->getQualityLabels()
+            && $this->getImages()->sameValueAs($object->getImages())
         ;
     }
 
