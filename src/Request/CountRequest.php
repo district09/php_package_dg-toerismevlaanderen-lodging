@@ -7,7 +7,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Request;
 use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
 
 /**
- * Request to get the number of lodges that apply to provided filters.
+ * Request to get the number of lodgings that apply to provided filters.
  */
 final class CountRequest extends AbstractFilteredRequest
 {
@@ -35,7 +35,7 @@ EOT;
      * Construct a new request.
      *
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface ...$filters
-     *   The filters to get the lodges by.
+     *   The filters to get the lodgings by.
      */
     public function __construct(FilterInterface ...$filters)
     {

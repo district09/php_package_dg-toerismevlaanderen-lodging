@@ -7,12 +7,12 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Response;
 use DigipolisGent\API\Client\Response\ResponseInterface;
 
 /**
- * Response containing the number of found lodges.
+ * Response containing the number of found lodgings.
  */
 final class CountResponse implements ResponseInterface
 {
     /**
-     * The number of found lodges.
+     * The number of found lodgings.
      *
      * @var int
      */
@@ -29,7 +29,7 @@ final class CountResponse implements ResponseInterface
     }
 
     /**
-     * Get the number of lodges.
+     * Get the number of lodgings.
      *
      * @return int
      */

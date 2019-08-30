@@ -15,7 +15,7 @@ require_once __DIR__ . '/bootstrap.php';
 // Start output.
 echo PHP_EOL;
 echo str_repeat('-', 80) . PHP_EOL;
-echo 'Count the number of lodges in Gent.' . PHP_EOL;
+echo 'Count the number of lodgings in Gent.' . PHP_EOL;
 echo str_repeat('-', 80) . PHP_EOL;
 echo PHP_EOL;
 
@@ -31,7 +31,7 @@ $client = new Client($guzzleClient, $configuration);
 echo ' → Create the Site Service wrapper.' . PHP_EOL;
 $service = LodgingServiceFactory::create($client);
 
-echo ' → Count the number of lodges in Gent that are "Erkend" or "Vergund".' . PHP_EOL;
+echo ' → Count the number of lodgings in Gent that are "Erkend" or "Vergund".' . PHP_EOL;
 $count = $service->count(
     new LocalityFilter('Gent'),
     new RegistrationStatusFilter('Erkend', 'Vergund')
