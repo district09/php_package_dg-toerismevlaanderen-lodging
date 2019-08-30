@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Serializer\ContactInfoArraySerializer;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;

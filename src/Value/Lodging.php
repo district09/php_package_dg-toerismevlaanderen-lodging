@@ -225,7 +225,7 @@ final class Lodging extends ValueAbstract
     /**
      * @inheritDoc
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
             && $this->getLodgingId()->sameValueAs($object->getLodgingId())

@@ -25,7 +25,7 @@ final class Images extends CollectionAbstract
         return $collection;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $urls = [];
         foreach ($this->getIterator() as $image) {
@@ -33,6 +33,6 @@ final class Images extends CollectionAbstract
             $urls[] = $image->getUrl();
         }
 
-        return implode(',', $urls);
+        return implode(', ', $urls);
     }
 }

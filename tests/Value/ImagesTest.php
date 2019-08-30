@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
@@ -24,7 +26,7 @@ class ImagesTest extends TestCase
         );
 
         $this->assertEquals(
-            'http://foo.bar/image1.jpg,http://foo.bar/image2.jpg',
+            'http://foo.bar/image1.jpg, http://foo.bar/image2.jpg',
             (string) $images
         );
     }

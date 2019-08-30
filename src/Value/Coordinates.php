@@ -78,7 +78,7 @@ final class Coordinates extends ValueAbstract
      *
      * @param \DigipolisGent\Value\ValueInterface|\DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem $object
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
             && $this->getLongitude() === $object->getLongitude()

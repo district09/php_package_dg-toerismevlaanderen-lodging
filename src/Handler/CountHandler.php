@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Handler;
 
-use DigipolisGent\API\Client\Exception\InvalidResponse;
 use DigipolisGent\API\Client\Handler\HandlerInterface;
 use DigipolisGent\API\Client\Response\ResponseInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
 use Psr\Http\Message as Psr;
-use RuntimeException;
 
 /**
  * Handles the count request.

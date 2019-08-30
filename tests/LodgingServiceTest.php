@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging;
 
 use DigipolisGent\API\Client\ClientInterface;

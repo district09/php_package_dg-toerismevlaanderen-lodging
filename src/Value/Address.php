@@ -155,7 +155,7 @@ final class Address extends ValueAbstract
     /**
      * @inheritDoc
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
             && $this->getStreet() === $object->getStreet()
@@ -170,7 +170,7 @@ final class Address extends ValueAbstract
     /**
      * @inheritDoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf(
             '%s %s%s, %s %s',

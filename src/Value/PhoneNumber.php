@@ -67,7 +67,7 @@ final class PhoneNumber extends ValueAbstract
     /**
      * @inheritDoc
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
             && $this->getNumber() === $object->getNumber();
@@ -76,7 +76,7 @@ final class PhoneNumber extends ValueAbstract
     /**
      * @inheritDoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getNumber();
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Request;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
-use GuzzleHttp\Psr7\Request;
 
 /**
  * Request based on provided filters.

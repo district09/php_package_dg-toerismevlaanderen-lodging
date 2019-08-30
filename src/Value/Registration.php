@@ -69,7 +69,7 @@ final class Registration extends ValueAbstract
     /**
      * @inheritDoc
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
             && $this->getType() === $object->getType()
@@ -79,7 +79,7 @@ final class Registration extends ValueAbstract
     /**
      * @inheritDoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%s (%s)', $this->getType(), $this->getStatus());
     }
