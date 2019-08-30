@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
+namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromArray;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\LodgingArrayNormalizer;
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\LodgingNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
@@ -21,9 +21,9 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\LodgingArrayNormalizer
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\LodgingNormalizer
  */
-class LodgingArrayNormalizerTest extends TestCase
+class LodgingNormalizerTest extends TestCase
 {
     /**
      * Lodging can be normalized from minimal data set.
@@ -60,7 +60,7 @@ class LodgingArrayNormalizerTest extends TestCase
             Images::fromImages()
         );
 
-        $normalizer = new LodgingArrayNormalizer();
+        $normalizer = new LodgingNormalizer();
         $this->assertEquals($expectedLodging, $normalizer->normalize($data));
     }
 
@@ -125,7 +125,7 @@ class LodgingArrayNormalizerTest extends TestCase
             )
         );
 
-        $normalizer = new LodgingArrayNormalizer();
+        $normalizer = new LodgingNormalizer();
         $this->assertEquals($expectedLodging, $normalizer->normalize($data));
     }
 }

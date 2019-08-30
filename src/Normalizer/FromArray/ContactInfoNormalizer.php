@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer;
+namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
@@ -12,7 +12,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 /**
  * Normalizes an array of data into a ContactInfo value.
  */
-final class ContactInfoArrayNormalizer
+final class ContactInfoNormalizer
 {
     /**
      * Normalizes a given array containing address data into an Address value.

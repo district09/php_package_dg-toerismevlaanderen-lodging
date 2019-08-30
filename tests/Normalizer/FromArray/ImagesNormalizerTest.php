@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
+namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromArray;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ImagesArrayNormalizer;
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\ImagesNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ImagesArrayNormalizer
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\ImagesNormalizer
  */
-class ImagesArrayNormalizerTest extends TestCase
+class ImagesNormalizerTest extends TestCase
 {
     /**
      * Images collection can be created from empty data array.
@@ -23,7 +23,7 @@ class ImagesArrayNormalizerTest extends TestCase
     {
         $expectedImages = Images::fromImages();
 
-        $normalizer = new ImagesArrayNormalizer();
+        $normalizer = new ImagesNormalizer();
         $this->assertEquals(
             $expectedImages,
             $normalizer->normalize([])
@@ -47,7 +47,7 @@ class ImagesArrayNormalizerTest extends TestCase
             Image::fromUrl('http://foo.bar/image/2.jpg')
         );
 
-        $normalizer = new ImagesArrayNormalizer();
+        $normalizer = new ImagesNormalizer();
         $this->assertEquals(
             $expectedImages,
             $normalizer->normalize($data)

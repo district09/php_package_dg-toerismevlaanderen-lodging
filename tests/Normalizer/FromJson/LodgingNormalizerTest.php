@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
+namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromJson;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\LodgingJsonNormalizer;
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromJson\LodgingNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
@@ -21,9 +21,9 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\LodgingJsonNormalizer
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromJson\LodgingNormalizer
  */
-class LodgingJsonNormalizerTest extends TestCase
+class LodgingNormalizerTest extends TestCase
 {
     /**
      * Partial (minimum data) JSON data.
@@ -193,7 +193,7 @@ EOT;
             Images::fromImages()
         );
 
-        $normalizer = new LodgingJsonNormalizer();
+        $normalizer = new LodgingNormalizer();
         $this->assertEquals($expectedLodging, $normalizer->normalize($this->partialJson));
     }
 
@@ -224,7 +224,7 @@ EOT;
             )
         );
 
-        $normalizer = new LodgingJsonNormalizer();
+        $normalizer = new LodgingNormalizer();
         $this->assertEquals($expectedLodging, $normalizer->normalize($this->completeJson));
     }
 }

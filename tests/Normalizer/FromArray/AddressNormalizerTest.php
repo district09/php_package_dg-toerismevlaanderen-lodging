@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
+namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromArray;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\AddressArrayNormalizer;
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\AddressNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\AddressArrayNormalizer
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\AddressNormalizer
  */
-class AddressArrayNormalizerTest extends TestCase
+class AddressNormalizerTest extends TestCase
 {
     /**
      * Address can be created from array without address data.
@@ -23,7 +23,7 @@ class AddressArrayNormalizerTest extends TestCase
     {
         $expectedAddress = Address::fromDetails('', '', '', '', '', Coordinates::fromLongitudeLatitude(0, 0));
 
-        $normalizer = new AddressArrayNormalizer();
+        $normalizer = new AddressNormalizer();
         $this->assertEquals($expectedAddress, $normalizer->normalize([]));
     }
 
@@ -55,7 +55,7 @@ class AddressArrayNormalizerTest extends TestCase
             Coordinates::fromLongitudeLatitude(1.234, 56.789)
         );
 
-        $normalizer = new AddressArrayNormalizer();
+        $normalizer = new AddressNormalizer();
         $this->assertEquals($expectedAddress, $normalizer->normalize($data));
     }
 }

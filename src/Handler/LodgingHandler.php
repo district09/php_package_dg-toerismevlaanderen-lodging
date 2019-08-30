@@ -7,7 +7,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Handler;
 use DigipolisGent\API\Client\Handler\HandlerInterface;
 use DigipolisGent\API\Client\Response\ResponseInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData;
-use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\LodgingJsonNormalizer;
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromJson\LodgingNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\LodgingRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\LodgingResponse;
 use Psr\Http\Message as Psr;
@@ -35,7 +35,7 @@ final class LodgingHandler implements HandlerInterface
         $json = $response->getBody()->getContents();
         $this->assertDataIsComplete($json);
 
-        $normalizer = new LodgingJsonNormalizer();
+        $normalizer = new LodgingNormalizer();
         $lodging = $normalizer->normalize($json);
 
         return new LodgingResponse($lodging);
@@ -56,7 +56,5 @@ final class LodgingHandler implements HandlerInterface
         if (!isset($data->results->bindings[0])) {
             throw MissingResponseData::lodging();
         }
-
-        // TODO: add check if there are details.
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer;
+namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
@@ -10,7 +10,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 /**
  * Normalizes an array of data into an Address value.
  */
-final class AddressArrayNormalizer
+final class AddressNormalizer
 {
     /**
      * Normalizes a given array containing address data into an Address value.

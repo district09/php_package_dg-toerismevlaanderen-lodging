@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer;
+namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromArray;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ContactInfoArrayNormalizer;
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\ContactInfoNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
@@ -12,9 +12,9 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\ContactInfoArrayNormalizer
+ * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\ContactInfoNormalizer
  */
-class ContactInfoArrayNormalizerTest extends TestCase
+class ContactInfoNormalizerTest extends TestCase
 {
     /**
      * Contactpoint can be created from array not containing any data.
@@ -29,7 +29,7 @@ class ContactInfoArrayNormalizerTest extends TestCase
             WebsiteAddress::withoutUrl()
         );
 
-        $normalizer = new ContactInfoArrayNormalizer();
+        $normalizer = new ContactInfoNormalizer();
         $this->assertEquals(
             $expectedContactPoint,
             $normalizer->normalize([])
@@ -55,7 +55,7 @@ class ContactInfoArrayNormalizerTest extends TestCase
             WebsiteAddress::fromUrl('https://foo.baz')
         );
 
-        $normalizer = new ContactInfoArrayNormalizer();
+        $normalizer = new ContactInfoNormalizer();
         $this->assertEquals($expectedContactPoint, $normalizer->normalize($data));
     }
 }

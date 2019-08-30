@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer;
+namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
@@ -10,7 +10,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 /**
  * Normalizes an array of data into a Images collection value.
  */
-final class ImagesArrayNormalizer
+final class ImagesNormalizer
 {
     /**
      * Normalizes a given array containing image URL's.
