@@ -13,10 +13,10 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 interface LodgingServiceInterface
 {
     /**
-     * Count the number of lodges by the given filter.
+     * Count the number of lodgings by the given filter.
      *
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface ...$filters
-     *   Filters to count the lodges by.
+     *   Filters to count the lodgings by.
      *
      * @return int
      *   The number of lodgings that apply to the given filters.
@@ -27,7 +27,7 @@ interface LodgingServiceInterface
      * Get a list of lodgings by the given filters.
      *
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface ...$filters
-     *   Filters to count the lodges by.
+     *   Filters to count the lodgings by.
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem[]
      *   Array of lodgings.

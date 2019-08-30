@@ -37,11 +37,11 @@ class LodgingServiceTest extends TestCase
 {
 
     /**
-     * Count method sends out the CountRequest and returns the number of lodges.
+     * Count method sends out the CountRequest and returns number of lodgings.
      *
      * @test
      */
-    public function countMethodSendsCountRequestAndReturnsNumberOfLodges(): void
+    public function countMethodSendsCountRequestAndReturnsNumberOfLodgings(): void
     {
         $localityFilter = new LocalityFilter('Foo');
         $registrationStatusFilter = new RegistrationStatusFilter('Biz', 'Baz');
@@ -65,7 +65,7 @@ class LodgingServiceTest extends TestCase
      *
      * @test
      */
-    public function listMethodSendsListRequestAndReturnsLodgesArray(): void
+    public function listMethodSendsListRequestAndReturnsLodgingsArray(): void
     {
         $localityFilter = new LocalityFilter('Foo');
         $registrationStatusFilter = new RegistrationStatusFilter('Biz', 'Baz');

@@ -38,7 +38,7 @@ EOT;
      * Construct a new request.
      *
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface ...$filters
-     *   The filters to get the lodges by.
+     *   The filters to get the lodgings by.
      */
     public function __construct(FilterInterface ...$filters)
     {

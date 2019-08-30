@@ -20,7 +20,9 @@ composer install
 
 ## Examples
 
-* `01-Count.php` : Count the number of lodges in Gent.
+* `01-Count.php` : Count the number of lodgings in Gent.
+* `02-List.php` : Get a list of lodgings in Gent that are Erkend or Vergund.
+* `03-Lodging.php` : Get the details of a single lodging by its URI.
 
 ## Usage
 
