@@ -47,6 +47,9 @@
         "coverage": "vendor/bin/phpunit --coverage-html ./build/coverage"
     },
     "extra": {
+        "branch-alias": {
+            "dev-develop": "0.1-dev"
+        },
         "hooks": {
             "pre-commit": [
                 "echo committing as $(git config user.name)",
