@@ -11,7 +11,7 @@ plugins:
       CleanCode/StaticAccess:
         enabled: false
       Naming/LongVariable:
-        enabled: false;
+        enabled: false
   duplication:
     enabled: true
     config:
