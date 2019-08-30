@@ -27,4 +27,14 @@ class MissingResponseData extends Exception
     {
         return new static('Response data does not contain list record value.', 500);
     }
+
+    /**
+     * Missing detail data.
+     *
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData
+     */
+    public static function lodging(): MissingResponseData
+    {
+        return new static('Response data does not contain lodging details.', 500);
+    }
 }

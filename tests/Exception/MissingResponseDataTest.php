@@ -1,6 +1,8 @@
 <?php
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Filter;
+declare(strict_types=1);
+
+namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Exception;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData;
 use PHPUnit\Framework\TestCase;
@@ -31,6 +33,18 @@ class MissingResponseDataTest extends TestCase
     {
         $exception = MissingResponseData::list();
         $this->assertEquals('Response data does not contain list record value.', $exception->getMessage());
+        $this->assertSame(500, $exception->getCode());
+    }
+
+    /**
+     * From detail contains the proper message.
+     *
+     * @test
+     */
+    public function exceptionForlodgingContainsProperMessage(): void
+    {
+        $exception = MissingResponseData::lodging();
+        $this->assertEquals('Response data does not contain lodging details.', $exception->getMessage());
         $this->assertSame(500, $exception->getCode());
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\ListResponse;
@@ -19,8 +21,8 @@ class ListResponseTest extends TestCase
     public function responseContainsListItems(): void
     {
         $listItems = [
-            ListItem::fromUriAndName('http://test.me/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-888888', 'FooBar'),
-            ListItem::fromUriAndName('http://test.me/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999', 'BizBaz'),
+            ListItem::fromUriAndName('http://test.me/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-888888', 'FooBar'),
+            ListItem::fromUriAndName('http://test.me/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999', 'BizBaz'),
         ];
 
         $response = new ListResponse($listItems);

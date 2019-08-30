@@ -13,18 +13,11 @@ use DigipolisGent\Value\ValueInterface;
 final class ListItem extends ValueAbstract
 {
     /**
-     * The list item ID.
+     * The lodging id.
      *
-     * @var string
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId
      */
-    private $id;
-
-    /**
-     * The list item URI.
-     *
-     * @var string
-     */
-    private $uri;
+    private $lodgingId;
 
     /**
      * The list item name.
@@ -51,29 +44,18 @@ final class ListItem extends ValueAbstract
     public static function fromUriAndName(string $uri, string $name): ListItem
     {
         $item = new static();
-        $item->uri = $uri;
+        $item->lodgingId = LodgingId::fromUri($uri);
         $item->name = $name;
-
-        $uriParts = explode('/', $uri);
-        $item->id = array_pop($uriParts);
 
         return $item;
     }
 
     /**
-     * @return string
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId
      */
-    public function getId(): string
+    public function lodgingId(): LodgingId
     {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUri(): string
-    {
-        return $this->uri;
+        return $this->lodgingId;
     }
 
     /**
@@ -89,10 +71,10 @@ final class ListItem extends ValueAbstract
      *
      * @param \DigipolisGent\Value\ValueInterface|\DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem $object
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
-            && $this->getUri() === $object->getUri()
+            && $this->lodgingId()->sameValueAs($object->lodgingId())
             && $this->getName() === $object->getName()
         ;
     }

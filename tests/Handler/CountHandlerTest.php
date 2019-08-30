@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData;
@@ -9,7 +11,6 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 
 /**
  * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Handler\CountHandler

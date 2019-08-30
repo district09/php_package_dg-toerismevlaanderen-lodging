@@ -5,7 +5,9 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging;
 use DigipolisGent\API\Client\ClientInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
+use DigipolisGent\Toerismevlaanderen\Lodging\Request\LodgingRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\ListRequest;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 
 /**
  * Service to access the Toerismevlaanderen Lodging linked open data.
@@ -44,5 +46,14 @@ class LodgingService implements LodgingServiceInterface
     {
         $request = new ListRequest(...$filters);
         return $this->client->send($request)->items();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function lodging(string $uri): Lodging
+    {
+        $request = new LodgingRequest($uri);
+        return $this->client->send($request)->lodging();
     }
 }

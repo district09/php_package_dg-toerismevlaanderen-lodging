@@ -4,6 +4,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging;
 
 use DigipolisGent\API\Client\ClientInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Handler\CountHandler;
+use DigipolisGent\Toerismevlaanderen\Lodging\Handler\LodgingHandler;
 use DigipolisGent\Toerismevlaanderen\Lodging\Handler\ListHandler;
 
 /**
@@ -20,6 +21,7 @@ class LodgingServiceFactory
     {
         $client->addHandler(new CountHandler());
         $client->addHandler(new ListHandler());
+        $client->addHandler(new LodgingHandler());
 
         return new LodgingService($client);
     }

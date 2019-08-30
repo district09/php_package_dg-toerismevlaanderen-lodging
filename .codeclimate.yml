@@ -10,6 +10,8 @@ plugins:
     checks:
       CleanCode/StaticAccess:
         enabled: false
+      Naming/LongVariable:
+        enabled: false
   duplication:
     enabled: true
     config:
