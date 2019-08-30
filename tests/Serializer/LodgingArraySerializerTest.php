@@ -12,6 +12,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
@@ -42,7 +43,7 @@ class LodgingArraySerializerTest extends TestCase
                 WebsiteAddress::fromUrl('https://foo.baz')
             ),
             StarRating::fromEuropeanFormat('4 *'),
-            ['label 1', 'Label 2'],
+            QualityLabels::fromLabels('label 1', 'Label 2'),
             Images::fromImages(
                 Image::fromUrl('http://foo.bar/image/1.jpg'),
                 Image::fromUrl('http://foo.bar/image/2.jpg')

@@ -11,6 +11,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
@@ -41,7 +42,7 @@ class LodgingResponseTest extends TestCase
                 WebsiteAddress::fromUrl('http://foo.bar')
             ),
             StarRating::fromEuropeanFormat('3 *'),
-            [],
+            QualityLabels::fromLabels(),
             Images::fromImages()
         );
 

@@ -11,6 +11,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
@@ -40,7 +41,7 @@ class LodgingTest extends TestCase
             WebsiteAddress::withoutUrl()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
-        $qualityLabels = ['Label 1', 'Label 2'];
+        $qualityLabels = QualityLabels::fromLabels('Label 1', 'Label 2');
         $images = Images::fromImages();
 
         $lodging = Lodging::fromDetails(
@@ -279,7 +280,7 @@ class LodgingTest extends TestCase
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
             $lodging->getStarRating(),
-            ['Other label'],
+            QualityLabels::fromLabels('Other label'),
             $lodging->getImages()
         );
 
@@ -361,7 +362,7 @@ class LodgingTest extends TestCase
                 WebsiteAddress::fromUrl('https://foo.baz')
             ),
             StarRating::fromEuropeanFormat('4 *'),
-            ['Label 1', 'Label 2'],
+            QualityLabels::fromLabels('Label 1', 'Label 2'),
             Images::fromImages(Image::fromUrl('http://foo.bar/image.jpg'))
         );
     }

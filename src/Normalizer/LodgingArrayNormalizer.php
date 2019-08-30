@@ -6,6 +6,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 
@@ -41,7 +42,7 @@ final class LodgingArrayNormalizer
             $addressArrayNormalizer->normalize($data['receptionAddress'] ?? []),
             $contactInfoNormalizer->normalize($data['contactPoint'] ?? []),
             StarRating::fromEuropeanFormat($data['starRating']),
-            $data['qualityLabels'] ?? [],
+            QualityLabels::fromLabels(... $data['qualityLabels'] ?? []),
             $imagesArrayNormalizer->normalize($data['images'] ?? [])
         );
     }

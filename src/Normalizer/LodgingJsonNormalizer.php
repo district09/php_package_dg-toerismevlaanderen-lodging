@@ -13,6 +13,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
@@ -116,15 +117,16 @@ final class LodgingJsonNormalizer
      *
      * @param object $lodgingData
      *
-     * @return string[]
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels
      */
-    private function normalizeQualityLabels(object $lodgingData): array
+    private function normalizeQualityLabels(object $lodgingData): QualityLabels
     {
         if (empty($lodgingData->qualityLabels->value)) {
-            return [];
+            return QualityLabels::fromLabels();
         }
 
-        return explode(',', $lodgingData->qualityLabels->value);
+        $labels = explode(',', $lodgingData->qualityLabels->value);
+        return QualityLabels::fromLabels(...$labels);
     }
 
     /**

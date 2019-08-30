@@ -71,7 +71,7 @@ final class Lodging extends ValueAbstract
     /**
      * The quality labels assigned to the lodging.
      *
-     * @var string[]
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels
      */
     private $qualityLabels;
 
@@ -108,7 +108,7 @@ final class Lodging extends ValueAbstract
      *   The contact details of the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating $starRating
      *   The rating in number of stars of the lodging.
-     * @param string[] $qualityLabels
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels $qualityLabels
      *   The quality labels of the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images $images
      *   The images collection.
@@ -124,7 +124,7 @@ final class Lodging extends ValueAbstract
         Address $receptionAddress,
         ContactInfo $contactPoint,
         StarRating $starRating,
-        array $qualityLabels,
+        QualityLabels $qualityLabels,
         Images $images
     ): Lodging {
         $lodging = new static();
@@ -207,9 +207,9 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return string[]
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels
      */
-    public function getQualityLabels(): array
+    public function getQualityLabels(): QualityLabels
     {
         return $this->qualityLabels;
     }
@@ -236,7 +236,7 @@ final class Lodging extends ValueAbstract
             && $this->getReceptionAddress()->sameValueAs($object->getReceptionAddress())
             && $this->getContactPoint()->sameValueAs($object->getContactPoint())
             && $this->getStarRating()->sameValueAs($object->getStarRating())
-            && $this->getQualityLabels() === $object->getQualityLabels()
+            && $this->getQualityLabels()->sameValueAs($object->getQualityLabels())
             && $this->getImages()->sameValueAs($object->getImages())
         ;
     }
