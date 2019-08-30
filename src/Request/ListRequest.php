@@ -7,9 +7,9 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Request;
 use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
 
 /**
- * Request to get the number of lodges that apply to provided filters.
+ * Request to get the a list of lodgings that apply to the filters.
  */
-final class CountRequest extends AbstractFilteredRequest
+final class ListRequest extends AbstractFilteredRequest
 {
 
     /**
@@ -22,13 +22,16 @@ PREFIX tvl: <https://data.vlaanderen.be/ns/logies#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX tva: <https://data.vlaanderen.be/ns/adres#>
 PREFIX schema: <http://schema.org/>
-SELECT (COUNT(?_lodging) AS ?count)
+SELECT
+  ?_lodging
+  ?naam
 WHERE {
-    ?_lodging a tvl:Logies;
-    %s
-    schema:name ?naam.
-    %s
+  ?_lodging a tvl:Logies;
+  %s
+  schema:name ?naam.
+  %s
 }
+ORDER BY ?naam
 EOT;
 
     /**
