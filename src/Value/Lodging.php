@@ -10,7 +10,7 @@ use DigipolisGent\Value\ValueInterface;
 /**
  * A lodging value.
  */
-final class Lodging extends ValueAbstract
+final class Lodging extends ValueAbstract implements LodgingInterface
 {
     /**
      * The lodging id.
@@ -113,7 +113,7 @@ final class Lodging extends ValueAbstract
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images $images
      *   The images collection.
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
      */
     public static function fromDetails(
         LodgingId $lodgingId,
@@ -126,7 +126,7 @@ final class Lodging extends ValueAbstract
         StarRating $starRating,
         QualityLabels $qualityLabels,
         Images $images
-    ): Lodging {
+    ): LodgingInterface {
         $lodging = new static();
         $lodging->lodgingId = $lodgingId;
         $lodging->name = $name;
@@ -143,7 +143,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId
+     * @inheritDoc
      */
     public function getLodgingId(): LodgingId
     {
@@ -151,7 +151,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getName(): string
     {
@@ -159,7 +159,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getDescription(): string
     {
@@ -167,7 +167,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return int
+     * @inheritDoc
      */
     public function getNumberOfSleepingPlaces(): int
     {
@@ -175,7 +175,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration
+     * @inheritDoc
      */
     public function getRegistration(): Registration
     {
@@ -183,7 +183,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
+     * @inheritDoc
      */
     public function getReceptionAddress(): Address
     {
@@ -191,7 +191,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
+     * @inheritDoc
      */
     public function getContactPoint(): ContactInfo
     {
@@ -199,7 +199,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
+     * @inheritDoc
      */
     public function getStarRating(): StarRating
     {
@@ -207,7 +207,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels
+     * @inheritDoc
      */
     public function getQualityLabels(): QualityLabels
     {
@@ -215,7 +215,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images
+     * @inheritDoc
      */
     public function getImages(): Images
     {

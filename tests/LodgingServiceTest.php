@@ -14,19 +14,8 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Request\ListRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\LodgingResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\ListResponse;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 
@@ -95,22 +84,7 @@ class LodgingServiceTest extends TestCase
      */
     public function lodgingMethodSendsDetailRequestAndReturnsLodgingDetail(): void
     {
-        $lodging = Lodging::fromDetails(
-            LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999'),
-            'Foo name',
-            '',
-            55,
-            Registration::fromTypeAndStatus('B&B', 'Erkend'),
-            Address::fromDetails('', '', '', '', '', Coordinates::fromLongitudeLatitude(0, 0)),
-            ContactInfo::fromDetails(
-                PhoneNumber::withoutNumber(),
-                EmailAddress::withoutAddress(),
-                WebsiteAddress::withoutUrl()
-            ),
-            StarRating::fromEuropeanFormat('3 *'),
-            QualityLabels::fromLabels(),
-            Images::fromImages()
-        );
+        $lodging = $this->prophesize(LodgingInterface::class)->reveal();
         $response = new LodgingResponse($lodging);
 
         $clientMock = $this->prophesize(ClientInterface::class);

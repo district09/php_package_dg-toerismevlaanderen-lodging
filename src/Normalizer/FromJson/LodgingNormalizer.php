@@ -6,6 +6,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromJson;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 
 /**
@@ -18,9 +19,9 @@ final class LodgingNormalizer
      *
      * @param string $json
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
      */
-    public function normalize(string $json): Lodging
+    public function normalize(string $json): LodgingInterface
     {
         $data = json_decode($json);
         $lodgingData = $data->results->bindings[0];
