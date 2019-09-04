@@ -44,9 +44,9 @@ SELECT
   ?receptionAddress_locality
   ?receptionAddress_longitude
   ?receptionAddress_latitude
-  (GROUP_CONCAT(DISTINCT ?contactPoint_phoneNumber; SEPARATOR=",") AS ?phoneNumbers)
-  (GROUP_CONCAT(DISTINCT ?contactPoint_emailAddress; SEPARATOR=",") AS ?emailAdresses)
-  (GROUP_CONCAT(DISTINCT ?contactPoint_websiteAddress; SEPARATOR=",") AS ?websiteAddresses)
+  (GROUP_CONCAT(DISTINCT ?contactPoint_phoneNumber; SEPARATOR=",") AS ?contactPoint_phoneNumbers)
+  (GROUP_CONCAT(DISTINCT ?contactPoint_emailAddress; SEPARATOR=",") AS ?contactPoint_emailAddresses)
+  (GROUP_CONCAT(DISTINCT ?contactPoint_websiteAddress; SEPARATOR=",") AS ?contactPoint_websiteAddresses)
   ?starRating
   (GROUP_CONCAT(DISTINCT ?qualityLabel; SEPARATOR=",") AS ?qualityLabels)
   (GROUP_CONCAT(DISTINCT ?media; SEPARATOR=",") AS ?images)

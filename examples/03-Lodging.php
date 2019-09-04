@@ -64,15 +64,15 @@ echo sprintf(
 
 echo sprintf(
     '   • Contact point     : t %s',
-    $lodging->getContactPoint()->getPhoneNumber()
+    (string)  $lodging->getContactPoint()->getPhoneNumbers()
 ), PHP_EOL;
 echo sprintf(
     '                         m %s',
-    $lodging->getContactPoint()->getEmailAddress()
+    (string) $lodging->getContactPoint()->getEmailAddresses()
 ), PHP_EOL;
 echo sprintf(
     '                         w %s',
-    $lodging->getContactPoint()->getWebsiteAddress()
+    (string) $lodging->getContactPoint()->getWebsiteAddresses()
 ), PHP_EOL;
 
 echo sprintf('   • Type              : %s', $lodging->getRegistration()->getType()), PHP_EOL;
