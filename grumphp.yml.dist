@@ -23,9 +23,7 @@ parameters:
         securitychecker: ~
         xmllint: ~
         yamllint: ~
-        git_commit_message:
-            allow_empty_message: false
-            max_subject_width: 72
+        git_commit_message: ~
         git_branch_name:
             whitelist:
                 Git-flow: /(master|develop|feature\/(\w+-)?\d+|(release|hotfix)\/(\d+\.\d+\.\d+))/
