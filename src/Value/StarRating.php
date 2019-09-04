@@ -52,7 +52,7 @@ final class StarRating extends ValueAbstract
      *   $starRating = StarRating::fromString('4 * sup');
      * </code>
      *
-     * @param string $uri
+     * @param string $rating
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
      *
