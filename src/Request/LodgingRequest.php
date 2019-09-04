@@ -52,7 +52,7 @@ SELECT
   (GROUP_CONCAT(DISTINCT ?media; SEPARATOR=",") AS ?images)
 
 WHERE {
-  BIND(<http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-211725> AS ?_lodging).
+  BIND(<%s> AS ?_lodging).
   ?_lodging a tvl:Logies.
   ?_lodging schema:name ?name.
   ?_lodging tvl:aantalSlaapplaatsen ?numberOfSleepingPlaces.
