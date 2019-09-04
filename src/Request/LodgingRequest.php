@@ -44,21 +44,20 @@ SELECT
   ?receptionAddress_locality
   ?receptionAddress_longitude
   ?receptionAddress_latitude
-  ?contactPoint_phoneNumber
-  ?contactPoint_emailAddress
-  ?contactPoint_websiteAddress
+  (GROUP_CONCAT(DISTINCT ?contactPoint_phoneNumber; SEPARATOR=",") AS ?phoneNumbers)
+  (GROUP_CONCAT(DISTINCT ?contactPoint_emailAddress; SEPARATOR=",") AS ?emailAdresses)
+  (GROUP_CONCAT(DISTINCT ?contactPoint_websiteAddress; SEPARATOR=",") AS ?websiteAddresses)
   ?starRating
   (GROUP_CONCAT(DISTINCT ?qualityLabel; SEPARATOR=",") AS ?qualityLabels)
   (GROUP_CONCAT(DISTINCT ?media; SEPARATOR=",") AS ?images)
 
 WHERE {
-  BIND(<%s> AS ?_lodging).
+  BIND(<http://linked.toerismevlaanderen.be/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-211725> AS ?_lodging).
   ?_lodging a tvl:Logies.
   ?_lodging schema:name ?name.
   ?_lodging tvl:aantalSlaapplaatsen ?numberOfSleepingPlaces.
   
-  OPTIONAL { ?_lodging tvl:heeftBeschrijving ?_description. }
-  ?_description schema:value ?description.
+  OPTIONAL { ?_lodging tvl:heeftBeschrijving/schema:value ?description. }
   
   ?_lodging tvl:onthaalAdres ?_receptionAddress.
   ?_receptionAddress locn:thoroughfare ?receptionAddress_street.
@@ -67,26 +66,26 @@ WHERE {
   ?_receptionAddress locn:postCode ?receptionAddress_postalCode.
   ?_receptionAddress tva:gemeentenaam ?receptionAddress_locality.
   
-  ?_lodging tvl:onthaalLocatie ?_receptionAddress_location.
-  ?_receptionAddress_location geoc:long ?receptionAddress_longitude.
-  ?_receptionAddress_location geoc:lat ?receptionAddress_latitude.
-   
+  OPTIONAL { ?_lodging tvl:onthaalLocatie ?_receptionAddress_location.
+             ?_receptionAddress_location geoc:long ?receptionAddress_longitude.
+             ?_receptionAddress_location geoc:lat ?receptionAddress_latitude.
+  }
+  
   OPTIONAL { ?_lodging schema:contactPoint/schema:telephone ?contactPoint_phoneNumber. }
   OPTIONAL { ?_lodging schema:contactPoint/schema:email ?contactPoint_emailAddress. }
   OPTIONAL { ?_lodging schema:contactPoint/foaf:page ?contactPoint_websiteAddress. }
   
-  OPTIONAL { ?_lodging tvl:heeftRegistratie ?_registration. }
-  ?_registration dcterms:type ?_registration_type.
-  ?_registration_type skos:prefLabel ?registration_type.
-  ?_registration tvl:registratieStatus ?_registration_status.
-  ?_registration_status skos:prefLabel ?registration_status.
+  OPTIONAL { ?_lodging tvl:heeftRegistratie ?_registration. 
+             ?_registration dcterms:type ?_registration_type.
+             ?_registration_type skos:prefLabel ?registration_type.
+             ?_registration tvl:registratieStatus ?_registration_status.
+             ?_registration_status skos:prefLabel ?registration_status.
+  }
   
-  OPTIONAL { ?_lodging schema:starRating ?_starRating. }
-  OPTIONAL { ?_starRating schema:ratingValue ?starRating. }
+  OPTIONAL { ?_lodging schema:starRating/schema:ratingValue ?starRating. }
   OPTIONAL { ?_lodging tvl:heeftKwaliteitslabel/skos:prefLabel ?qualityLabel. }
   
-  OPTIONAL { ?_lodging tvl:heeftMedia ?_media. }
-  OPTIONAL { ?_media schema:contentUrl ?media. }
+  OPTIONAL { ?_lodging tvl:heeftMedia/schema:contentUrl ?media. }
   
   FILTER (LANG(?registration_status) = "nl")
   FILTER (LANG(?registration_type) = "nl")
