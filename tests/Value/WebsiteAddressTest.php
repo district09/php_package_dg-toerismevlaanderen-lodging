@@ -36,17 +36,6 @@ class WebsiteAddressTest extends TestCase
     }
 
     /**
-     * Website address can be created without URL.
-     *
-     * @test
-     */
-    public function websiteAddressCanBeCreatedWithoutUrl(): void
-    {
-        $websiteAddress = WebsiteAddress::withoutUrl();
-        $this->assertEquals('', $websiteAddress->getUrl());
-    }
-
-    /**
      * Not the same value if URLs are different.
      *
      * @test

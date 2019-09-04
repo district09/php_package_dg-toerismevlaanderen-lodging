@@ -24,17 +24,6 @@ class PhoneNumberTest extends TestCase
     }
 
     /**
-     * Empty phone number can be created.
-     *
-     * @test
-     */
-    public function phoneNumberCanBeCreatedWithoutNumber(): void
-    {
-        $phoneNumber = PhoneNumber::withoutNumber();
-        $this->assertEquals('', $phoneNumber->getNumber());
-    }
-
-    /**
      * Not the same value if numbers are different.
      *
      * @test

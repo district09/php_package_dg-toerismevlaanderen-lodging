@@ -47,19 +47,6 @@ final class WebsiteAddress extends ValueAbstract
     }
 
     /**
-     * Create website address without url.
-     *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress
-     */
-    public static function withoutUrl(): WebsiteAddress
-    {
-        $websiteAddress = new static();
-        $websiteAddress->url = '';
-
-        return $websiteAddress;
-    }
-
-    /**
      * Get the website address url.
      *
      * @return string

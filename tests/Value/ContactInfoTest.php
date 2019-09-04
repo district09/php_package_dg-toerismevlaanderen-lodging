@@ -6,8 +6,11 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,30 +25,32 @@ class ContactInfoTest extends TestCase
      */
     public function contactIsCreatedFromDetails(): void
     {
-        $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
-        $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
-        $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
+        $phoneNumbers = PhoneNumbers::fromPhoneNumbers();
+        $emailAddresses = EmailAddresses::fromEmailAddresses();
+        $websiteAddresses = WebsiteAddresses::fromWebsiteAddresses();
 
-        $contactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
-        $this->assertEquals($phoneNumber, $contactInfo->getPhoneNumber());
-        $this->assertEquals($emailAddress, $contactInfo->getEmailAddress());
-        $this->assertEquals($websiteAddress, $contactInfo->getWebsiteAddress());
+        $contactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $websiteAddresses);
+        $this->assertEquals($phoneNumbers, $contactInfo->getPhoneNumbers());
+        $this->assertEquals($emailAddresses, $contactInfo->getEmailAddresses());
+        $this->assertEquals($websiteAddresses, $contactInfo->getWebsiteAddresses());
     }
 
     /**
-     * Not the same value if phone number is different.
+     * Not the same value if phone numbers are different.
      *
      * @test
      */
     public function notSameValueIfPhoneNumberIsDifferent(): void
     {
-        $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
-        $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
-        $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
+        $phoneNumbers = PhoneNumbers::fromPhoneNumbers();
+        $emailAddresses = EmailAddresses::fromEmailAddresses();
+        $websiteAddresses = WebsiteAddresses::fromWebsiteAddresses();
+        $contactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $websiteAddresses);
 
-        $otherPhoneNumber = PhoneNumber::withoutNumber();
-        $otherContactInfo = ContactInfo::fromDetails($otherPhoneNumber, $emailAddress, $websiteAddress);
+        $otherPhoneNumbers = PhoneNumbers::fromPhoneNumbers(
+            PhoneNumber::fromNumber('+32 9 123 12 12')
+        );
+        $otherContactInfo = ContactInfo::fromDetails($otherPhoneNumbers, $emailAddresses, $websiteAddresses);
 
         $this->assertFalse($contactInfo->sameValueAs($otherContactInfo));
     }
@@ -57,13 +62,15 @@ class ContactInfoTest extends TestCase
      */
     public function notSameValueIfEmailAddressIsDifferent(): void
     {
-        $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
-        $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
-        $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
+        $phoneNumbers = PhoneNumbers::fromPhoneNumbers();
+        $emailAddresses = EmailAddresses::fromEmailAddresses();
+        $websiteAddresses = WebsiteAddresses::fromWebsiteAddresses();
+        $contactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $websiteAddresses);
 
-        $otherEmailAddress = EmailAddress::withoutAddress();
-        $otherContactInfo = ContactInfo::fromDetails($phoneNumber, $otherEmailAddress, $websiteAddress);
+        $otherEmailAddresses = EmailAddresses::fromEmailAddresses(
+            EmailAddress::fromAddress('jane@biz.baz')
+        );
+        $otherContactInfo = ContactInfo::fromDetails($phoneNumbers, $otherEmailAddresses, $websiteAddresses);
 
         $this->assertFalse($contactInfo->sameValueAs($otherContactInfo));
     }
@@ -75,13 +82,15 @@ class ContactInfoTest extends TestCase
      */
     public function notSameValueIfWebsiteAddressIsDifferent(): void
     {
-        $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
-        $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
-        $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
+        $phoneNumbers = PhoneNumbers::fromPhoneNumbers();
+        $emailAddresses = EmailAddresses::fromEmailAddresses();
+        $websiteAddresses = WebsiteAddresses::fromWebsiteAddresses();
+        $contactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $websiteAddresses);
 
-        $otherWebsiteAddress = WebsiteAddress::withoutUrl();
-        $otherContactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $otherWebsiteAddress);
+        $otherWebsiteAddresses = WebsiteAddresses::fromWebsiteAddresses(
+            WebsiteAddress::fromUrl('https://foo.bar')
+        );
+        $otherContactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $otherWebsiteAddresses);
 
         $this->assertFalse($contactInfo->sameValueAs($otherContactInfo));
     }
@@ -93,12 +102,12 @@ class ContactInfoTest extends TestCase
      */
     public function sameValueIfDetailsAreTheSame(): void
     {
-        $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
-        $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
-        $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
+        $phoneNumbers = PhoneNumbers::fromPhoneNumbers();
+        $emailAddresses = EmailAddresses::fromEmailAddresses();
+        $websiteAddresses = WebsiteAddresses::fromWebsiteAddresses();
+        $contactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $websiteAddresses);
 
-        $sameContactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
+        $sameContactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $websiteAddresses);
 
         $this->assertTrue($contactInfo->sameValueAs($sameContactInfo));
     }
@@ -110,14 +119,20 @@ class ContactInfoTest extends TestCase
      */
     public function castToStringReturnsAddress(): void
     {
-        $phoneNumber = PhoneNumber::fromNumber('+32 9 123 12 12');
-        $emailAddress = EmailAddress::fromAddress('foo@biz.baz');
-        $websiteAddress = WebsiteAddress::fromUrl('http://foo.bar');
-        $contactInfo = ContactInfo::fromDetails($phoneNumber, $emailAddress, $websiteAddress);
+        $phoneNumbers = PhoneNumbers::fromPhoneNumbers(
+            PhoneNumber::fromNumber('+32 9 123 12 12')
+        );
+        $emailAddresses = EmailAddresses::fromEmailAddresses(
+            EmailAddress::fromAddress('jane@biz.baz')
+        );
+        $websiteAddresses = WebsiteAddresses::fromWebsiteAddresses(
+            WebsiteAddress::fromUrl('http://foo.bar')
+        );
+        $contactInfo = ContactInfo::fromDetails($phoneNumbers, $emailAddresses, $websiteAddresses);
 
         $expected = <<<EOT
 t: +32 9 123 12 12
-m: foo@biz.baz
+m: jane@biz.baz
 w: http://foo.bar
 EOT;
 

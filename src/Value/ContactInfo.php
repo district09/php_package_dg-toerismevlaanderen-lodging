@@ -15,23 +15,23 @@ final class ContactInfo extends ValueAbstract
     /**
      * Phone number.
      *
-     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers
      */
-    private $phoneNumber;
+    private $phoneNumbers;
 
     /**
      * E-mail address.
      *
-     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses
      */
-    private $emailAddress;
+    private $emailAddresses;
 
     /**
-     * The website address.
+     * The website addresses.
      *
-     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses
      */
-    private $websiteAddress;
+    private $websiteAddresses;
 
     /**
      * Disable constructor.
@@ -43,47 +43,47 @@ final class ContactInfo extends ValueAbstract
     /**
      * Create the contact from its details.
      *
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber $phoneNumber
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress $emailAddress
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress $websiteAddress
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers $phoneNumbers
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses $emailAddresses
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses $websiteAddresses
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
      */
     public static function fromDetails(
-        PhoneNumber $phoneNumber,
-        EmailAddress $emailAddress,
-        WebsiteAddress $websiteAddress
+        PhoneNumbers $phoneNumbers,
+        EmailAddresses $emailAddresses,
+        WebsiteAddresses $websiteAddresses
     ): ContactInfo {
         $contact = new static();
-        $contact->phoneNumber = $phoneNumber;
-        $contact->emailAddress = $emailAddress;
-        $contact->websiteAddress = $websiteAddress;
+        $contact->phoneNumbers = $phoneNumbers;
+        $contact->emailAddresses = $emailAddresses;
+        $contact->websiteAddresses = $websiteAddresses;
 
         return $contact;
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers
      */
-    public function getPhoneNumber(): PhoneNumber
+    public function getPhoneNumbers(): PhoneNumbers
     {
-        return $this->phoneNumber;
+        return $this->phoneNumbers;
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses
      */
-    public function getEmailAddress(): EmailAddress
+    public function getEmailAddresses(): EmailAddresses
     {
-        return $this->emailAddress;
+        return $this->emailAddresses;
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses
      */
-    public function getWebsiteAddress(): WebsiteAddress
+    public function getWebsiteAddresses(): WebsiteAddresses
     {
-        return $this->websiteAddress;
+        return $this->websiteAddresses;
     }
 
     /**
@@ -92,9 +92,9 @@ final class ContactInfo extends ValueAbstract
     public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
-            && $this->getPhoneNumber()->sameValueAs($object->getPhoneNumber())
-            && $this->getEmailAddress()->sameValueAs($object->getEmailAddress())
-            && $this->getWebsiteAddress()->sameValueAs($object->getWebsiteAddress());
+            && $this->getPhoneNumbers()->sameValueAs($object->getPhoneNumbers())
+            && $this->getEmailAddresses()->sameValueAs($object->getEmailAddresses())
+            && $this->getWebsiteAddresses()->sameValueAs($object->getWebsiteAddresses());
     }
 
     /**
@@ -110,9 +110,9 @@ EOT;
 
         return sprintf(
             $template,
-            $this->getPhoneNumber(),
-            $this->getEmailAddress(),
-            $this->getWebsiteAddress()
+            $this->getPhoneNumbers(),
+            $this->getEmailAddresses(),
+            $this->getWebsiteAddresses()
         );
     }
 }

@@ -9,7 +9,8 @@ parameters:
                 - "die("
                 - "var_dump("
                 - "exit;"
-        phpcpd: ~
+        phpcpd:
+            exclude: ['tests' ,'vendor']
         phpcs: ~
         phpmd:
             whitelist_patterns:

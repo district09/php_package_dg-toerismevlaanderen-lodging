@@ -48,19 +48,6 @@ final class EmailAddress extends ValueAbstract
     }
 
     /**
-     * Create email address value without number.
-     *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress
-     */
-    public static function withoutAddress(): EmailAddress
-    {
-        $emailAddress = new static();
-        $emailAddress->address = '';
-
-        return $emailAddress;
-    }
-
-    /**
      * Get the email address.
      *
      * @return string

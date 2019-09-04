@@ -36,17 +36,6 @@ class EmailAddressTest extends TestCase
     }
 
     /**
-     * Empty email address can be created.
-     *
-     * @test
-     */
-    public function emailAddressCanBeCreatedWithoutAddress(): void
-    {
-        $emailAddress = EmailAddress::withoutAddress();
-        $this->assertEquals('', $emailAddress->getAddress());
-    }
-
-    /**
      * Not the same value if addresses is different.
      *
      * @test

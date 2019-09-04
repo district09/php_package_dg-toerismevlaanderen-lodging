@@ -14,11 +14,11 @@ use PHPUnit\Framework\TestCase;
 class ImagesTest extends TestCase
 {
     /**
-     * To string returns the Image URLs.
+     * To string returns the image url's separated by ", ".
      *
      * @test
      */
-    public function toStringReturnsImageUrls(): void
+    public function toStringReturnsImageUrlsSeparatedByComma(): void
     {
         $images = Images::fromImages(
             Image::fromUrl('http://foo.bar/image1.jpg'),
