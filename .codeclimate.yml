@@ -7,7 +7,8 @@ plugins:
       standard: "PSR1,PSR2"
   phpmd:
     enabled: true
-    rulesets: "phpmd.xml"
+    config:
+      rulesets: "phpmd.xml"
   duplication:
     enabled: true
     config:
