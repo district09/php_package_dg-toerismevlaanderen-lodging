@@ -62,7 +62,8 @@ echo sprintf(
     $lodging->getReceptionAddress()->getLocality()
 ), PHP_EOL;
 
-echo sprintf('   • Contact point     : t %s',
+echo sprintf(
+    '   • Contact point     : t %s',
     $lodging->getContactPoint()->getPhoneNumber()
 ), PHP_EOL;
 echo sprintf(

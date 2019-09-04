@@ -118,7 +118,7 @@ final class StarRating extends ValueAbstract
      */
     private static function assertEuropeanFormat(string $starRating): void
     {
-        if (!preg_match(static::EUROPEAN_FORMAT_PATTERN, $starRating, $matches)) {
+        if (!preg_match(static::EUROPEAN_FORMAT_PATTERN, $starRating)) {
             throw InvalidStarRating::notInEuropeanFormat($starRating);
         }
     }
