@@ -228,16 +228,31 @@ final class Lodging extends ValueAbstract implements LodgingInterface
     public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
-            && $this->getLodgingId()->sameValueAs($object->getLodgingId())
-            && $this->getName() === $object->getName()
-            && $this->getDescription() === $object->getDescription()
-            && $this->getNumberOfSleepingPlaces() === $object->getNumberOfSleepingPlaces()
+            && $this->sameDetailsAs($object)
             && $this->getRegistration()->sameValueAs($object->getRegistration())
             && $this->getReceptionAddress()->sameValueAs($object->getReceptionAddress())
             && $this->getContactPoint()->sameValueAs($object->getContactPoint())
             && $this->getStarRating()->sameValueAs($object->getStarRating())
             && $this->getQualityLabels()->sameValueAs($object->getQualityLabels())
             && $this->getImages()->sameValueAs($object->getImages())
+        ;
+    }
+
+    /**
+     * Check if a given value shares the same details.
+     *
+     * @param \DigipolisGent\Value\ValueInterface $object
+     *   Object to validate.
+     *
+     * @return bool
+     *   Same details.
+     */
+    private function sameDetailsAs(ValueInterface $object): bool
+    {
+        return $this->getLodgingId()->sameValueAs($object->getLodgingId())
+            && $this->getName() === $object->getName()
+            && $this->getDescription() === $object->getDescription()
+            && $this->getNumberOfSleepingPlaces() === $object->getNumberOfSleepingPlaces()
         ;
     }
 

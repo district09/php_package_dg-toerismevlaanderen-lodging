@@ -36,7 +36,7 @@ abstract class AbstractRequest extends Request
      */
     private function bodyFromQuery(string $query): string
     {
-        $clean = preg_replace('/\s+/', ' ', $query);
+        $clean = (string) preg_replace('/\s+/', ' ', $query);
         return sprintf(
             'query=%s',
             urlencode(trim($clean))

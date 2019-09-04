@@ -40,12 +40,12 @@ final class CountHandler implements HandlerInterface
     /**
      * Assert that the response contains all necessary data.
      *
-     * @param object
+     * @param object $data
      *
      * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData
      *   When the response does not contain a count value.
      */
-    private function assertDataIsComplete($data): void
+    private function assertDataIsComplete(object $data): void
     {
         if (!isset($data->results->bindings[0]->count->value)) {
             throw MissingResponseData::count();
