@@ -2,6 +2,17 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [Unreleased]
+
+### Added
+
+* VG-1660: Added Grumphp to run quality checks.
+
+### Changed
+
+* VG-1660: Replaced the single phone number, email address, website address by
+           collections.
+
 ## [0.1.0]
 
 Initial package.

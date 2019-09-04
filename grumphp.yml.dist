@@ -9,7 +9,8 @@ parameters:
                 - "die("
                 - "var_dump("
                 - "exit;"
-        phpcpd: ~
+        phpcpd:
+            exclude: ['tests' ,'vendor']
         phpcs: ~
         phpmd:
             whitelist_patterns:
@@ -22,8 +23,7 @@ parameters:
         securitychecker: ~
         xmllint: ~
         yamllint: ~
-        git_commit_message:
-            allow_empty_message: false
+        git_commit_message: ~
         git_branch_name:
             whitelist:
-                Git-flow: /(master|develop|feature\/\d+|(release|hotfix)\/\d+\.\d+\.?\d*)/
+                Git-flow: /(master|develop|feature\/(\w+-)?\d+|(release|hotfix)\/(\d+\.\d+\.\d+))/
