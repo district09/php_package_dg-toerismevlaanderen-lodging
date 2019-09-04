@@ -19,7 +19,7 @@ final class ContactInfoNormalizer
      *
      * @param array $data
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
      */
     public function normalize(array $data): ContactInfo
     {

@@ -47,7 +47,8 @@
         "grumphp": "vendor/bin/grumphp run --ansi",
         "phpcs": "vendor/bin/phpcs",
         "test": "vendor/bin/phpunit",
-        "coverage": "vendor/bin/phpunit --coverage-html ./build/coverage"
+        "coverage": "vendor/bin/phpunit --coverage-html ./build/coverage",
+        "phpstan": "vendor/bin/phpstan analyse --level=7 ./src"
     },
     "extra": {
         "branch-alias": {

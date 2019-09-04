@@ -49,12 +49,12 @@ final class ListHandler implements HandlerInterface
     /**
      * Assert that the response contains all necessary data.
      *
-     * @param object
+     * @param object $data
      *
      * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\MissingResponseData
      *   When the response does not contain the list values.
      */
-    private function assertDataIsComplete($data): void
+    private function assertDataIsComplete(object $data): void
     {
         if (!isset($data->results->bindings)) {
             throw MissingResponseData::list();
