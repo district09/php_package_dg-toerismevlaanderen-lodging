@@ -27,6 +27,7 @@ abstract class AbstractWhereInFilter implements FilterInterface
      * Create from an array of items.
      *
      * @param string $identifier
+     * @param string[] ...$items
      */
     public function __construct($identifier, string ...$items)
     {
