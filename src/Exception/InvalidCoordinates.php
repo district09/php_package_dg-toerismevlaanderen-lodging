@@ -30,18 +30,18 @@ class InvalidCoordinates extends Exception
     }
 
     /**
-     * Create the exception from an invalid longitude value.
+     * Create the exception from an invalid latitude value.
      *
-     * @param float $longitude
+     * @param float $latitude
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidCoordinates
      */
-    public static function latitudeOutsideBounds(float $longitude): InvalidCoordinates
+    public static function latitudeOutsideBounds(float $latitude): InvalidCoordinates
     {
         return new static(
             sprintf(
                 'Latitude "%s" is outside -90° > 90° bounds.',
-                $longitude
+                $latitude
             ),
             400
         );

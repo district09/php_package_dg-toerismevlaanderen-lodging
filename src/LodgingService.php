@@ -7,7 +7,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\LodgingRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Request\ListRequest;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 
 /**
  * Service to access the Toerismevlaanderen Lodging linked open data.
@@ -51,7 +51,7 @@ class LodgingService implements LodgingServiceInterface
     /**
      * @inheritDoc
      */
-    public function lodging(string $uri): Lodging
+    public function lodging(string $uri): LodgingInterface
     {
         $request = new LodgingRequest($uri);
         return $this->client->send($request)->lodging();

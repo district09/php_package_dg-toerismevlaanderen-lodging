@@ -6,6 +6,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 
 /**
@@ -18,9 +19,9 @@ final class LodgingNormalizer
      *
      * @param array $data
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
      */
-    public function normalize(array $data): Lodging
+    public function normalize(array $data): LodgingInterface
     {
         $registrationNormalizer = new RegistrationNormalizer();
         $addressNormalizer = new AddressNormalizer();

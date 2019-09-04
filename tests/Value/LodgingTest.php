@@ -12,6 +12,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
@@ -340,9 +341,9 @@ class LodgingTest extends TestCase
     /**
      * Create a lodging record to test with.
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
      */
-    private function createLodging(): Lodging
+    private function createLodging(): LodgingInterface
     {
         return Lodging::fromDetails(
             LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999'),
