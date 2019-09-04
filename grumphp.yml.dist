@@ -1,6 +1,7 @@
 parameters:
     git_dir: .
     bin_dir: vendor/bin
+    ascii: ~
     tasks:
         composer: ~
         git_blacklist:
@@ -14,7 +15,7 @@ parameters:
             whitelist_patterns:
                 - /^src\/(.*)/
             ruleset:
-                - .phpmd.xml
+                - phpmd.xml
         phpunit: ~
         phpversion:
             project: '7.2'

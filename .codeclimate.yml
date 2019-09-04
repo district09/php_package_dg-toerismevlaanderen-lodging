@@ -7,11 +7,7 @@ plugins:
       standard: "PSR1,PSR2"
   phpmd:
     enabled: true
-    checks:
-      CleanCode/StaticAccess:
-        enabled: false
-      Naming/LongVariable:
-        enabled: false
+    rulesets: "phpmd.xml"
   duplication:
     enabled: true
     config:
