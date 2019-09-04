@@ -48,20 +48,12 @@
         "phpcs": "vendor/bin/phpcs",
         "test": "vendor/bin/phpunit",
         "coverage": "vendor/bin/phpunit --coverage-html ./build/coverage",
-        "phpstan": "vendor/bin/phpstan analyse --level=7 ./src"
+        "phpstan": "vendor/bin/phpstan analyse --level=7 ./src",
+        "post-install-cmd": "vendor/bin/grumphp git:init"
     },
     "extra": {
         "branch-alias": {
             "dev-develop": "0.1-dev"
-        },
-        "hooks": {
-            "pre-commit": [
-                "echo committing as $(git config user.name)",
-                "vendor/bin/phpcs"
-            ],
-            "pre-push": [
-                "vendor/bin/phpunit"
-            ]
         }
     }
 }
