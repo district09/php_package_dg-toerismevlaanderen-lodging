@@ -14,6 +14,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\NoRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
@@ -61,10 +62,6 @@ class LodgingNormalizerTest extends TestCase
           "value": "55",
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer"
-        },
-        "starRating": {
-          "value": "3 *",
-          "type": "literal"
         }
       }
     ]
@@ -154,7 +151,7 @@ EOT;
           "value": "https://foo.baz",
           "type": "uri"
         },
-        "starRating": {
+        "rating": {
           "value": "4 *",
           "type": "literal"
         },
@@ -191,7 +188,7 @@ EOT;
                 EmailAddresses::fromEmailAddresses(),
                 WebsiteAddresses::fromWebsiteAddresses()
             ),
-            StarRating::fromEuropeanFormat('3 *'),
+            NoRating::create(),
             QualityLabels::fromLabels(),
             Images::fromImages()
         );

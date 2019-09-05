@@ -77,7 +77,7 @@ echo sprintf(
 
 echo sprintf('   • Type              : %s', $lodging->getRegistration()->getType()), PHP_EOL;
 echo sprintf('   • Status            : %s', $lodging->getRegistration()->getStatus()), PHP_EOL;
-echo sprintf('   • Star rating       : %s', $lodging->getStarRating()), PHP_EOL;
+echo sprintf('   • Star rating       : %s', $lodging->getRating()), PHP_EOL;
 echo sprintf('   • Quality labels    : %s', $lodging->getQualityLabels()), PHP_EOL;
 echo sprintf('   • Images            : %s', $lodging->getImages()), PHP_EOL;
 

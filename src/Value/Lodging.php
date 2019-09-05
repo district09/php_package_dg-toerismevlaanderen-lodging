@@ -62,11 +62,11 @@ final class Lodging extends ValueAbstract implements LodgingInterface
     private $contactPoint;
 
     /**
-     * The star rating.
+     * The rating.
      *
-     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface
      */
-    private $starRating;
+    private $rating;
 
     /**
      * The quality labels assigned to the lodging.
@@ -106,8 +106,8 @@ final class Lodging extends ValueAbstract implements LodgingInterface
      *   The address of the lodging reception.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo $contactPoint
      *   The contact details of the lodging.
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating $starRating
-     *   The rating in number of stars of the lodging.
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface $rating
+     *   The rating of the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels $qualityLabels
      *   The quality labels of the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images $images
@@ -123,7 +123,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
         Registration $registration,
         Address $receptionAddress,
         ContactInfo $contactPoint,
-        StarRating $starRating,
+        RatingInterface $rating,
         QualityLabels $qualityLabels,
         Images $images
     ): LodgingInterface {
@@ -135,7 +135,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
         $lodging->registration = $registration;
         $lodging->receptionAddress = $receptionAddress;
         $lodging->contactPoint = $contactPoint;
-        $lodging->starRating = $starRating;
+        $lodging->rating = $rating;
         $lodging->qualityLabels = $qualityLabels;
         $lodging->images = $images;
 
@@ -201,9 +201,9 @@ final class Lodging extends ValueAbstract implements LodgingInterface
     /**
      * @inheritDoc
      */
-    public function getStarRating(): StarRating
+    public function getRating(): RatingInterface
     {
-        return $this->starRating;
+        return $this->rating;
     }
 
     /**
@@ -232,7 +232,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
             && $this->getRegistration()->sameValueAs($object->getRegistration())
             && $this->getReceptionAddress()->sameValueAs($object->getReceptionAddress())
             && $this->getContactPoint()->sameValueAs($object->getContactPoint())
-            && $this->getStarRating()->sameValueAs($object->getStarRating())
+            && $this->getRating()->sameValueAs($object->getRating())
             && $this->getQualityLabels()->sameValueAs($object->getQualityLabels())
             && $this->getImages()->sameValueAs($object->getImages())
         ;

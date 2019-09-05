@@ -47,7 +47,7 @@ SELECT
   (GROUP_CONCAT(DISTINCT ?contactPoint_phoneNumber; SEPARATOR=",") AS ?contactPoint_phoneNumbers)
   (GROUP_CONCAT(DISTINCT ?contactPoint_emailAddress; SEPARATOR=",") AS ?contactPoint_emailAddresses)
   (GROUP_CONCAT(DISTINCT ?contactPoint_websiteAddress; SEPARATOR=",") AS ?contactPoint_websiteAddresses)
-  ?starRating
+  ?rating
   (GROUP_CONCAT(DISTINCT ?qualityLabel; SEPARATOR=",") AS ?qualityLabels)
   (GROUP_CONCAT(DISTINCT ?media; SEPARATOR=",") AS ?images)
 
@@ -82,7 +82,7 @@ WHERE {
              ?_registration_status skos:prefLabel ?registration_status.
   }
   
-  OPTIONAL { ?_lodging schema:starRating/schema:ratingValue ?starRating. }
+  OPTIONAL { ?_lodging schema:starRating/schema:ratingValue ?rating. }
   OPTIONAL { ?_lodging tvl:heeftKwaliteitslabel/skos:prefLabel ?qualityLabel. }
   
   OPTIONAL { ?_lodging tvl:heeftMedia/schema:contentUrl ?media. }
