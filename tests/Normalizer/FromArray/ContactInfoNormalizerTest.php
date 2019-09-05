@@ -7,8 +7,11 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromArray;
 use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray\ContactInfoNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,9 +27,9 @@ class ContactInfoNormalizerTest extends TestCase
     public function contactPointCanBeNormalizedFromEmptyDataSet(): void
     {
         $expectedContactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
+            PhoneNumbers::fromPhoneNumbers(),
+            EmailAddresses::fromEmailAddresses(),
+            WebsiteAddresses::fromWebsiteAddresses()
         );
 
         $normalizer = new ContactInfoNormalizer();
@@ -44,15 +47,21 @@ class ContactInfoNormalizerTest extends TestCase
     public function allContactPointDataIsNormalized(): void
     {
         $data = [
-            'phoneNumber' => '+32 9 123 12 12',
-            'emailAddress' => 'foo@biz.baz',
-            'websiteAddress' => 'https://foo.baz',
+            'phoneNumbers' => ['+32 9 123 12 12'],
+            'emailAddresses' => ['foo@biz.baz'],
+            'websiteAddresses' => ['https://foo.baz'],
         ];
 
         $expectedContactPoint = ContactInfo::fromDetails(
-            PhoneNumber::fromNumber('+32 9 123 12 12'),
-            EmailAddress::fromAddress('foo@biz.baz'),
-            WebsiteAddress::fromUrl('https://foo.baz')
+            PhoneNumbers::fromPhoneNumbers(
+                PhoneNumber::fromNumber('+32 9 123 12 12')
+            ),
+            EmailAddresses::fromEmailAddresses(
+                EmailAddress::fromAddress('foo@biz.baz')
+            ),
+            WebsiteAddresses::fromWebsiteAddresses(
+                WebsiteAddress::fromUrl('https://foo.baz')
+            )
         );
 
         $normalizer = new ContactInfoNormalizer();

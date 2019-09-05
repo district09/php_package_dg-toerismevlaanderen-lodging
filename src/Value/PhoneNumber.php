@@ -42,19 +42,6 @@ final class PhoneNumber extends ValueAbstract
     }
 
     /**
-     * Create phone number value without number.
-     *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber
-     */
-    public static function withoutNumber(): PhoneNumber
-    {
-        $phoneNumber = new static();
-        $phoneNumber->number = '';
-
-        return $phoneNumber;
-    }
-
-    /**
      * Get the phone number.
      *
      * @return string

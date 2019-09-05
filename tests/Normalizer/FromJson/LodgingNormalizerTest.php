@@ -9,15 +9,19 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\NoRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -58,10 +62,6 @@ class LodgingNormalizerTest extends TestCase
           "value": "55",
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#integer"
-        },
-        "starRating": {
-          "value": "3 *",
-          "type": "literal"
         }
       }
     ]
@@ -139,19 +139,19 @@ EOT;
           "type": "typed-literal",
           "datatype": "http://www.w3.org/2001/XMLSchema#float"
         },
-        "contactPoint_phoneNumber": {
+        "contactPoint_phoneNumbers": {
           "value": "+32 9 123 12 12",
           "type": "literal"
         },
-        "contactPoint_emailAddress": {
+        "contactPoint_emailAddresses": {
           "value": "info@foo.baz",
           "type": "literal"
         },
-        "contactPoint_websiteAddress": {
+        "contactPoint_websiteAddresses": {
           "value": "https://foo.baz",
           "type": "uri"
         },
-        "starRating": {
+        "rating": {
           "value": "4 *",
           "type": "literal"
         },
@@ -184,11 +184,11 @@ EOT;
             Registration::fromTypeAndStatus('B&B', 'Foo status'),
             Address::fromDetails('', '', '', '', '', Coordinates::fromLongitudeLatitude(0, 0)),
             ContactInfo::fromDetails(
-                PhoneNumber::withoutNumber(),
-                EmailAddress::withoutAddress(),
-                WebsiteAddress::withoutUrl()
+                PhoneNumbers::fromPhoneNumbers(),
+                EmailAddresses::fromEmailAddresses(),
+                WebsiteAddresses::fromWebsiteAddresses()
             ),
-            StarRating::fromEuropeanFormat('3 *'),
+            NoRating::create(),
             QualityLabels::fromLabels(),
             Images::fromImages()
         );
@@ -212,9 +212,15 @@ EOT;
             Registration::fromTypeAndStatus('B&B', 'Foo status'),
             Address::fromDetails('Foo street', '8', 'b', '9000', 'Foo locality', Coordinates::fromLongitudeLatitude(1.234, 56.789)),
             ContactInfo::fromDetails(
-                PhoneNumber::fromNumber('+32 9 123 12 12'),
-                EmailAddress::fromAddress('info@foo.baz'),
-                WebsiteAddress::fromUrl('https://foo.baz')
+                PhoneNumbers::fromPhoneNumbers(
+                    PhoneNumber::fromNumber('+32 9 123 12 12')
+                ),
+                EmailAddresses::fromEmailAddresses(
+                    EmailAddress::fromAddress('info@foo.baz')
+                ),
+                WebsiteAddresses::fromWebsiteAddresses(
+                    WebsiteAddress::fromUrl('https://foo.baz')
+                )
             ),
             StarRating::fromEuropeanFormat('4 *'),
             QualityLabels::fromLabels('Label 1', 'Label 2'),

@@ -14,7 +14,7 @@ final class Images extends CollectionAbstract
     /**
      * Create a collection from zero or more Images.
      *
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Image ...$image
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Image ...$images
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images
      */
@@ -25,6 +25,9 @@ final class Images extends CollectionAbstract
         return $collection;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function __toString(): string
     {
         $urls = [];

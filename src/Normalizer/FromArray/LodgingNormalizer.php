@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromArray;
 
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromString\RatingNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 
 /**
  * Normalizes an array of lodging data to a Lodging value.
@@ -18,13 +19,14 @@ final class LodgingNormalizer
      *
      * @param array $data
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
      */
-    public function normalize(array $data): Lodging
+    public function normalize(array $data): LodgingInterface
     {
         $registrationNormalizer = new RegistrationNormalizer();
         $addressNormalizer = new AddressNormalizer();
         $contactNormalizer = new ContactInfoNormalizer();
+        $ratingNormalizer = new RatingNormalizer();
         $qualityLabelsNormalizer = new QualityLabelsNormalizer();
         $imagesNormalizer = new ImagesNormalizer();
 
@@ -36,7 +38,7 @@ final class LodgingNormalizer
             $registrationNormalizer->normalize($data['registration']),
             $addressNormalizer->normalize($data['receptionAddress'] ?? []),
             $contactNormalizer->normalize($data['contactPoint'] ?? []),
-            StarRating::fromEuropeanFormat($data['starRating']),
+            $ratingNormalizer->normalize($data['rating'] ?? null),
             $qualityLabelsNormalizer->normalize($data['qualityLabels'] ?? []),
             $imagesNormalizer->normalize($data['images'] ?? [])
         );

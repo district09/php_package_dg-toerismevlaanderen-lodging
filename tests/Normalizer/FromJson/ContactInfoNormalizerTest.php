@@ -7,8 +7,11 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromJson;
 use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromJson\ContactInfoNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,21 +19,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ContactInfoNormalizerTest extends TestCase
 {
-    /**
-     * Partial (minimum data) JSON data.
-     *
-     * @var string
-     */
-    private $partialJson = <<<EOT
-{
-  "results": {
-    "bindings": [
-      {}
-    ]
-  }
-}
-EOT;
-
     /**
      * Full JSON data.
      *
@@ -41,16 +29,16 @@ EOT;
   "results": {
     "bindings": [
       {
-        "contactPoint_phoneNumber": {
-          "value": "+32 9 123 12 12",
+        "contactPoint_phoneNumbers": {
+          "value": "+32 9 123 12 12,+32 9 123 12 34",
           "type": "literal"
         },
-        "contactPoint_emailAddress": {
-          "value": "info@foo.baz",
+        "contactPoint_emailAddresses": {
+          "value": "jane@foo.baz,john@foo.baz",
           "type": "literal"
         },
-        "contactPoint_websiteAddress": {
-          "value": "https://foo.baz",
+        "contactPoint_websiteAddresses": {
+          "value": "https://foo.baz,https://foo.bar",
           "type": "uri"
         }
       }
@@ -60,38 +48,29 @@ EOT;
 EOT;
 
     /**
-     * Contact info can be normalized from minimal data set.
-     *
-     * @test
-     */
-    public function contactInfoCanBeNormalizedFromMinimalDataSet(): void
-    {
-        $expectedContactInfo = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
-        );
-
-        $jsonData = json_decode($this->partialJson)->results->bindings[0];
-
-        $normalizer = new ContactInfoNormalizer();
-        $this->assertEquals(
-            $expectedContactInfo,
-            $normalizer->normalize($jsonData, 'contactPoint')
-        );
-    }
-
-    /**
-     * All lodging data is normalized.
+     * All contact point data is normalized.
      *
      * @test
      */
     public function allLodgingDataIsNormalized(): void
     {
-        $expectedContactInfo = ContactInfo::fromDetails(
+        $expectedPhoneNumbers = PhoneNumbers::fromPhoneNumbers(
             PhoneNumber::fromNumber('+32 9 123 12 12'),
-            EmailAddress::fromAddress('info@foo.baz'),
-            WebsiteAddress::fromUrl('https://foo.baz')
+            PhoneNumber::fromNumber('+32 9 123 12 34')
+        );
+        $expectedEmailaddress = EmailAddresses::fromEmailAddresses(
+            EmailAddress::fromAddress('jane@foo.baz'),
+            EmailAddress::fromAddress('john@foo.baz')
+        );
+        $expectedWebsiteAddresses = WebsiteAddresses::fromWebsiteAddresses(
+            WebsiteAddress::fromUrl('https://foo.baz'),
+            WebsiteAddress::fromUrl('https://foo.bar')
+        );
+
+        $expectedContactInfo = ContactInfo::fromDetails(
+            $expectedPhoneNumbers,
+            $expectedEmailaddress,
+            $expectedWebsiteAddresses
         );
 
         $jsonData = json_decode($this->completeJson)->results->bindings[0];

@@ -10,7 +10,7 @@ use DigipolisGent\Value\ValueInterface;
 /**
  * A lodging value.
  */
-final class Lodging extends ValueAbstract
+final class Lodging extends ValueAbstract implements LodgingInterface
 {
     /**
      * The lodging id.
@@ -62,11 +62,11 @@ final class Lodging extends ValueAbstract
     private $contactPoint;
 
     /**
-     * The star rating.
+     * The rating.
      *
-     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
+     * @var \DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface
      */
-    private $starRating;
+    private $rating;
 
     /**
      * The quality labels assigned to the lodging.
@@ -106,14 +106,14 @@ final class Lodging extends ValueAbstract
      *   The address of the lodging reception.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo $contactPoint
      *   The contact details of the lodging.
-     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating $starRating
-     *   The rating in number of stars of the lodging.
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface $rating
+     *   The rating of the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels $qualityLabels
      *   The quality labels of the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images $images
      *   The images collection.
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
      */
     public static function fromDetails(
         LodgingId $lodgingId,
@@ -123,10 +123,10 @@ final class Lodging extends ValueAbstract
         Registration $registration,
         Address $receptionAddress,
         ContactInfo $contactPoint,
-        StarRating $starRating,
+        RatingInterface $rating,
         QualityLabels $qualityLabels,
         Images $images
-    ): Lodging {
+    ): LodgingInterface {
         $lodging = new static();
         $lodging->lodgingId = $lodgingId;
         $lodging->name = $name;
@@ -135,7 +135,7 @@ final class Lodging extends ValueAbstract
         $lodging->registration = $registration;
         $lodging->receptionAddress = $receptionAddress;
         $lodging->contactPoint = $contactPoint;
-        $lodging->starRating = $starRating;
+        $lodging->rating = $rating;
         $lodging->qualityLabels = $qualityLabels;
         $lodging->images = $images;
 
@@ -143,7 +143,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId
+     * @inheritDoc
      */
     public function getLodgingId(): LodgingId
     {
@@ -151,7 +151,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getName(): string
     {
@@ -159,7 +159,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getDescription(): string
     {
@@ -167,7 +167,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return int
+     * @inheritDoc
      */
     public function getNumberOfSleepingPlaces(): int
     {
@@ -175,7 +175,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration
+     * @inheritDoc
      */
     public function getRegistration(): Registration
     {
@@ -183,7 +183,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Address
+     * @inheritDoc
      */
     public function getReceptionAddress(): Address
     {
@@ -191,7 +191,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo
+     * @inheritDoc
      */
     public function getContactPoint(): ContactInfo
     {
@@ -199,15 +199,15 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
+     * @inheritDoc
      */
-    public function getStarRating(): StarRating
+    public function getRating(): RatingInterface
     {
-        return $this->starRating;
+        return $this->rating;
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels
+     * @inheritDoc
      */
     public function getQualityLabels(): QualityLabels
     {
@@ -215,7 +215,7 @@ final class Lodging extends ValueAbstract
     }
 
     /**
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Images
+     * @inheritDoc
      */
     public function getImages(): Images
     {
@@ -228,16 +228,31 @@ final class Lodging extends ValueAbstract
     public function sameValueAs(ValueInterface $object): bool
     {
         return $this->sameValueTypeAs($object)
-            && $this->getLodgingId()->sameValueAs($object->getLodgingId())
-            && $this->getName() === $object->getName()
-            && $this->getDescription() === $object->getDescription()
-            && $this->getNumberOfSleepingPlaces() === $object->getNumberOfSleepingPlaces()
+            && $this->sameDetailsAs($object)
             && $this->getRegistration()->sameValueAs($object->getRegistration())
             && $this->getReceptionAddress()->sameValueAs($object->getReceptionAddress())
             && $this->getContactPoint()->sameValueAs($object->getContactPoint())
-            && $this->getStarRating()->sameValueAs($object->getStarRating())
+            && $this->getRating()->sameValueAs($object->getRating())
             && $this->getQualityLabels()->sameValueAs($object->getQualityLabels())
             && $this->getImages()->sameValueAs($object->getImages())
+        ;
+    }
+
+    /**
+     * Check if a given value shares the same details.
+     *
+     * @param \DigipolisGent\Value\ValueInterface $object
+     *   Object to validate.
+     *
+     * @return bool
+     *   Same details.
+     */
+    private function sameDetailsAs(ValueInterface $object): bool
+    {
+        return $this->getLodgingId()->sameValueAs($object->getLodgingId())
+            && $this->getName() === $object->getName()
+            && $this->getDescription() === $object->getDescription()
+            && $this->getNumberOfSleepingPlaces() === $object->getNumberOfSleepingPlaces()
         ;
     }
 

@@ -8,15 +8,19 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Address;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ContactInfo;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Coordinates;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\EmailAddresses;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -38,9 +42,9 @@ class LodgingTest extends TestCase
         $registration = Registration::fromTypeAndStatus('Biz', 'Baz');
         $receptionAddress = Address::fromDetails('Foo', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0));
         $contactPoint = ContactInfo::fromDetails(
-            PhoneNumber::withoutNumber(),
-            EmailAddress::withoutAddress(),
-            WebsiteAddress::withoutUrl()
+            PhoneNumbers::fromPhoneNumbers(),
+            EmailAddresses::fromEmailAddresses(),
+            WebsiteAddresses::fromWebsiteAddresses()
         );
         $starRating = StarRating::fromEuropeanFormat('4 *');
         $qualityLabels = QualityLabels::fromLabels('Label 1', 'Label 2');
@@ -64,7 +68,7 @@ class LodgingTest extends TestCase
         $this->assertSame($registration, $lodging->getRegistration());
         $this->assertSame($receptionAddress, $lodging->getReceptionAddress());
         $this->assertSame($contactPoint, $lodging->getContactPoint());
-        $this->assertSame($starRating, $lodging->getStarRating());
+        $this->assertSame($starRating, $lodging->getRating());
         $this->assertSame($qualityLabels, $lodging->getQualityLabels());
         $this->assertSame($images, $lodging->getImages());
     }
@@ -85,7 +89,7 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             $lodging->getImages()
         );
@@ -109,7 +113,7 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             $lodging->getImages()
         );
@@ -133,7 +137,7 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             $lodging->getImages()
         );
@@ -157,7 +161,7 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             $lodging->getImages()
         );
@@ -181,7 +185,7 @@ class LodgingTest extends TestCase
             Registration::fromTypeAndStatus('Fiz', 'Baz'),
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             $lodging->getImages()
         );
@@ -205,7 +209,7 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             Address::fromDetails('Other address', '5', 'b', '9000', 'Baz', Coordinates::fromLongitudeLatitude(0, 0)),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             $lodging->getImages()
         );
@@ -229,11 +233,11 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             $lodging->getReceptionAddress(),
             ContactInfo::fromDetails(
-                PhoneNumber::withoutNumber(),
-                EmailAddress::withoutAddress(),
-                WebsiteAddress::withoutUrl()
+                PhoneNumbers::fromPhoneNumbers(),
+                EmailAddresses::fromEmailAddresses(),
+                WebsiteAddresses::fromWebsiteAddresses()
             ),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             $lodging->getImages()
         );
@@ -281,7 +285,7 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             QualityLabels::fromLabels('Other label'),
             $lodging->getImages()
         );
@@ -305,7 +309,7 @@ class LodgingTest extends TestCase
             $lodging->getRegistration(),
             $lodging->getReceptionAddress(),
             $lodging->getContactPoint(),
-            $lodging->getStarRating(),
+            $lodging->getRating(),
             $lodging->getQualityLabels(),
             Images::fromImages()
         );
@@ -340,9 +344,9 @@ class LodgingTest extends TestCase
     /**
      * Create a lodging record to test with.
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
      */
-    private function createLodging(): Lodging
+    private function createLodging(): LodgingInterface
     {
         return Lodging::fromDetails(
             LodgingId::fromUri('http://foo.bar/id/lodgings/7e9bf017-aec6-4b27-a21b-0c33cae0ae2e-999999'),
@@ -359,9 +363,15 @@ class LodgingTest extends TestCase
                 Coordinates::fromLongitudeLatitude(0, 0)
             ),
             ContactInfo::fromDetails(
-                PhoneNumber::fromNumber('+32 9 123 12 12'),
-                EmailAddress::fromAddress('info@foo.baz'),
-                WebsiteAddress::fromUrl('https://foo.baz')
+                PhoneNumbers::fromPhoneNumbers(
+                    PhoneNumber::fromNumber('+32 9 123 12 12')
+                ),
+                EmailAddresses::fromEmailAddresses(
+                    EmailAddress::fromAddress('info@foo.baz')
+                ),
+                WebsiteAddresses::fromWebsiteAddresses(
+                    WebsiteAddress::fromUrl('https://foo.baz')
+                )
             ),
             StarRating::fromEuropeanFormat('4 *'),
             QualityLabels::fromLabels('Label 1', 'Label 2'),
