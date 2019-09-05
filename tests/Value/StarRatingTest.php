@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidStarRating;
+use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 use PHPUnit\Framework\TestCase;
 
@@ -23,7 +23,7 @@ class StarRatingTest extends TestCase
     public function invalidStarRatingExceptionWhenInvalidValueProvided(): void
     {
         $invalid = '*****';
-        $this->expectException(InvalidStarRating::class);
+        $this->expectException(InvalidRating::class);
         StarRating::fromEuropeanFormat($invalid);
     }
 
@@ -44,6 +44,7 @@ class StarRatingTest extends TestCase
     public function numberOfStarsAndSuperiorAreExtractedFromString($string, $numberOfStars, $isSuperior): void
     {
         $starRating = StarRating::fromEuropeanFormat($string);
+        $this->assertSame($string, $starRating->getRating());
         $this->assertSame($numberOfStars, $starRating->getNumberOfStars());
         $this->assertSame($isSuperior, $starRating->isSuperior());
     }

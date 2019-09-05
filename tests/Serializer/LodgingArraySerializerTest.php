@@ -86,7 +86,7 @@ class LodgingArraySerializerTest extends TestCase
                 'emailAddresses' => ['info@biz.baz'],
                 'websiteAddresses' => ['https://foo.baz'],
             ],
-            'starRating' => '4 *',
+            'rating' => '4 *',
             'qualityLabels' => ['label 1', 'Label 2'],
             'images' => [
                 'http://foo.bar/image/1.jpg',

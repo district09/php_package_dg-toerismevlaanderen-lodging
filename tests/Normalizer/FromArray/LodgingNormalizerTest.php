@@ -14,6 +14,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\Image;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Images;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\NoRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\QualityLabels;
@@ -42,8 +43,7 @@ class LodgingNormalizerTest extends TestCase
             'registration' => [
                 'type' => 'B&B',
                 'status' => 'Erkend',
-            ],
-            'starRating' => '2 *',
+            ]
         ];
 
         $expectedLodging = Lodging::fromDetails(
@@ -58,7 +58,7 @@ class LodgingNormalizerTest extends TestCase
                 EmailAddresses::fromEmailAddresses(),
                 WebsiteAddresses::fromWebsiteAddresses()
             ),
-            StarRating::fromEuropeanFormat('2 *'),
+            NoRating::create(),
             QualityLabels::fromLabels(),
             Images::fromImages()
         );
@@ -100,7 +100,7 @@ class LodgingNormalizerTest extends TestCase
                 'emailAddresses' => ['foo@biz.baz'],
                 'websiteAddresses' => ['https://foo.baz'],
             ],
-            'starRating' => '2 *',
+            'rating' => '2 *',
             'qualityLabels' => ['Label 1', 'Label 2'],
             'images' => [
                 'http://foo.bar/image/1.jpg',

@@ -116,7 +116,7 @@ class LodgingHandlerTest extends TestCase
           "value": "https://foo.baz",
           "type": "uri"
         },
-        "starRating": {
+        "rating": {
           "value": "4 *",
           "type": "literal"
         },

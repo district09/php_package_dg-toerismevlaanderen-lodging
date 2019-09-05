@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Value;
 
-use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidStarRating;
+use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
 
 /**
  * A rating in number of stars.
  */
-final class StarRating extends ValueAbstract
+final class StarRating extends ValueAbstract implements RatingInterface
 {
     /**
      * The star rating pattern.
@@ -56,7 +56,7 @@ final class StarRating extends ValueAbstract
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
      *
-     * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidStarRating
+     * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating
      *   When value is not in the correct format.
      */
     public static function fromEuropeanFormat(string $rating): StarRating
@@ -69,6 +69,17 @@ final class StarRating extends ValueAbstract
         $starRating->isSuperior = !empty($matches[2]);
 
         return $starRating;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRating(): string
+    {
+        return sprintf(
+            $this->isSuperior ? '%d * sup' : '%d *',
+            $this->getNumberOfStars()
+        );
     }
 
     /**
@@ -102,10 +113,7 @@ final class StarRating extends ValueAbstract
      */
     public function __toString(): string
     {
-        return sprintf(
-            $this->isSuperior ? '%d * sup' : '%d *',
-            $this->getNumberOfStars()
-        );
+        return $this->getRating();
     }
 
     /**
@@ -114,12 +122,12 @@ final class StarRating extends ValueAbstract
      * @param string $starRating
      *   The star rating string to validate.
      *
-     * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidStarRating
+     * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating
      */
     private static function assertEuropeanFormat(string $starRating): void
     {
         if (!preg_match(static::EUROPEAN_FORMAT_PATTERN, $starRating)) {
-            throw InvalidStarRating::notInEuropeanFormat($starRating);
+            throw InvalidRating::starRatingNotInEuropeanFormat($starRating);
         }
     }
 }

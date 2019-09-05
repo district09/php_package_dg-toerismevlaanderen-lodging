@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromJson;
 
+use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromString\RatingNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
-use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
 
 /**
  * Normalizes a json string into a Lodging value.
@@ -29,6 +29,7 @@ final class LodgingNormalizer
         $registrationNormalizer = new RegistrationNormalizer();
         $addressNormalizer = new AddressNormalizer();
         $contactInfoNormalizer = new ContactInfoNormalizer();
+        $ratingNormalizer = new RatingNormalizer();
         $qualityLabelsNormalizer = new QualityLabelsNormalizer();
         $imagesNormalizer = new ImagesNormalizer();
 
@@ -40,7 +41,7 @@ final class LodgingNormalizer
             $registrationNormalizer->normalize($lodgingData, 'registration'),
             $addressNormalizer->normalize($lodgingData, 'receptionAddress'),
             $contactInfoNormalizer->normalize($lodgingData, 'contactPoint'),
-            StarRating::fromEuropeanFormat($lodgingData->starRating->value),
+            $ratingNormalizer->normalize($lodgingData->rating->value ?? null),
             $qualityLabelsNormalizer->normalize($lodgingData),
             $imagesNormalizer->normalize($lodgingData)
         );

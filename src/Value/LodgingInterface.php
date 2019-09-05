@@ -63,9 +63,9 @@ interface LodgingInterface extends ValueInterface
     /**
      * Get the star rating.
      *
-     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface
      */
-    public function getStarRating(): StarRating;
+    public function getRating(): RatingInterface;
 
     /**
      * Get the quality labels.
