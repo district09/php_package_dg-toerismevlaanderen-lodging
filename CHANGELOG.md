@@ -14,7 +14,7 @@ All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
   collections.
 * VG-1660: Replaced star ratings by rating interface: the returned rating value
   can also be a category rating or can be empty.
-  
+
 ### Fixed
 
 * VG-1660: Fixed the lodging details query.
