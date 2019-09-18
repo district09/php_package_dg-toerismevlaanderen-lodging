@@ -21,12 +21,12 @@ class ImagesTest extends TestCase
     public function toStringReturnsImageUrlsSeparatedByComma(): void
     {
         $images = Images::fromImages(
-            Image::fromUrl('http://foo.bar/image1.jpg'),
-            Image::fromUrl('http://foo.bar/image2.jpg')
+            Image::fromUrl('https://foo.bar/image1.jpg'),
+            Image::fromUrl('https://foo.bar/image2.jpg')
         );
 
         $this->assertEquals(
-            'http://foo.bar/image1.jpg, http://foo.bar/image2.jpg',
+            'https://foo.bar/image1.jpg, https://foo.bar/image2.jpg',
             (string) $images
         );
     }
