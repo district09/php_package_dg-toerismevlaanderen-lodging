@@ -41,7 +41,7 @@ final class WebsiteAddress extends ValueAbstract
         static::assertWebsiteUrl($url);
 
         $websiteAddress = new static();
-        $websiteAddress->url = $url;
+        $websiteAddress->url = preg_replace('#//86e934d00a8f/#', '//', $url);
 
         return $websiteAddress;
     }

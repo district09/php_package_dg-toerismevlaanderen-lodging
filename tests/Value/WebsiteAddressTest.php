@@ -36,6 +36,21 @@ class WebsiteAddressTest extends TestCase
     }
 
     /**
+     * Website address data bug is fixed.
+     *
+     * Some website addresses have a prefix that should not be there. This due
+     * to data quality issues in the Linked Open Data. The value object will
+     * automatically fix these URLs.
+     *
+     * @test
+     */
+    public function websiteAddressUrlIsAutomaticallyCorrected(): void
+    {
+        $websiteAddress = WebsiteAddress::fromUrl('http://86e934d00a8f/foo.bar');
+        $this->assertSame('http://foo.bar', $websiteAddress->getUrl());
+    }
+
+    /**
      * Not the same value if URLs are different.
      *
      * @test

@@ -7,6 +7,7 @@ All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 ### Fixed
 
 * VG-1803: Fixed image URL scheme.
+* VG-1803: Fixed website URL of addresses with bad data.
 
 ## [0.2.0]
 
