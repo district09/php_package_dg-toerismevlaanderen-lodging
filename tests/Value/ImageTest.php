@@ -29,10 +29,23 @@ class ImageTest extends TestCase
      *
      * @test
      */
-    public function imageCanBeCreatedFromUrl(): void
+    public function imageUrlSchemeIsTransformedIntoHttps(): void
     {
         $image = Image::fromUrl('http://foo.bar/image.jpg');
-        $this->assertEquals('http://foo.bar/image.jpg', $image->getUrl());
+        $this->assertEquals('https://foo.bar/image.jpg', $image->getUrl());
+    }
+
+    /**
+     * Image file info can be accessed.
+     *
+     * @test
+     */
+    public function imageFileInfoCanBeRetrieved(): void
+    {
+        $image = Image::fromUrl('http://foo.bar/image.jpg');
+        $this->assertEquals('image.jpg', $image->getBasename());
+        $this->assertEquals('image', $image->getFilename());
+        $this->assertEquals('jpg', $image->getExtension());
     }
 
     /**
@@ -42,8 +55,8 @@ class ImageTest extends TestCase
      */
     public function notSameValueIfUrlIsDifferent(): void
     {
-        $image = Image::fromUrl('http://foo.bar/image.jpg');
-        $otherImage = Image::fromUrl('http://foo.bar/other-image.jpg');
+        $image = Image::fromUrl('https://foo.bar/image.jpg');
+        $otherImage = Image::fromUrl('https://foo.bar/other-image.jpg');
         $this->assertFalse($image->sameValueAs($otherImage));
     }
 
@@ -54,8 +67,8 @@ class ImageTest extends TestCase
      */
     public function sameValueIfUrlIsTheSame(): void
     {
-        $image = Image::fromUrl('http://foo.bar/image.jpg');
-        $sameImage = Image::fromUrl('http://foo.bar/image.jpg');
+        $image = Image::fromUrl('https://foo.bar/image.jpg');
+        $sameImage = Image::fromUrl('https://foo.bar/image.jpg');
         $this->assertTrue($image->sameValueAs($sameImage));
     }
 
@@ -66,7 +79,7 @@ class ImageTest extends TestCase
      */
     public function castToStringReturnsAddress(): void
     {
-        $image = Image::fromUrl('http://foo.bar/image.jpg');
-        $this->assertSame('http://foo.bar/image.jpg', (string) $image);
+        $image = Image::fromUrl('https://foo.bar/image.jpg');
+        $this->assertSame('https://foo.bar/image.jpg', (string) $image);
     }
 }

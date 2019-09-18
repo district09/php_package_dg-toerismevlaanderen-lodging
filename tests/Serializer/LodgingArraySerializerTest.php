@@ -56,8 +56,8 @@ class LodgingArraySerializerTest extends TestCase
             StarRating::fromEuropeanFormat('4 *'),
             QualityLabels::fromLabels('label 1', 'Label 2'),
             Images::fromImages(
-                Image::fromUrl('http://foo.bar/image/1.jpg'),
-                Image::fromUrl('http://foo.bar/image/2.jpg')
+                Image::fromUrl('https://foo.bar/image/1.jpg'),
+                Image::fromUrl('https://foo.bar/image/2.jpg')
             )
         );
 
@@ -89,8 +89,8 @@ class LodgingArraySerializerTest extends TestCase
             'rating' => '4 *',
             'qualityLabels' => ['label 1', 'Label 2'],
             'images' => [
-                'http://foo.bar/image/1.jpg',
-                'http://foo.bar/image/2.jpg',
+                'https://foo.bar/image/1.jpg',
+                'https://foo.bar/image/2.jpg',
             ]
         ];
 

@@ -22,13 +22,13 @@ class ImagesArraySerializerTest extends TestCase
     public function imagesArrayContainsAllUrls(): void
     {
         $images = Images::fromImages(
-            Image::fromUrl('http://foo.bar/image/1.jpg'),
-            Image::fromUrl('http://foo.bar/image/2.jpg')
+            Image::fromUrl('https://foo.bar/image/1.jpg'),
+            Image::fromUrl('https://foo.bar/image/2.jpg')
         );
 
         $expectedArray = [
-            'http://foo.bar/image/1.jpg',
-            'http://foo.bar/image/2.jpg',
+            'https://foo.bar/image/1.jpg',
+            'https://foo.bar/image/2.jpg',
         ];
 
         $serializer = new ImagesArraySerializer();

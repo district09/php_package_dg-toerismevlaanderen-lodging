@@ -42,7 +42,9 @@ final class Image extends ValueAbstract
         static::assertImageUrl($url);
 
         $image = new static();
-        $image->url = $url;
+        // The data portal returns the images as http but they are always
+        // redirected to https.
+        $image->url = (string) preg_replace('#^http:#', 'https:', $url);
 
         return $image;
     }
@@ -55,6 +57,36 @@ final class Image extends ValueAbstract
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    /**
+     * Get the image basename.
+     *
+     * @return string
+     */
+    public function getBasename(): string
+    {
+        return pathinfo($this->getUrl(), PATHINFO_BASENAME);
+    }
+
+    /**
+     * Get the image filename.
+     *
+     * @return string
+     */
+    public function getFilename(): string
+    {
+        return pathinfo($this->getUrl(), PATHINFO_FILENAME);
+    }
+
+    /**
+     * Get the file extension.
+     *
+     * @return string
+     */
+    public function getExtension(): string
+    {
+        return pathinfo($this->getUrl(), PATHINFO_EXTENSION);
     }
 
     /**
