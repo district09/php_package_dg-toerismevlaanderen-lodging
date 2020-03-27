@@ -47,6 +47,8 @@ final class LodgingId extends ValueAbstract
      * Get the lodging record id.
      *
      * @return int
+     *
+     * @SuppressWarnings(PHPMD.UndefinedVariable)
      */
     public function getId(): int
     {

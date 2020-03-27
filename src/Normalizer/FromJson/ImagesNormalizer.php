@@ -30,6 +30,7 @@ class ImagesNormalizer
         foreach ($imageUrls as $imageUrl) {
             $images[] = Image::fromUrl($imageUrl);
         }
+        $images = array_reverse($images);
 
         return Images::fromImages(...$images);
     }

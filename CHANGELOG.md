@@ -2,6 +2,12 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [0.2.2]
+
+### Fixed
+
+* VG-1836: Fixed wrong order of concatenated data.
+
 ## [0.2.1]
 
 ### Fixed
@@ -36,6 +42,7 @@ Initial package.
 * Added getting a list of lodgings by given filters.
 * Added getting the details of a single lodging.
 
+[0.2.2]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/releases/tag/0.1.0

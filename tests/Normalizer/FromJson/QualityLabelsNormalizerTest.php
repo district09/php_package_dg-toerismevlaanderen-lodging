@@ -39,7 +39,7 @@ EOT;
     "bindings": [
       {
         "qualityLabels": {
-          "value": "Label 1,Label 2",
+          "value": "Label 2,Label 1",
           "type": "literal"
         }
       }

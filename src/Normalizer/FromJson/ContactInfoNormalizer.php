@@ -58,6 +58,7 @@ class ContactInfoNormalizer
         foreach ($numbers as $number) {
             $phoneNumbers[] = PhoneNumber::fromNumber($number);
         }
+        $phoneNumbers = array_reverse($phoneNumbers);
 
         return PhoneNumbers::fromPhoneNumbers(...$phoneNumbers);
     }
@@ -76,6 +77,7 @@ class ContactInfoNormalizer
         foreach ($addresses as $address) {
             $emailAddresses[] = EmailAddress::fromAddress($address);
         }
+        $emailAddresses = array_reverse($emailAddresses);
 
         return EmailAddresses::fromEmailAddresses(...$emailAddresses);
     }
@@ -94,6 +96,7 @@ class ContactInfoNormalizer
         foreach ($urls as $url) {
             $websiteAddresses[] = WebsiteAddress::fromUrl($url);
         }
+        $websiteAddresses = array_reverse($websiteAddresses);
 
         return WebsiteAddresses::fromWebsiteAddresses(...$websiteAddresses);
     }

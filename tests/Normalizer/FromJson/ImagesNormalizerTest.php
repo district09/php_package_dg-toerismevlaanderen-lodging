@@ -40,7 +40,7 @@ EOT;
     "bindings": [
       {
         "images": {
-          "value": "http://foo.bar/img/1.jpg,http://foo.bar/img/2.jpg",
+          "value": "http://foo.bar/img/2.jpg,http://foo.bar/img/1.jpg",
           "type": "literal"
         }
       }
