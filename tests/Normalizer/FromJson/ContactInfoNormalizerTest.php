@@ -30,15 +30,15 @@ class ContactInfoNormalizerTest extends TestCase
     "bindings": [
       {
         "contactPoint_phoneNumbers": {
-          "value": "+32 9 123 12 12,+32 9 123 12 34",
+          "value": "+32 9 123 00 02,+32 9 123 00 01",
           "type": "literal"
         },
         "contactPoint_emailAddresses": {
-          "value": "jane@foo.baz,john@foo.baz",
+          "value": "jane_2@foo.baz,john_1@foo.baz",
           "type": "literal"
         },
         "contactPoint_websiteAddresses": {
-          "value": "https://foo.baz,https://foo.bar",
+          "value": "https://foo.baz/2,https://foo.bar/1",
           "type": "uri"
         }
       }
@@ -55,16 +55,16 @@ EOT;
     public function allLodgingDataIsNormalized(): void
     {
         $expectedPhoneNumbers = PhoneNumbers::fromPhoneNumbers(
-            PhoneNumber::fromNumber('+32 9 123 12 12'),
-            PhoneNumber::fromNumber('+32 9 123 12 34')
+            PhoneNumber::fromNumber('+32 9 123 00 01'),
+            PhoneNumber::fromNumber('+32 9 123 00 02')
         );
         $expectedEmailaddress = EmailAddresses::fromEmailAddresses(
-            EmailAddress::fromAddress('jane@foo.baz'),
-            EmailAddress::fromAddress('john@foo.baz')
+            EmailAddress::fromAddress('john_1@foo.baz'),
+            EmailAddress::fromAddress('jane_2@foo.baz')
         );
         $expectedWebsiteAddresses = WebsiteAddresses::fromWebsiteAddresses(
-            WebsiteAddress::fromUrl('https://foo.baz'),
-            WebsiteAddress::fromUrl('https://foo.bar')
+            WebsiteAddress::fromUrl('https://foo.bar/1'),
+            WebsiteAddress::fromUrl('https://foo.baz/2')
         );
 
         $expectedContactInfo = ContactInfo::fromDetails(

@@ -58,6 +58,8 @@ final class StarRating extends ValueAbstract implements RatingInterface
      *
      * @throws \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating
      *   When value is not in the correct format.
+     *
+     * @SuppressWarnings(PHPMD.UndefinedVariable)
      */
     public static function fromEuropeanFormat(string $rating): StarRating
     {
