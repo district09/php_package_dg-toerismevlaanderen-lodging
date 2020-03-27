@@ -2,6 +2,12 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [Unreleased]
+
+### Fixed
+
+* VG-1836: Fixed wrong order of concatenated data.
+
 ## [0.2.1]
 
 ### Fixed

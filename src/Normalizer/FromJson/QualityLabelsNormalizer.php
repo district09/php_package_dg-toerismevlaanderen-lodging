@@ -24,7 +24,10 @@ class QualityLabelsNormalizer
             return QualityLabels::fromLabels();
         }
 
-        $labels = explode(',', $lodgingData->qualityLabels->value);
+        $labels = array_reverse(
+            explode(',', $lodgingData->qualityLabels->value)
+        );
+
         return QualityLabels::fromLabels(...$labels);
     }
 }

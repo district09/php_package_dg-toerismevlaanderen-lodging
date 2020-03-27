@@ -156,11 +156,11 @@ EOT;
           "type": "literal"
         },
         "qualityLabels": {
-          "value": "Label 1,Label 2",
+          "value": "Label 2,Label 1",
           "type": "literal"
         },
         "images": {
-          "value": "http://foo.bar/img/1.jpg,http://foo.bar/img/2.jpg",
+          "value": "http://foo.bar/img/2.jpg,http://foo.bar/img/1.jpg",
           "type": "literal"
         }
       }

@@ -103,6 +103,7 @@ EOT;
     public function __construct(string $uri)
     {
         $query = sprintf($this->query, $uri);
+
         parent::__construct($query);
     }
 }
