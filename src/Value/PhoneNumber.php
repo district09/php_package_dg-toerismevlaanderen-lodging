@@ -6,6 +6,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Value;
 
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * PhoneNumber value.
@@ -35,6 +36,8 @@ final class PhoneNumber extends ValueAbstract
      */
     public static function fromNumber(string $number): PhoneNumber
     {
+        Assert::startsWith($number, '+');
+
         $phoneNumber = new static();
         $phoneNumber->number = $number;
 
