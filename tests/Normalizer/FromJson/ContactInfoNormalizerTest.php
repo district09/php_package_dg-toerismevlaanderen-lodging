@@ -30,7 +30,7 @@ class ContactInfoNormalizerTest extends TestCase
     "bindings": [
       {
         "contactPoint_phoneNumbers": {
-          "value": "+32 9 123 00 02,+32 9 123 00 01",
+          "value": "+32 9 123 00 02,+32 9 123 00 01,123",
           "type": "literal"
         },
         "contactPoint_emailAddresses": {
@@ -54,6 +54,7 @@ EOT;
      */
     public function allLodgingDataIsNormalized(): void
     {
+        // Invalid phone numbers are ignored.
         $expectedPhoneNumbers = PhoneNumbers::fromPhoneNumbers(
             PhoneNumber::fromNumber('+32 9 123 00 01'),
             PhoneNumber::fromNumber('+32 9 123 00 02')

@@ -24,6 +24,17 @@ class PhoneNumberTest extends TestCase
     }
 
     /**
+     * Exception if number does not start with an "+".
+     *
+     * @test
+     */
+    public function exceptionIsThrownWhenPhoneNumberDoesNotStartWithPlus(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        PhoneNumber::fromNumber('123');
+    }
+
+    /**
      * Not the same value if numbers are different.
      *
      * @test
