@@ -47,6 +47,7 @@ class ContactInfoNormalizerTest extends TestCase
     public function allContactPointDataIsNormalized(): void
     {
         $data = [
+            // Invalid phone numbers are ignored.
             'phoneNumbers' => ['+32 9 123 12 12'],
             'emailAddresses' => ['foo@biz.baz'],
             'websiteAddresses' => ['https://foo.baz'],

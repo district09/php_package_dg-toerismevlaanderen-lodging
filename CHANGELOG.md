@@ -2,6 +2,12 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [0.2.4]
+
+### Fixed
+
+* VG-1878: Reverted validating and ignoring phone numbers.
+
 ## [0.2.3]
 
 ### Fixed
@@ -48,6 +54,7 @@ Initial package.
 * Added getting a list of lodgings by given filters.
 * Added getting the details of a single lodging.
 
+[0.2.4]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.0...0.2.1
