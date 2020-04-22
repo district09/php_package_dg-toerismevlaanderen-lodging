@@ -2,6 +2,12 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [Unreleased]
+
+### Fixed
+
+* VG-1878: Reverted validating and ignoring phone numbers.
+
 ## [0.2.3]
 
 ### Fixed

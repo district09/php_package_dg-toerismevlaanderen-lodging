@@ -11,7 +11,6 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumber;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\PhoneNumbers;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses;
-use InvalidArgumentException;
 
 /**
  * Normalizer to get the contact info out of json decoded data.
@@ -57,11 +56,7 @@ class ContactInfoNormalizer
         $numbers = $this->extractValuesFromString($data);
         $phoneNumbers = [];
         foreach ($numbers as $number) {
-            try {
-                $phoneNumbers[] = PhoneNumber::fromNumber($number);
-            } catch (InvalidArgumentException $exception) {
-                continue;
-            }
+            $phoneNumbers[] = PhoneNumber::fromNumber($number);
         }
         $phoneNumbers = array_reverse($phoneNumbers);
 
