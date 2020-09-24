@@ -2,7 +2,9 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
-## [Unreleased]
+## [1.0.0]
+
+First stable release of the `digipolisgent/toerismevlaanderen-lodging` package.
 
 ### Changed
 
