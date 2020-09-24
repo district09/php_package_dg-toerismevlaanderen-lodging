@@ -20,11 +20,11 @@ class InvalidRatingTest extends TestCase
     public function exceptionFromUnknownType(): void
     {
         $exception = InvalidRating::unknownType('Foo * Bar');
-        $this->assertEquals(
+        self::assertEquals(
             '"Foo * Bar" rating value is of an unknown type.',
             $exception->getMessage()
         );
-        $this->assertSame(400, $exception->getCode());
+        self::assertSame(400, $exception->getCode());
     }
 
     /**
@@ -35,11 +35,11 @@ class InvalidRatingTest extends TestCase
     public function exceptionFromInvalidClassification(): void
     {
         $exception = InvalidRating::classificationUnknown('Foo Bar');
-        $this->assertEquals(
+        self::assertEquals(
             '"Foo Bar" classification value is not within the known types.',
             $exception->getMessage()
         );
-        $this->assertSame(400, $exception->getCode());
+        self::assertSame(400, $exception->getCode());
     }
 
     /**
@@ -50,10 +50,25 @@ class InvalidRatingTest extends TestCase
     public function exceptionFromInvalidStarRatingFormat(): void
     {
         $exception = InvalidRating::starRatingNotInEuropeanFormat('*****');
-        $this->assertEquals(
+        self::assertEquals(
             '"*****" star rating value is not in the European Hotelstar\'s Union format.',
             $exception->getMessage()
         );
-        $this->assertSame(400, $exception->getCode());
+        self::assertSame(400, $exception->getCode());
+    }
+
+    /**
+     * Proper message is set when created from invalid letter rating value.
+     *
+     * @test
+     */
+    public function itCreatesExceptionFromInvalidLetterRatingValue(): void
+    {
+        $exception = InvalidRating::noLetter('1');
+        self::assertEquals(
+            '"1" is not a valid letter rating value.',
+            $exception->getMessage()
+        );
+        self::assertSame(400, $exception->getCode());
     }
 }

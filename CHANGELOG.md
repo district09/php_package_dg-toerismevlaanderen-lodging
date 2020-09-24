@@ -2,6 +2,12 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [0.2.5]
+
+### Added
+
+* VG-1966: Added support for letter ratings.
+
 ## [0.2.4]
 
 ### Fixed
@@ -54,6 +60,7 @@ Initial package.
 * Added getting a list of lodgings by given filters.
 * Added getting the details of a single lodging.
 
+[0.2.5]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.1...0.2.2

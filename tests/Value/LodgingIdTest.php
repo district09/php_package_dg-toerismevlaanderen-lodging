@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Handler;
+namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Value;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidLodgingUri;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingId;

@@ -67,4 +67,23 @@ class InvalidRating extends Exception
             400
         );
     }
+
+    /**
+     * Create the exception from an invalid letter rating value.
+     *
+     * @param string $rating
+     *   The invalid letter rating value.
+     *
+     * @return \DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating
+     */
+    public static function noLetter(string $rating): InvalidRating
+    {
+        return new static(
+            sprintf(
+                '"%s" is not a valid letter rating value.',
+                $rating
+            ),
+            400
+        );
+    }
 }
