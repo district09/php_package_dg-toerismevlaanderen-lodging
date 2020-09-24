@@ -7,6 +7,7 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Normalizer\FromString;
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromString\RatingNormalizer;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ClassificationRating;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LetterRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\NoRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
@@ -48,6 +49,7 @@ class RatingNormalizerTest extends TestCase
             ['', NoRating::create()],
             ['2 *', StarRating::fromEuropeanFormat('2 *')],
             [ClassificationRating::LUXE, ClassificationRating::fromClassification(ClassificationRating::LUXE)],
+            ['A', LetterRating::fromLetter('A')],
         ];
     }
 

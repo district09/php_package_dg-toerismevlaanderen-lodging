@@ -6,6 +6,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Normalizer\FromString;
 
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ClassificationRating;
+use DigipolisGent\Toerismevlaanderen\Lodging\Value\LetterRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\NoRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\StarRating;
@@ -33,13 +34,19 @@ final class RatingNormalizer
 
         try {
             return StarRating::fromEuropeanFormat($rating);
-        } catch (Exception $exception) {
+        } catch (InvalidRating $exception) {
             // Ignore.
         }
 
         try {
             return ClassificationRating::fromClassification($rating);
-        } catch (Exception $exception) {
+        } catch (InvalidRating $exception) {
+            // Ignore.
+        }
+
+        try {
+            return LetterRating::fromLetter($rating);
+        } catch (InvalidRating $exception) {
             // Ignore.
         }
 
