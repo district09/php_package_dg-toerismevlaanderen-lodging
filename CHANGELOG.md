@@ -2,6 +2,12 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [Unreleased]
+
+### Added
+
+* VG-1966: Added support for letter ratings.
+
 ## [0.2.4]
 
 ### Fixed
