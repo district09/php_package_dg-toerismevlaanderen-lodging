@@ -14,24 +14,7 @@ It also contains the value objects representing the returned data.
 
 ## Install
 
-Add the package repository to composer.json:
-
-``` json
-{
-    ...
-    "repositories": [
-        ...
-        {
-            "type": "composer",
-            "url": "https://packagist.gentgrp.gent.be"
-        },
-        ...
-    ],
-    ...
-}
-```
-
-Install the package:
+Install the package using composer:
 
 ```bash
 composer require digipolisgent/toerismevlaanderen-lodging
