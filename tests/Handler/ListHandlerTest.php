@@ -18,7 +18,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ListHandlerTest extends TestCase
 {
-
     /**
      * List request Json response content (reduced).
      *

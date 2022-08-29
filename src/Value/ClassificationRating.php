@@ -74,7 +74,7 @@ final class ClassificationRating extends ValueAbstract implements RatingInterfac
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getRating() === $object->getRating();
     }
 

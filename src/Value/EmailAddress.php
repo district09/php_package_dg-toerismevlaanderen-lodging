@@ -62,7 +62,7 @@ final class EmailAddress extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getAddress() === $object->getAddress();
     }
 

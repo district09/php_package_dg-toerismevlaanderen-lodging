@@ -24,7 +24,6 @@ use Prophecy\Argument;
  */
 class LodgingServiceTest extends TestCase
 {
-
     /**
      * Count method sends out the CountRequest and returns number of lodgings.
      *

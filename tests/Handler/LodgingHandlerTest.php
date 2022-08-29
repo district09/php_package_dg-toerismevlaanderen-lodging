@@ -33,7 +33,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class LodgingHandlerTest extends TestCase
 {
-
     /**
      * List request Json response content (reduced).
      *

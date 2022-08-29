@@ -11,5 +11,4 @@ use DigipolisGent\API\Client\AbstractClient;
  */
 class Client extends AbstractClient
 {
-
 }

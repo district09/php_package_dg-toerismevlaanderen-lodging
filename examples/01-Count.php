@@ -2,6 +2,8 @@
 
 /**
  * Example how to count (filtered) the number of lodgings.
+ *
+ * @var string $apiEndpoint
  */
 
 use DigipolisGent\API\Client\Configuration\Configuration;

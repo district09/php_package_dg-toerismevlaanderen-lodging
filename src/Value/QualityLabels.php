@@ -66,7 +66,7 @@ final class QualityLabels extends ValueAbstract implements CollectionInterface
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && !array_diff($this->getLabels(), $object->getLabels());
     }
 

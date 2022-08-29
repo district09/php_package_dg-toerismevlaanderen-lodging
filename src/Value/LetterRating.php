@@ -70,7 +70,7 @@ final class LetterRating extends ValueAbstract implements RatingInterface
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getRating() === $object->getRating();
     }
 

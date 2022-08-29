@@ -94,7 +94,7 @@ final class Image extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getUrl() === $object->getUrl();
     }
 

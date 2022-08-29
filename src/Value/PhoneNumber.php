@@ -56,7 +56,7 @@ final class PhoneNumber extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getNumber() === $object->getNumber();
     }
 

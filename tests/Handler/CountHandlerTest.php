@@ -17,7 +17,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class CountHandlerTest extends TestCase
 {
-
     /**
      * Count request Json response content (reduced).
      *

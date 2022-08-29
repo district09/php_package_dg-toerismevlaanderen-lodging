@@ -2,6 +2,8 @@
 
 /**
  * Example how to get the details of a lodging.
+ *
+ * @var string $apiEndpoint
  */
 
 use DigipolisGent\API\Client\Configuration\Configuration;

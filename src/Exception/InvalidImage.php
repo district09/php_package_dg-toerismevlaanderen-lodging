@@ -9,7 +9,7 @@ use Exception;
 /**
  * Image value is not valid.
  */
-class InvalidImage extends Exception
+final class InvalidImage extends Exception
 {
     /**
      * Create the exception from an invalid image URL.
@@ -21,7 +21,7 @@ class InvalidImage extends Exception
      */
     public static function notAnUrl(string $url): InvalidImage
     {
-        return new static(
+        return new self(
             sprintf(
                 '"%s" is not a valid image URL.',
                 $url
