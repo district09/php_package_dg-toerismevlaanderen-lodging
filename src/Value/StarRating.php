@@ -105,7 +105,7 @@ final class StarRating extends ValueAbstract implements RatingInterface
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getNumberOfStars() === $object->getNumberOfStars()
             && $this->isSuperior() === $object->isSuperior();
     }

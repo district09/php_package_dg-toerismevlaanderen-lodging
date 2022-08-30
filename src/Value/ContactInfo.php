@@ -91,7 +91,7 @@ final class ContactInfo extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getPhoneNumbers()->sameValueAs($object->getPhoneNumbers())
             && $this->getEmailAddresses()->sameValueAs($object->getEmailAddresses())
             && $this->getWebsiteAddresses()->sameValueAs($object->getWebsiteAddresses());

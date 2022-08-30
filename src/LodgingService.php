@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigipolisGent\Toerismevlaanderen\Lodging;
 
 use DigipolisGent\API\Client\ClientInterface;
@@ -14,11 +16,10 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
  */
 class LodgingService implements LodgingServiceInterface
 {
-
     /**
-     * @var ClientInterface
+     * @var \DigipolisGent\API\Client\ClientInterface
      */
-    protected $client;
+    protected ClientInterface $client;
 
     /**
      * Create a new lodging service by injecting the client.
@@ -36,7 +37,9 @@ class LodgingService implements LodgingServiceInterface
     public function count(FilterInterface ...$filters): int
     {
         $request = new CountRequest(...$filters);
-        return $this->client->send($request)->count();
+        /** @var \DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse $response */
+        $response = $this->client->send($request);
+        return $response->count();
     }
 
     /**
@@ -45,7 +48,9 @@ class LodgingService implements LodgingServiceInterface
     public function list(FilterInterface ...$filters): array
     {
         $request = new ListRequest(...$filters);
-        return $this->client->send($request)->items();
+        /** @var \DigipolisGent\Toerismevlaanderen\Lodging\Response\ListResponse $response */
+        $response = $this->client->send($request);
+        return $response->items();
     }
 
     /**
@@ -54,6 +59,8 @@ class LodgingService implements LodgingServiceInterface
     public function lodging(string $uri): LodgingInterface
     {
         $request = new LodgingRequest($uri);
-        return $this->client->send($request)->lodging();
+        /** @var \DigipolisGent\Toerismevlaanderen\Lodging\Response\LodgingResponse $response */
+        $response = $this->client->send($request);
+        return $response->lodging();
     }
 }

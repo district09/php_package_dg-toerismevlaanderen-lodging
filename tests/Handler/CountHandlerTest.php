@@ -10,6 +10,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Request\CountRequest;
 use DigipolisGent\Toerismevlaanderen\Lodging\Response\CountResponse;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -17,6 +18,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class CountHandlerTest extends TestCase
 {
+    use ProphecyTrait;
 
     /**
      * Count request Json response content (reduced).

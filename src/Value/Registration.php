@@ -71,7 +71,7 @@ final class Registration extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getType() === $object->getType()
             && $this->getStatus() === $object->getStatus();
     }

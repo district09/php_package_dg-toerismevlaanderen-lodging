@@ -18,12 +18,14 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @covers \DigipolisGent\Toerismevlaanderen\Lodging\LodgingService
  */
 class LodgingServiceTest extends TestCase
 {
+    use ProphecyTrait;
 
     /**
      * Count method sends out the CountRequest and returns number of lodgings.

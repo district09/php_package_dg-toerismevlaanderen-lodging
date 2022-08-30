@@ -9,7 +9,7 @@ use Exception;
 /**
  * Email address value is not valid.
  */
-class InvalidEmailAddress extends Exception
+final class InvalidEmailAddress extends Exception
 {
     /**
      * Create the exception from an invalid email address.
@@ -21,7 +21,7 @@ class InvalidEmailAddress extends Exception
      */
     public static function notAnEmailAddress(string $address): InvalidEmailAddress
     {
-        return new static(
+        return new self(
             sprintf(
                 '"%s" is not a valid email address.',
                 $address

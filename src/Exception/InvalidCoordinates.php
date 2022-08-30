@@ -9,7 +9,7 @@ use Exception;
 /**
  * Invalid geo coordinates.
  */
-class InvalidCoordinates extends Exception
+final class InvalidCoordinates extends Exception
 {
     /**
      * Create the exception from an invalid longitude value.
@@ -20,7 +20,7 @@ class InvalidCoordinates extends Exception
      */
     public static function longitudeOutsideBounds(float $longitude): InvalidCoordinates
     {
-        return new static(
+        return new self(
             sprintf(
                 'Longitude "%s" is outside -180° > 180° bounds.',
                 $longitude

@@ -11,12 +11,15 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Handler\ListHandler;
 use DigipolisGent\Toerismevlaanderen\Lodging\LodgingService;
 use DigipolisGent\Toerismevlaanderen\Lodging\LodgingServiceFactory;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @covers \DigipolisGent\Toerismevlaanderen\Lodging\LodgingServiceFactory
  */
 class LodgingServiceFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * Check if all the expected handlers are in place.
      *

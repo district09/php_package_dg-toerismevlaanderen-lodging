@@ -9,7 +9,7 @@ use Exception;
 /**
  * Invalid website address.
  */
-class InvalidWebsiteAddress extends Exception
+final class InvalidWebsiteAddress extends Exception
 {
     /**
      * Create the exception from an invalid website URL.
@@ -21,7 +21,7 @@ class InvalidWebsiteAddress extends Exception
      */
     public static function invalidUrl(string $url): InvalidWebsiteAddress
     {
-        return new static(
+        return new self(
             sprintf(
                 '"%s" is not a valid website address URL.',
                 $url

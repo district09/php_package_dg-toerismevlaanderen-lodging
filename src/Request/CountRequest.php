@@ -11,7 +11,6 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Filter\FilterInterface;
  */
 final class CountRequest extends AbstractFilteredRequest
 {
-
     /**
      * The query string.
      *

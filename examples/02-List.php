@@ -2,6 +2,8 @@
 
 /**
  * Example how to get a (filtered) list of lodgings.
+ *
+ * @var string $apiEndpoint
  */
 
 use DigipolisGent\API\Client\Configuration\Configuration;

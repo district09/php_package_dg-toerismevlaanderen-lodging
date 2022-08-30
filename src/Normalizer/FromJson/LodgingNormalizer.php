@@ -26,24 +26,17 @@ final class LodgingNormalizer
         $data = json_decode($json);
         $lodgingData = $data->results->bindings[0];
 
-        $registrationNormalizer = new RegistrationNormalizer();
-        $addressNormalizer = new AddressNormalizer();
-        $contactInfoNormalizer = new ContactInfoNormalizer();
-        $ratingNormalizer = new RatingNormalizer();
-        $qualityLabelsNormalizer = new QualityLabelsNormalizer();
-        $imagesNormalizer = new ImagesNormalizer();
-
         return Lodging::fromDetails(
             LodgingId::fromUri($lodgingData->_lodging->value),
             $lodgingData->name->value,
             $lodgingData->description->value ?? '',
             (int) $lodgingData->numberOfSleepingPlaces->value,
-            $registrationNormalizer->normalize($lodgingData, 'registration'),
-            $addressNormalizer->normalize($lodgingData, 'receptionAddress'),
-            $contactInfoNormalizer->normalize($lodgingData, 'contactPoint'),
-            $ratingNormalizer->normalize($lodgingData->rating->value ?? null),
-            $qualityLabelsNormalizer->normalize($lodgingData),
-            $imagesNormalizer->normalize($lodgingData)
+            (new RegistrationNormalizer())->normalize($lodgingData, 'registration'),
+            (new AddressNormalizer())->normalize($lodgingData, 'receptionAddress'),
+            (new ContactInfoNormalizer())->normalize($lodgingData, 'contactPoint'),
+            (new RatingNormalizer())->normalize($lodgingData->rating->value ?? null),
+            (new QualityLabelsNormalizer())->normalize($lodgingData),
+            (new ImagesNormalizer())->normalize($lodgingData)
         );
     }
 }

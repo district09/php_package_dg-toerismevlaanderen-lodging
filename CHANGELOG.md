@@ -2,6 +2,22 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
+## [2.0.0]
+
+### Added
+
+- Add PHP 8.x support.
+- Add qa-php to validate code quality.
+
+### Updated
+
+- Update digipolisgent/api-client to 3.x
+- Update digipolisgent/value to 3.x.
+
+### Changed
+
+- Change minimal PHP version to 7.4.
+
 ## [1.0.0]
 
 First stable release of the `digipolisgent/toerismevlaanderen-lodging` package.
@@ -68,11 +84,13 @@ Initial package.
 * Added getting a list of lodgings by given filters.
 * Added getting the details of a single lodging.
 
-[0.2.5]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.4...0.2.5
-[0.2.4]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.3...0.2.4
-[0.2.3]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.2...0.2.3
-[0.2.2]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.1...0.2.2
-[0.2.1]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.2.0...0.2.1
-[0.2.0]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/0.1.0...0.2.0
-[0.1.0]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/releases/tag/0.1.0
-[Unreleased]: https://github.com/digipolisgent/php_package_dg-toerismevlaanderen-lodging/compare/master...develop
+[2.0.0]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/1.0.0...2.0.0
+[1.0.0]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.5...1.0.0
+[0.2.5]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.4...0.2.5
+[0.2.4]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.3...0.2.4
+[0.2.3]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.2...0.2.3
+[0.2.2]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.1...0.2.2
+[0.2.1]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.0...0.2.1
+[0.2.0]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.1.0...0.2.0
+[0.1.0]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/releases/tag/0.1.0
+[Unreleased]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/main...develop
