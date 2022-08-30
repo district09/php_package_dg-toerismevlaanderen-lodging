@@ -11,6 +11,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Response\ListResponse;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\ListItem;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -18,6 +19,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ListHandlerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * List request Json response content (reduced).
      *

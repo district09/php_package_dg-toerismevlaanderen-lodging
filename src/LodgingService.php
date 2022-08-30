@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigipolisGent\Toerismevlaanderen\Lodging;
 
 use DigipolisGent\API\Client\ClientInterface;
@@ -15,9 +17,9 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface;
 class LodgingService implements LodgingServiceInterface
 {
     /**
-     * @var ClientInterface
+     * @var \DigipolisGent\API\Client\ClientInterface
      */
-    protected $client;
+    protected ClientInterface $client;
 
     /**
      * Create a new lodging service by injecting the client.
