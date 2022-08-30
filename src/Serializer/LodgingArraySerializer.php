@@ -20,10 +20,6 @@ final class LodgingArraySerializer
      */
     public function serialize(LodgingInterface $lodging): array
     {
-        $addressSerializer = new AddressArraySerializer();
-        $contactInfoSerializer = new ContactInfoArraySerializer();
-        $imagesSerializer = new ImagesArraySerializer();
-
         return [
             'lodgingId' => $lodging->getLodgingId()->getUri(),
             'name' => $lodging->getName(),
@@ -33,11 +29,11 @@ final class LodgingArraySerializer
                 'type' => $lodging->getRegistration()->getType(),
                 'status' => $lodging->getRegistration()->getStatus(),
             ],
-            'receptionAddress' => $addressSerializer->serialize($lodging->getReceptionAddress()),
-            'contactPoint' => $contactInfoSerializer->serialize($lodging->getContactPoint()),
+            'receptionAddress' => (new AddressArraySerializer())->serialize($lodging->getReceptionAddress()),
+            'contactPoint' => (new ContactInfoArraySerializer())->serialize($lodging->getContactPoint()),
             'rating' => (string) $lodging->getRating(),
             'qualityLabels' => $lodging->getQualityLabels()->getLabels(),
-            'images' => $imagesSerializer->serialize($lodging->getImages()),
+            'images' => (new ImagesArraySerializer())->serialize($lodging->getImages()),
         ];
     }
 }

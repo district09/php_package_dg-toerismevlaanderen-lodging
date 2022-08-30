@@ -9,7 +9,7 @@ use Exception;
 /**
  * Rating value is not valid.
  */
-class InvalidRating extends Exception
+final class InvalidRating extends Exception
 {
     /**
      * Value can not be mapped to a proper rating type.
@@ -21,7 +21,7 @@ class InvalidRating extends Exception
      */
     public static function unknownType(string $rating): InvalidRating
     {
-        return new static(
+        return new self(
             sprintf(
                 '"%s" rating value is of an unknown type.',
                 $rating

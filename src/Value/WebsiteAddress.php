@@ -7,6 +7,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Value;
 use DigipolisGent\Toerismevlaanderen\Lodging\Exception\InvalidWebsiteAddress;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
+use phpDocumentor\Reflection\Types\Self_;
 
 /**
  * Website address value.
@@ -61,7 +62,7 @@ final class WebsiteAddress extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getUrl() === $object->getUrl();
     }
 

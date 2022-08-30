@@ -5,6 +5,8 @@
  *
  * This script gets the list of lodgings and tries to load one-by-one.
  * It will report what lodgings could not be loaded.
+ *
+ * @var string $apiEndpoint
  */
 
 use DigipolisGent\API\Client\Configuration\Configuration;

@@ -23,24 +23,17 @@ final class LodgingNormalizer
      */
     public function normalize(array $data): LodgingInterface
     {
-        $registrationNormalizer = new RegistrationNormalizer();
-        $addressNormalizer = new AddressNormalizer();
-        $contactNormalizer = new ContactInfoNormalizer();
-        $ratingNormalizer = new RatingNormalizer();
-        $qualityLabelsNormalizer = new QualityLabelsNormalizer();
-        $imagesNormalizer = new ImagesNormalizer();
-
         return Lodging::fromDetails(
             LodgingId::fromUri($data['lodgingId']),
             $data['name'],
             $data['description'] ?? '',
             (int) $data['numberOfSleepingPlaces'],
-            $registrationNormalizer->normalize($data['registration']),
-            $addressNormalizer->normalize($data['receptionAddress'] ?? []),
-            $contactNormalizer->normalize($data['contactPoint'] ?? []),
-            $ratingNormalizer->normalize($data['rating'] ?? null),
-            $qualityLabelsNormalizer->normalize($data['qualityLabels'] ?? []),
-            $imagesNormalizer->normalize($data['images'] ?? [])
+            (new RegistrationNormalizer())->normalize($data['registration']),
+            (new AddressNormalizer())->normalize($data['receptionAddress'] ?? []),
+            (new ContactInfoNormalizer())->normalize($data['contactPoint'] ?? []),
+            (new RatingNormalizer())->normalize($data['rating'] ?? null),
+            (new QualityLabelsNormalizer())->normalize($data['qualityLabels'] ?? []),
+            (new ImagesNormalizer())->normalize($data['images'] ?? [])
         );
     }
 }

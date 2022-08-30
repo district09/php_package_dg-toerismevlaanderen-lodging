@@ -38,7 +38,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
      *
      * @var int
      */
-    private $numberOfSleepingPlaces;
+    private $sleepingPlaces;
 
     /**
      * The registration.
@@ -98,7 +98,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
      *   The lodging name.
      * @param string $description
      *   The lodging description.
-     * @param int $numberOfSleepingPlaces
+     * @param int $sleepingPlaces
      *   The number of sleeping laces at the lodging.
      * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Registration $registration
      *   The registration details.
@@ -114,12 +114,14 @@ final class Lodging extends ValueAbstract implements LodgingInterface
      *   The images collection.
      *
      * @return \DigipolisGent\Toerismevlaanderen\Lodging\Value\LodgingInterface
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public static function fromDetails(
         LodgingId $lodgingId,
         string $name,
         string $description,
-        int $numberOfSleepingPlaces,
+        int $sleepingPlaces,
         Registration $registration,
         Address $receptionAddress,
         ContactInfo $contactPoint,
@@ -131,7 +133,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
         $lodging->lodgingId = $lodgingId;
         $lodging->name = $name;
         $lodging->description = $description;
-        $lodging->numberOfSleepingPlaces = $numberOfSleepingPlaces;
+        $lodging->sleepingPlaces = $sleepingPlaces;
         $lodging->registration = $registration;
         $lodging->receptionAddress = $receptionAddress;
         $lodging->contactPoint = $contactPoint;
@@ -171,7 +173,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
      */
     public function getNumberOfSleepingPlaces(): int
     {
-        return $this->numberOfSleepingPlaces;
+        return $this->sleepingPlaces;
     }
 
     /**
@@ -227,7 +229,7 @@ final class Lodging extends ValueAbstract implements LodgingInterface
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->sameDetailsAs($object)
             && $this->getRegistration()->sameValueAs($object->getRegistration())
             && $this->getReceptionAddress()->sameValueAs($object->getReceptionAddress())
@@ -241,13 +243,13 @@ final class Lodging extends ValueAbstract implements LodgingInterface
     /**
      * Check if a given value shares the same details.
      *
-     * @param \DigipolisGent\Value\ValueInterface $object
+     * @param \DigipolisGent\Toerismevlaanderen\Lodging\Value\Lodging $object
      *   Object to validate.
      *
      * @return bool
      *   Same details.
      */
-    private function sameDetailsAs(ValueInterface $object): bool
+    private function sameDetailsAs(Lodging $object): bool
     {
         return $this->getLodgingId()->sameValueAs($object->getLodgingId())
             && $this->getName() === $object->getName()

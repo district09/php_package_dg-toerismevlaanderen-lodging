@@ -69,7 +69,7 @@ final class LodgingId extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object): bool
     {
-        return $this->sameValueTypeAs($object)
+        return $object instanceof self
             && $this->getUri() === $object->getUri();
     }
 
@@ -91,10 +91,12 @@ final class LodgingId extends ValueAbstract
      */
     private static function assertLodgingUri(string $uri): void
     {
-        if (!preg_match(
-            '#lodgings/[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}-[\d]{6}$#',
-            $uri
-        )) {
+        if (
+            !preg_match(
+                '#lodgings/[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}-[\d]{6}$#',
+                $uri
+            )
+        ) {
             throw InvalidLodgingUri::fromUri($uri);
         }
     }

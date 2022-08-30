@@ -6,7 +6,7 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Exception;
 
 use Exception;
 
-class MissingResponseData extends Exception
+final class MissingResponseData extends Exception
 {
     /**
      * Missing count data.
@@ -15,7 +15,7 @@ class MissingResponseData extends Exception
      */
     public static function count(): MissingResponseData
     {
-        return new static('Response data does not contain count value.', 500);
+        return new self('Response data does not contain count value.', 500);
     }
 
     /**
@@ -25,7 +25,7 @@ class MissingResponseData extends Exception
      */
     public static function list(): MissingResponseData
     {
-        return new static('Response data does not contain list record value.', 500);
+        return new self('Response data does not contain list record value.', 500);
     }
 
     /**
@@ -35,6 +35,6 @@ class MissingResponseData extends Exception
      */
     public static function lodging(): MissingResponseData
     {
-        return new static('Response data does not contain lodging details.', 500);
+        return new self('Response data does not contain lodging details.', 500);
     }
 }

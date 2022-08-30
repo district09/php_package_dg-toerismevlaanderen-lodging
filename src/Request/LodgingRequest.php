@@ -9,7 +9,6 @@ namespace DigipolisGent\Toerismevlaanderen\Lodging\Request;
  */
 final class LodgingRequest extends AbstractRequest
 {
-
     /**
      * The query string.
      *

@@ -7,12 +7,15 @@ namespace DigipolisGent\Tests\Toerismevlaanderen\Lodging\Value;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\NoRating;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\RatingInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @covers \DigipolisGent\Toerismevlaanderen\Lodging\Value\NoRating
  */
 class NoRatingTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * No rating has empty value.
      *

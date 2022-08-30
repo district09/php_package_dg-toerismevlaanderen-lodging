@@ -26,6 +26,7 @@ use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddress;
 use DigipolisGent\Toerismevlaanderen\Lodging\Value\WebsiteAddresses;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -33,6 +34,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class LodgingHandlerTest extends TestCase
 {
+    use ProphecyTrait;
 
     /**
      * List request Json response content (reduced).
