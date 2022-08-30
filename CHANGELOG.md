@@ -2,7 +2,7 @@
 
 All Notable changes to `digipolisgent/toerismevlaanderen-lodging` package.
 
-## [Unreleased]
+## [2.0.0]
 
 ### Added
 
@@ -84,6 +84,7 @@ Initial package.
 * Added getting a list of lodgings by given filters.
 * Added getting the details of a single lodging.
 
+[2.0.0]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.5...1.0.0
 [0.2.5]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/district09/php_package_dg-toerismevlaanderen-lodging/compare/0.2.3...0.2.4
